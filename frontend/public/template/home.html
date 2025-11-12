@@ -1,0 +1,152 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>TechSafra — Inovação no Campo</title>
+    <link rel="stylesheet" href="/css/home.css" />
+    <link rel="icon" href="/img/logo.png" />
+  </head>
+
+  <body>
+    <!-- 🔝 Cabeçalho -->
+    <header class="topbar">
+      <div class="logo-area">
+        <img src="/img/logo.png" alt="TechSafra logo" class="logo" />
+        <h1>TechSafra</h1>
+      </div>
+      <nav>
+        <a href="/PaginaInicial.html" class="btn-sair" onclick="logout()"
+          >Sair</a
+        >
+      </nav>
+    </header>
+
+    <!-- 👋 Saudação -->
+    <section
+      class="saudacao"
+      id="saudacao-section"
+      style="text-align: center; padding: 2rem"
+    >
+      <h2 id="saudacao">Bem-vindo 👋</h2>
+      <p id="mensagem-dia">Tenha um ótimo dia no campo!</p>
+    </section>
+
+    <!-- 🌾 Hero -->
+    <section class="hero">
+      <div class="hero-overlay">
+        <h1>Transformando o campo com tecnologia</h1>
+        <p>Gerencie e transforme seu negócio no campo com um clique.</p>
+        <a href="/template/dashboard.html" class="btn-entrar"
+          >Ir ao Painel de Controle</a
+        >
+      </div>
+    </section>
+
+    <!-- 🌤️ Previsão do Tempo -->
+    <section id="clima" class="weather-widget">
+      <h3>🌤️ Previsão do Tempo</h3>
+      <p id="weather-info">Carregando previsão...</p>
+    </section>
+
+    <!-- 💰 Cotações -->
+    <section class="cotacoes">
+      <h2>💰 Cotações do Agro</h2>
+      <div class="cotacoes-grid" id="cotacoes-grid">
+        <!-- Populado dinamicamente -->
+      </div>
+    </section>
+
+    <!-- 🌱 Destaques informativos -->
+    <section class="cards">
+      <div class="card">
+        <div
+          class="icon-area"
+          style="background: linear-gradient(135deg, #81c784, #43a047)"
+        >
+          🌾
+        </div>
+        <h3>Gestão da Lavoura</h3>
+        <p>
+          Planeje cada etapa da produção com ferramentas inteligentes e dados do
+          seu campo.
+        </p>
+      </div>
+
+      <div class="card">
+        <div
+          class="icon-area"
+          style="background: linear-gradient(135deg, #a5d6a7, #2e7d32)"
+        >
+          🚜
+        </div>
+        <h3>Tecnologia no Agro</h3>
+        <p>
+          Conheça soluções com IA, sensores e drones para aumentar sua
+          produtividade.
+        </p>
+      </div>
+
+      <div class="card">
+        <div
+          class="icon-area"
+          style="background: linear-gradient(135deg, #c5e1a5, #8bc34a)"
+        >
+          📊
+        </div>
+        <h3>Controle Financeiro</h3>
+        <p>
+          Visualize custos, lucros e margens com relatórios fáceis de
+          interpretar.
+        </p>
+      </div>
+
+      <div class="card">
+        <div
+          class="icon-area"
+          style="background: linear-gradient(135deg, #aed581, #689f38)"
+        >
+          🌍
+        </div>
+        <h3>Sustentabilidade</h3>
+        <p>
+          Práticas sustentáveis que garantem o futuro do agronegócio e do
+          planeta.
+        </p>
+      </div>
+    </section>
+
+    <!-- 🧑‍🌾 Produtor da Semana -->
+    <section class="destaque-produtor">
+      <h2>Produtor da Semana 🧑‍🌾</h2>
+      <p>
+        Destaque para <strong>Maria Silva</strong>, produtora de soja em Mato
+        Grosso, que reduziu 25% do consumo de água utilizando sensores de
+        irrigação.
+      </p>
+    </section>
+
+    <!-- 💡 Curiosidades -->
+    <section class="curiosidades">
+      <h2>Você sabia?</h2>
+      <div class="curiosidades-grid" id="curiosidades-grid">
+        <!-- JS insere curiosidades -->
+      </div>
+    </section>
+
+    <!-- 📰 Últimas do Campo -->
+    <section id="noticias" class="noticias">
+      <h2>Últimas notícias do campo</h2>
+      <div class="news-grid" id="lista-noticias">
+        <!-- Notícias via JS -->
+      </div>
+    </section>
+
+    <!-- ⚙️ Rodapé -->
+    <footer>
+      <p>© 2025 TechSafra — Informação e Inovação para o Agronegócio</p>
+    </footer>
+
+    <script src="/js/home.js"></script>
+  </body>
+</html>

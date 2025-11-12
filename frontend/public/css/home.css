@@ -1,0 +1,357 @@
+:root {
+  --green-primary: #2e7d32;
+  --green-light: #81c784;
+  --gold: #f9a825;
+  --earth: #6d4c41;
+  --white: #ffffff;
+  --gray: #f7f8f7;
+  --text-dark: #1b1b1b;
+  --shadow: 0 6px 20px rgba(0, 0, 0, 0.12);
+}
+
+/* Reset */
+body,
+h1,
+h2,
+h3,
+p {
+  margin: 0;
+  padding: 0;
+}
+
+body {
+  font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
+  color: var(--text-dark);
+  background-color: var(--gray);
+  overflow-x: hidden;
+}
+
+/* Cabeçalho */
+.topbar {
+  background: linear-gradient(90deg, var(--green-primary), var(--green-light));
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 1rem 3rem;
+  color: var(--white);
+  box-shadow: var(--shadow);
+}
+
+.logo-area {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+}
+
+.logo {
+  width: 50px;
+  height: 50px;
+}
+
+.btn-sair {
+  color: var(--white);
+  text-decoration: none;
+  padding: 0.6rem 1.4rem;
+  background-color: var(--gold);
+  border-radius: 25px;
+  transition: 0.3s;
+  font-weight: bold;
+}
+
+.btn-sair:hover {
+  background-color: #ffca28;
+  transform: scale(1.05);
+}
+
+/* Hero */
+.hero {
+  background-image: url("https://images.unsplash.com/photo-1500534314209-a25ddb2bd429?auto=format&fit=crop&w=1920&q=60");
+  background-size: cover;
+  background-position: center;
+  height: 70vh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  position: relative;
+}
+
+.hero-overlay {
+  background: rgba(0, 0, 0, 0.55);
+  color: var(--white);
+  text-align: center;
+  padding: 3rem;
+  border-radius: 14px;
+  max-width: 800px;
+}
+
+.hero h1 {
+  font-size: 2.6rem;
+  margin-bottom: 1rem;
+}
+
+.hero p {
+  font-size: 1.2rem;
+  margin-bottom: 1.8rem;
+}
+
+.btn-entrar {
+  background: var(--green-light);
+  color: var(--white);
+  padding: 0.8rem 2rem;
+  border-radius: 30px;
+  text-decoration: none;
+  font-weight: bold;
+  transition: 0.3s ease;
+}
+
+.btn-entrar:hover {
+  background: var(--gold);
+  transform: scale(1.05);
+}
+
+/* Cards informativos */
+.cards {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+  gap: 2rem;
+  padding: 4rem 3rem;
+  animation: fadeIn 1s ease-in;
+}
+
+.card {
+  background-color: var(--white);
+  border-radius: 16px;
+  overflow: hidden;
+  box-shadow: var(--shadow);
+  text-align: center;
+  transition: 0.4s ease;
+  padding-bottom: 1rem;
+}
+
+.card:hover {
+  transform: translateY(-8px);
+  box-shadow: 0 10px 25px rgba(0, 0, 0, 0.15);
+}
+
+.icon-area {
+  font-size: 3rem;
+  color: var(--white);
+  height: 120px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.card h3 {
+  margin-top: 1rem;
+  color: var(--green-primary);
+  font-size: 1.3rem;
+}
+
+.card p {
+  padding: 0.8rem 1.5rem;
+  color: #444;
+  font-size: 0.95rem;
+}
+
+/* Notícias */
+.noticias {
+  background: #edf7ee;
+  padding: 3rem;
+  text-align: center;
+}
+
+.noticias h2 {
+  font-size: 2rem;
+  margin-bottom: 2rem;
+  color: var(--green-primary);
+}
+
+.news-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+  gap: 2rem;
+}
+
+.news-card {
+  background: var(--white);
+  border-radius: 14px;
+  overflow: hidden;
+  box-shadow: var(--shadow);
+  text-align: left;
+  transition: 0.3s ease;
+}
+
+.news-card img {
+  width: 100%;
+  height: 180px;
+  object-fit: cover;
+}
+
+.news-card h3 {
+  padding: 1rem;
+  font-size: 1.2rem;
+  color: var(--green-primary);
+}
+
+.news-card p {
+  padding: 0 1rem 1.5rem;
+  font-size: 0.95rem;
+  color: #555;
+}
+
+.news-card:hover {
+  transform: translateY(-6px);
+  box-shadow: 0 8px 25px rgba(0, 0, 0, 0.1);
+}
+
+/* 🌤️ Previsão do tempo */
+.weather-widget {
+  background: var(--white);
+  border-radius: 16px;
+  box-shadow: var(--shadow);
+  padding: 1.5rem;
+  text-align: center;
+  width: 300px;
+  margin: 2rem auto;
+  animation: fadeIn 0.8s ease;
+}
+
+.weather-widget h3 {
+  color: var(--green-primary);
+  margin-bottom: 0.6rem;
+}
+
+.weather-widget p {
+  font-size: 0.95rem;
+  color: #333;
+}
+
+/* 💰 Cotações */
+.cotacoes {
+  padding: 3rem;
+  text-align: center;
+  background: var(--gray);
+}
+
+.cotacoes h2 {
+  color: var(--green-primary);
+  margin-bottom: 1.5rem;
+}
+
+.cotacoes-grid {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 1.5rem;
+}
+
+.cotacao-card {
+  background: var(--white);
+  border-radius: 14px;
+  padding: 1rem 2rem;
+  box-shadow: var(--shadow);
+  min-width: 180px;
+  transition: 0.3s ease;
+}
+
+.cotacao-card:hover {
+  transform: translateY(-6px);
+}
+
+/* 🧑‍🌾 Produtor da semana */
+.destaque-produtor {
+  background: linear-gradient(90deg, var(--green-light), var(--green-primary));
+  color: var(--white);
+  text-align: center;
+  padding: 3rem 2rem;
+  margin: 3rem 0;
+  border-radius: 16px;
+  box-shadow: var(--shadow);
+}
+
+.destaque-produtor h2 {
+  font-size: 2rem;
+  margin-bottom: 1rem;
+}
+
+.destaque-produtor p {
+  font-size: 1.1rem;
+  max-width: 800px;
+  margin: 0 auto;
+}
+
+/* 💡 Curiosidades */
+.curiosidades {
+  background: #ffffff;
+  padding: 3rem;
+  text-align: center;
+}
+
+.curiosidades h2 {
+  color: var(--green-primary);
+  margin-bottom: 1.5rem;
+}
+
+.curiosidades-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+  gap: 1.5rem;
+}
+
+.curiosidade-item {
+  background: var(--gray);
+  border-radius: 12px;
+  padding: 1.2rem;
+  box-shadow: var(--shadow);
+  transition: 0.3s ease;
+}
+
+.curiosidade-item:hover {
+  transform: translateY(-6px);
+}
+
+/* Rodapé */
+footer {
+  background: var(--green-primary);
+  color: var(--white);
+  text-align: center;
+  padding: 1rem;
+  margin-top: 3rem;
+  font-size: 0.9rem;
+}
+
+/* Animações e ajustes gerais */
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+    transform: translateY(15px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+section {
+  animation: fadeIn 0.8s ease;
+}
+
+a {
+  cursor: pointer;
+}
+
+a.botao {
+  text-decoration: none;
+  background-color: #3c9a4e;
+  color: white;
+  padding: 10px 15px;
+  border-radius: 8px;
+}
+a.botao:hover {
+  background-color: #2e7a3e;
+}
+a {
+  text-decoration: none;
+  color: #000; 
+}

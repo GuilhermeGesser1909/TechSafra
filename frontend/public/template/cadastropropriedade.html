@@ -1,0 +1,215 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>Cadastrar Propriedade - TechSafra</title>
+    <link rel="stylesheet" href="/css/cadastropropriedade.css" />
+  </head>
+
+  <body>
+    <div class="container">
+      <h1>🌾 Cadastro de Nova Propriedade</h1>
+      <p class="subtitle">Preencha as informações da fazenda para melhor gestão agrícola.</p>
+
+      <form id="formPropriedade">
+        <!-- 🏡 Dados Gerais -->
+        <fieldset>
+          <legend>🏡 Dados da Propriedade</legend>
+
+          <div class="input-group">
+            <label for="nomePropriedade">Nome da Propriedade</label>
+            <input type="text" id="nomePropriedade" placeholder="Ex: Fazenda Boa Esperança" required />
+          </div>
+
+          <div class="grid-2">
+            <div class="input-group">
+              <label for="responsavel">Responsável Técnico</label>
+              <input type="text" id="responsavel" placeholder="Ex: João da Silva" required />
+            </div>
+
+            <div class="input-group">
+              <label for="telefone">Telefone / WhatsApp</label>
+              <input type="tel" id="telefone" placeholder="(00) 91234-5678" required />
+            </div>
+          </div>
+
+          <div class="grid-2">
+            <div class="input-group">
+              <label for="emailContato">Email de Contato</label>
+              <input type="email" id="emailContato" placeholder="contato@fazenda.com" required />
+            </div>
+
+            <div class="input-group">
+              <label for="cnpjCpf">CNPJ / CPF</label>
+              <input type="text" id="cnpjCpf" placeholder="00.123.456/0001-89" required />
+            </div>
+          </div>
+        </fieldset>
+
+        <!-- 📍 Localização -->
+        <fieldset>
+          <legend>📍 Localização</legend>
+
+          <div class="grid-2">
+            <div class="input-group">
+              <label for="nomecidade">Cidade</label>
+              <input type="text" id="nomecidade" placeholder="Ex: Rio Verde" required />
+            </div>
+
+            <div class="input-group">
+              <label for="Estado">Estado (UF)</label>
+              <select id="Estado" required>
+                <option value="">Selecione...</option>
+                <option value="Acre">Acre</option>
+              <option value="Alagoas">Alagoas</option>
+              <option value="Amapá">Amapá</option>
+              <option value="Amazonas">Amazonas</option>
+              <option value="Bahia">Bahia</option>
+              <option value="Ceará">Ceará</option>
+              <option value="Distrito Federal">Distrito Federal</option>
+              <option value="Espírito Santo">Espírito Santo</option>
+              <option value="Goiás">Goiás</option>
+              <option value="Maranhão">Maranhão</option>
+              <option value="Mato Grosso">Mato Grosso</option>
+              <option value="Mato Grosso do Sul">Mato Grosso do Sul</option>
+              <option value="Minas Gerais">Minas Gerais</option>
+              <option value="Pará">Pará</option>
+              <option value="Pará">Paraná</option>
+              <option value="Pernambuco">Pernambuco</option>
+              <option value="Piauí">Piauí</option>
+              <option value="Rio de Janeiro">Rio de Janeiro</option>
+              <option value="Rio Grande do Norte">Rio Grande do Norte</option>
+              <option value="Rio Grande do Sul">Rio Grande do Sul</option>
+              <option value="Rondônia">Rondônia</option>
+              <option value="Roraima">Roraima</option>
+              <option value="Santa Catarina">Santa Catarina</option>
+              <option value="São Paulo">São Paulo</option>
+              <option value="Sergipe">Sergipe</option>
+              <option value="Tocantins">Tocantins</option>
+              </select>
+            </div>
+          </div>
+
+          <div class="grid-2">
+            <div class="input-group">
+              <label for="cep">CEP</label>
+              <input type="text" id="cep" placeholder="Ex: 75901-000" required />
+            </div>
+
+            <div class="input-group">
+              <label for="endereco">Endereço / Rodovia / Km</label>
+              <input type="text" id="endereco" placeholder="GO-174, Km 25, Zona Rural" required />
+            </div>
+          </div>
+
+          <div class="grid-2">
+            <div class="input-group">
+              <label for="latitude">Latitude</label>
+              <input type="text" id="latitude" placeholder="-17.789" required />
+            </div>
+
+            <div class="input-group">
+              <label for="longitude">Longitude</label>
+              <input type="text" id="longitude" placeholder="-50.927" required />
+            </div>
+          </div>
+        </fieldset>
+
+        <!-- 🌱 Dados Técnicos -->
+        <fieldset>
+          <legend>🌱 Dados Técnicos</legend>
+
+          <div class="grid-3">
+            <div class="input-group">
+              <label for="tamanhopropriedade">Área Total (ha)</label>
+              <input type="number" id="tamanhopropriedade" placeholder="Ex: 1500" required />
+            </div>
+
+            <div class="input-group">
+              <label for="areaCultivavel">Área Cultivável (ha)</label>
+              <input type="number" id="areaCultivavel" placeholder="Ex: 1200" required />
+            </div>
+
+            <div class="input-group">
+              <label for="areaReserva">Área de Reserva (ha)</label>
+              <input type="number" id="areaReserva" placeholder="Ex: 300" required />
+            </div>
+          </div>
+
+          <div class="grid-3">
+            <div class="input-group">
+              <label for="solo">Tipo de Solo</label>
+              <select id="solo" required>
+                <option value="">Selecione...</option>
+                <option value="Argiloso">Argiloso</option>
+                <option value="Arenoso">Arenoso</option>
+                <option value="Mistura">Mistura</option>
+              </select>
+            </div>
+
+            <div class="input-group">
+              <label for="topografia">Topografia</label>
+              <select id="topografia" required>
+                <option value="">Selecione...</option>
+                <option value="Plana">Plana</option>
+                <option value="Levemente ondulada">Levemente ondulada</option>
+                <option value="Ondulada">Ondulada</option>
+              </select>
+            </div>
+
+            <div class="input-group">
+              <label for="irrigacao">Sistema de Irrigação</label>
+              <select id="irrigacao" required>
+                <option value="">Selecione...</option>
+                <option value="Pivô">Pivô</option>
+                <option value="Gotejamento">Gotejamento</option>
+                <option value="Aspersão">Aspersão</option>
+                <option value="Sem irrigação">Sem irrigação</option>
+              </select>
+            </div>
+          </div>
+        </fieldset>
+
+        <!-- 🌾 Produção -->
+        <fieldset>
+          <legend>🌾 Produção</legend>
+
+          <div class="grid-3">
+            <div class="input-group">
+              <label for="culturaPrincipal">Cultura Principal</label>
+              <input type="text" id="culturaPrincipal" placeholder="Ex: Soja" required />
+            </div>
+
+            <div class="input-group">
+              <label for="culturaSecundaria">Cultura Secundária</label>
+              <input type="text" id="culturaSecundaria" placeholder="Ex: Milho" required />
+            </div>
+
+            <div class="input-group">
+              <label for="numTalhoes">Número de Talhões</label>
+              <input type="number" id="numTalhoes" placeholder="Ex: 10" required />
+            </div>
+          </div>
+        </fieldset>
+
+        <!-- 💬 Observações -->
+        <fieldset>
+          <legend>💬 Observações</legend>
+          <textarea id="observacoes" rows="4" placeholder="Observações gerais sobre a propriedade..."></textarea>
+        </fieldset>
+
+        <div class="button-group">
+          <button type="submit" class="btn">💾 Salvar Propriedade</button>
+          <button type="button" class="secondary" onclick="window.location.href='/template/dashboard.html'">
+            ⬅️ Voltar ao Dashboard
+          </button>
+        </div>
+      </form>
+
+      <div id="resultado" class="mensagem"></div>
+    </div>
+
+    <script src="/js/cadastropropriedade.js" defer></script>
+  </body>
+</html>

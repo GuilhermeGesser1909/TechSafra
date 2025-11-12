@@ -1,0 +1,151 @@
+@import url("https://fonts.googleapis.com/css2?family=Poppins:wght@100;200;300;400;500;600;700;800;900&display=swap");
+
+/* ===== RESET E FONTES ===== */
+* {
+  font-family: 'Poppins', sans-serif;
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+/* ===== CONTAINER PRINCIPAL ===== */
+#container {
+  background-color: #b42d2d;
+  border-radius: 10px;
+  padding: 14px;
+  box-shadow: 5px 5px 15px rgba(0, 0, 0, 0.1);
+}
+
+/* ===== FORMULÁRIO DE BUSCA ===== */
+#search {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  border: 1px solid #bdbdbd;
+  border-radius: 8px;
+  padding: 4px;
+}
+
+#search input {
+  border: none;
+  background-color: transparent;
+  font-size: 16px;
+  width: 100%;
+}
+
+#search input:focus-visible {
+  outline: none;
+}
+
+#search button {
+  border: none;
+  background-color: transparent;
+  cursor: pointer;
+}
+
+/* ===== SEÇÃO DO CLIMA ===== */
+#weather {
+  margin-top: -35px;
+}
+
+/* ===== TÍTULO ===== */
+#title {
+  text-align: center;
+  margin-bottom: 5px;
+  font-weight: 600;
+  color: #377f3f;
+}
+
+/* ===== BLOCO DE TEMPERATURA ===== */
+#temp {
+  display: flex;
+  align-items: center;
+  justify-content: space-around;
+  gap: 10px;
+  background: linear-gradient(90deg, #5a7cdc, #606dde);
+  color: #fff;
+  border-radius: 20px;
+  padding: 10px;
+}
+
+#temp img {
+  filter: drop-shadow(2px 2px 2px rgba(0, 0, 0, 0.2));
+}
+
+#temp_value {
+  font-weight: bold;
+  font-size: 50px;
+  line-height: 55px;
+}
+
+#temp_description {
+  font-weight: 500;
+  text-transform: capitalize;
+}
+
+/* ===== OUTRAS INFORMAÇÕES ===== */
+#other_infos {
+  text-align: center;
+  margin-top: 15px;
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 12px;
+  white-space: nowrap;
+}
+
+#other_infos .info {
+  display: flex;
+  align-items: center;
+  justify-content: flex-start;
+  padding: 4px 10px;
+  border-radius: 8px;
+  box-shadow: 0 0 5px rgba(0, 0, 0, 0.2);
+  background-color: #fff;
+  gap: 10px;
+}
+
+#other_infos .info h2 {
+  font-size: 18px;
+  font-weight: 600;
+}
+
+#other_infos .info i {
+  font-size: 30px;
+  width: 20%;
+  text-align: center;
+}
+
+#other_infos .info p {
+  font-size: 28px;
+  width: 20%;
+  text-align: center;
+}
+
+#section2 h3 {
+    font-size: 24px;
+}
+
+/* ===== ÍCONES COLORIDOS ===== */
+#temp_max_icon {
+  color: #7f1d1d;
+}
+
+#humidity_icon {
+  color: #0ea5e9;
+}
+
+#wind_icon {
+  color: #7c3aed;
+}
+
+/* ===== ALERTAS ===== */
+#alert {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+#alert img {
+  width: 20px;
+  margin-top: 20px;
+}

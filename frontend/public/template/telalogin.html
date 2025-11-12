@@ -1,0 +1,116 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width,initial-scale=1" />
+    <title>TechSafra — Entrar</title>
+    <link rel="icon" href="/img/logo.png" />
+    <link rel="stylesheet" href="/css/telalogin.css" />
+  </head>
+
+  <body>
+    <main class="login-page">
+      <!-- Lado visual -->
+      <aside class="login-visual">
+        <img
+          src="/img/photocampo.jpeg"
+          alt="Imagem de fundo agrícola"
+          class="visual-image"
+        />
+        <div class="visual-overlay">
+          <img src="/img/logo.png" alt="TechSafra" class="logo-small" />
+          <h1>TechSafra</h1>
+          <p>Conectando fazendas, dados e decisões.</p>
+        </div>
+      </aside>
+
+      <!-- Lado do formulário -->
+      <section class="login-form-wrap">
+        <div class="card">
+          <header class="card-header">
+            <img src="/img/logo.png" alt="TechSafra" class="logo-inline" />
+            <h2>Faça seu login</h2>
+            <p class="muted">
+              Acesse sua conta para gerenciar suas propriedades.
+            </p>
+          </header>
+
+          <form id="login-form" class="login-form" autocomplete="on">
+            <label class="input-group">
+              <span class="label">Email</span>
+              <input
+                type="email"
+                id="usuario"
+                name="email"
+                placeholder="seu@exemplo.com"
+                required
+              />
+            </label>
+
+            <label class="input-group">
+              <span class="label">Senha</span>
+              <div class="password-row">
+                <input
+                  type="password"
+                  name="senha"
+                  placeholder="••••••••"
+                  required
+                  id="password"
+                />
+                <button
+                  type="button"
+                  class="toggle-pass"
+                  aria-label="Mostrar senha"
+                  onclick="togglePassword('password')"
+                >
+                  Mostrar
+                </button>
+              </div>
+            </label>
+
+            <!-- Elemento para exibir mensagens (sucesso/erro) -->
+            <p id="mensagemLogin" class="mensagem"></p>
+
+            <div class="form-actions">
+              <label class="checkbox">
+                <input type="checkbox" name="remember" />
+                <span>Manter-me conectado</span>
+              </label>
+              <a class="forgot" href="/template/recuperarsenha.html"
+                >Esqueceu a senha?</a
+              >
+            </div>
+
+            <!-- Corrigido: o botão não deve ter “a ref” -->
+            <button type="submit" class="btn primary">Entrar</button>
+
+            <div class="divider"><span>ou</span></div>
+
+            <div class="social-row">
+              <button type="button" class="btn social google">
+                Entrar com Google
+              </button>
+              <button type="button" class="btn social apple">
+                Entrar com Apple
+              </button>
+            </div>
+
+            <p class="signup">
+              Não tem uma conta?
+              <a href="/template/telacadastro.html">Crie gratuitamente</a>
+            </p>
+          </form>
+
+          <footer class="card-foot muted">
+            <small
+              >© <span id="year"></span> TechSafra — Todos os direitos
+              reservados.</small
+            >
+          </footer>
+        </div>
+      </section>
+    </main>
+
+    <script src="/js/telalogin.js"></script>
+  </body>
+</html>

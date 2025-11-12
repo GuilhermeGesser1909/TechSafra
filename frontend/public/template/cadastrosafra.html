@@ -1,0 +1,110 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Nova Safra | TechSafra</title>
+    <link rel="stylesheet" href="/css/dashboard.css" />
+    <link rel="stylesheet" href="/css/formulariocadastro.css" />
+  </head>
+
+  <body>
+    <div class="container">
+      <h1>Cadastro de Nova Safra</h1>
+
+      <form id="formSafra">
+        <div>
+          <label for="nomeSafra">Nome da Safra</label>
+          <input
+            type="text"
+            id="nomeSafra"
+            name="nomeSafra"
+            placeholder="Ex: Safra 2025/2026"
+            required
+          />
+        </div>
+
+        <div>
+          <label for="cultura">Cultura:</label>
+          <select id="cultura" name="cultura" required>
+            <option value="">Selecione...</option>
+            <option value="soja">Soja</option>
+            <option value="milho">Milho</option>
+            <option value="trigo">Trigo</option>
+            <option value="arroz">Arroz</option>
+            <option value="café">Café</option>
+            <option value="outra">Outra</option>
+          </select>
+        </div>
+
+        <div style="display: flex; gap: 20px">
+          <div style="flex: 1">
+            <label for="dataInicio">Data de Início:</label>
+            <input type="date" id="dataInicio" name="dataInicio" required />
+          </div>
+
+          <div style="flex: 1">
+            <label for="dataFim">Data de Fim:</label>
+            <input type="date" id="dataFim" name="dataFim" required />
+          </div>
+        </div>
+
+        <div style="display: flex; gap: 20px">
+          <div style="flex: 1">
+            <label for="area">Área Cultivada (ha):</label>
+            <input
+              type="number"
+              id="area"
+              name="area"
+              placeholder="Ex: 150"
+              required
+            />
+          </div>
+
+          <div style="flex: 1">
+            <label for="producao">Produção Esperada (ton):</label>
+            <input
+              type="number"
+              id="producao"
+              name="producao"
+              placeholder="Ex: 350"
+              required
+            />
+          </div>
+        </div>
+
+        <div>
+          <label for="custos">Custos Estimados (R$):</label>
+          <input
+            type="number"
+            id="custos"
+            name="custos"
+            placeholder="Ex: R$150000"
+            required
+          />
+        </div>
+
+        <div>
+          <label for="observacoessafra">Observações:</label>
+          <textarea
+            id="observacoessafra"
+            name="observacoessafra"
+            placeholder="Adicione anotações importantes sobre a safra..."
+          ></textarea>
+        </div>
+
+        <div class="button-group">
+          <button type="submit">Salvar Safra</button>
+          <button
+            type="button"
+            class="secondary"
+            onclick="window.location.href='/template/dashboard.html'"
+          >
+            Voltar ao Dashboard
+          </button>
+        </div>
+      </form>
+    </div>
+  </body>
+  <script src="/js/cadastrosafra.js" defer></script>
+</html>
