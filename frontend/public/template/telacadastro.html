@@ -1,0 +1,120 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width,initial-scale=1" />
+
+    <title>TechSafra — Cadastrar</title>
+    <link rel="icon" href="/img/logo.png" />
+    <link rel="stylesheet" href="/css/telacadastro.css" />
+  </head>
+
+  <body>
+    <main class="login-page">
+      <aside class="login-visual">
+        <img
+          src="/img/photocampo.jpeg"
+          alt="Imagem de fundo agrícola"
+          class="visual-image"
+        />
+        <div class="visual-overlay">
+          <img src="/img/logo.png" alt="TechSafra" class="logo-small" />
+          <h1>TechSafra</h1>
+          <p>Conectando fazendas, dados e decisões.</p>
+        </div>
+      </aside>
+
+      <section class="login-form-wrap">
+        <div class="card">
+          <header class="card-header">
+            <img src="/img/logo.png" alt="TechSafra" class="logo-inline" />
+            <h2>Cadastre-se</h2>
+            <p class="muted">
+              Crie uma conta para gerenciar suas propriedades.
+            </p>
+          </header>
+          <form id="cadastroForm" class="login-form" autocomplete="on">
+            <label class="input-group">
+              <span class="label">Nome</span>
+              <input
+                type="text"
+                name="nome"
+                placeholder="Nome Completo"
+                required
+              />
+            </label>
+            <label class="input-group">
+              <span class="label">Email</span>
+              <input
+                type="email"
+                name="email"
+                placeholder="seu@exemplo.com"
+                required
+              />
+            </label>
+            <label class="input-group">
+              <span class="label">Senha</span>
+              <div class="password-row">
+                <input
+                  type="password"
+                  name="senha"
+                  placeholder="••••••••"
+                  required
+                  id="password"
+                />
+                <button
+                  type="button"
+                  class="toggle-pass"
+                  onclick="togglePassword('password')"
+                >
+                  Mostrar
+                </button>
+              </div>
+            </label>
+            <label class="input-group">
+              <span class="label">Confirmar Senha</span>
+              <div class="password-row">
+                <input
+                  type="password"
+                  name="confirmarSenha"
+                  placeholder="••••••••"
+                  required
+                  id="confirmPassword"
+                />
+                <button
+                  type="button"
+                  class="toggle-pass"
+                  onclick="togglePassword('confirmPassword')"
+                >
+                  Mostrar
+                </button>
+              </div>
+            </label>
+
+            
+  <!-- Checkbox obrigatório de aceite dos termos -->
+                      <input type="checkbox" id="aceiteTermos" name="aceiteTermos" required>
+                        <label for="aceiteTermos">
+                            Li e aceito os
+                             <a href="./termoDeUso.html" target="_blank">Termos de Uso</a> e  <a href="./politicaDePrivacidade.html" target="_blank">Política de Privacidade</a>
+                            </label><br><br>
+
+
+            <!-- Div para mensagem de sucesso/erro -->
+
+            <div id="mensagemCadastro" class="mensagem"></div>
+            <button type="submit" class="btn primary">Cadastrar</button>
+            <footer class="card-foot muted">
+              <small
+                >© <span id="year"></span> TechSafra — Todos os direitos
+                reservados.</small
+              >
+            </footer>
+          </form>
+        </div>
+      </section>
+    </main>
+
+    <script src="/js/telacadastro.js"></script>
+  </body>
+</html>

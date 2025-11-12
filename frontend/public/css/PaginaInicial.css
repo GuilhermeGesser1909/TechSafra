@@ -1,0 +1,375 @@
+:root {
+  --green-dark: #2e7a3e;
+  --green: #45b649;
+  --green-light: #a8e063;
+  --yellow: #f9d71c;
+  --beige: #fffef6;
+  --white: #ffffff;
+  --text: #153127;
+  --radius: 16px;
+  --shadow: 0 6px 20px rgba(0, 0, 0, 0.08);
+  font-family: "Inter", system-ui, -apple-system, "Segoe UI", Roboto,
+    "Helvetica Neue", Arial;
+}
+
+body {
+  margin: 0;
+  background: linear-gradient(180deg, #f7fff8 0%, #ffffff 100%);
+  color: var(--text);
+  overflow-x: hidden;
+}
+
+/* HEADER */
+header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 14px 6vw;
+  background: linear-gradient(90deg, var(--green-light), var(--green));
+  box-shadow: var(--shadow);
+}
+
+header img {
+  max-width: 160px;
+  height: auto;
+}
+
+.nav {
+  display: flex;
+  gap: 24px;
+  align-items: center;
+}
+
+.nav a {
+  color: #fff;
+  text-decoration: none;
+  font-weight: 600;
+  background: var(--green-dark);
+  padding: 10px 20px;
+  border-radius: 12px;
+  transition: all 0.3s ease;
+}
+
+.nav a:hover {
+  background: var(--yellow);
+  color: #153127;
+  box-shadow: 0 4px 10px rgba(249, 215, 28, 0.4);
+}
+
+/* HERO */
+.hero {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 40px;
+  align-items: center;
+  padding: 80px 6vw;
+  background: linear-gradient(180deg, #ffffff, #f7fff8);
+}
+
+.hero-left h1 {
+  font-size: 64px;
+  color: var(--green-dark);
+  margin: 0;
+}
+
+.hero-left h2 {
+  font-size: 32px;
+  color: var(--green);
+  margin: 8px 0 24px;
+}
+
+p.lead {
+  color: rgba(20, 40, 20, 0.8);
+  font-size: 18px;
+  margin-bottom: 28px;
+}
+
+.cta {
+  display: inline-block;
+  background: var(--green-dark);
+  color: #ffffff;
+  padding: 14px 28px;
+  border-radius: 14px;
+  font-weight: 700;
+  text-decoration: none;
+  transition: all 0.3s ease;
+}
+
+.cta:hover {
+  background: var(--yellow);
+  color: #110f0f;
+  box-shadow: 0 8px 20px rgba(46, 122, 62, 0.4);
+}
+
+.hero-card {
+  border-radius: 18px;
+  overflow: hidden;
+  box-shadow: var(--shadow);
+  background: var(--white);
+  transition: transform 0.3s ease;
+}
+
+.hero-card:hover {
+  transform: scale(1.02);
+}
+
+.hero-card img {
+  width: 100%;
+  height: 350px;
+  object-fit: cover;
+}
+
+/* FEATURES */
+.features {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+  gap: 24px;
+  padding: 80px 6vw;
+}
+
+.feature {
+  background: var(--white);
+  border-radius: var(--radius);
+  box-shadow: var(--shadow);
+  text-align: center;
+  padding: 30px;
+  transition: all 0.3s ease;
+  border: 1px solid #e0f2e9;
+}
+
+.feature:hover {
+  transform: translateY(-6px);
+  box-shadow: 0 6px 20px rgba(46, 122, 62, 0.25);
+  background: linear-gradient(180deg, #ffffff, #f3ffe9);
+}
+
+.feature h3 {
+  color: var(--green-dark);
+  margin-top: 12px;
+}
+
+/* COMO FUNCIONA */
+.como-funciona {
+  background: var(--beige);
+  text-align: center;
+  padding: 80px 6vw;
+}
+
+.steps {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 40px;
+}
+
+.step {
+  background: var(--white);
+  border-radius: var(--radius);
+  padding: 25px;
+  box-shadow: var(--shadow);
+  max-width: 300px;
+  transition: transform 0.3s ease;
+}
+
+.step:hover {
+  transform: translateY(-8px);
+  background: #f6fff7;
+}
+
+/* RECURSOS */
+.recursos {
+  text-align: center;
+  padding: 80px 6vw;
+}
+
+.recursos .grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+  gap: 28px;
+}
+
+.recursos .card {
+  background: #fafffa;
+  border-radius: var(--radius);
+  padding: 26px;
+  text-align: center;
+  box-shadow: var(--shadow);
+  border: 1px solid #def3e1;
+  transition: all 0.3s ease;
+}
+
+.recursos .card:hover {
+  transform: translateY(-6px);
+  background: #fffef5;
+  box-shadow: 0 6px 20px rgba(249, 215, 28, 0.2);
+}
+
+/* DEPOIMENTOS */
+.depoimentos {
+  text-align: center;
+  background: linear-gradient(180deg, #ffffff, #f3fff5);
+  padding: 80px 6vw;
+}
+
+.depoimentos-grid {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 40px;
+}
+
+.depoimento {
+  background: var(--white);
+  border-left: 6px solid var(--green);
+  border-radius: var(--radius);
+  padding: 28px;
+  box-shadow: var(--shadow);
+  max-width: 380px;
+  transition: 0.3s;
+}
+
+.depoimento:hover {
+  border-color: var(--yellow);
+  transform: translateY(-6px);
+}
+
+/* MÉTRICAS */
+.metricas {
+  text-align: center;
+  background: var(--beige);
+  padding: 80px 6vw;
+}
+
+.metricas-grid {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 40px;
+}
+
+.metrica {
+  background: var(--white);
+  border-radius: var(--radius);
+  padding: 30px 40px;
+  box-shadow: var(--shadow);
+  transition: 0.3s;
+}
+
+.metrica:hover {
+  transform: translateY(-6px);
+  background: linear-gradient(180deg, #fff, #f7fff3);
+}
+
+.metrica strong {
+  display: block;
+  font-size: 2.4em;
+  color: var(--green-dark);
+}
+
+.metrica span {
+  color: #555;
+  font-weight: 500;
+}
+
+/* COMPARATIVO */
+.comparativo {
+  padding: 80px 6vw;
+}
+
+.comparativo table {
+  width: 100%;
+  border-collapse: collapse;
+  background: var(--white);
+  border-radius: var(--radius);
+  box-shadow: var(--shadow);
+  overflow: hidden;
+}
+
+.comparativo th {
+  background: var(--green);
+  color: #fff;
+  padding: 18px;
+}
+
+.comparativo td {
+  padding: 14px;
+  text-align: center;
+  border-top: 1px solid #e0f2e9;
+}
+
+.comparativo tr:nth-child(even) {
+  background-color: #fafffa;
+}
+
+/* PROPÓSITO */
+.proposito {
+  text-align: center;
+  padding: 80px 6vw;
+  background: linear-gradient(180deg, #fff, #f5fff8);
+}
+
+.proposito h2 {
+  color: var(--green-dark);
+  margin-bottom: 20px;
+}
+
+.proposito p {
+  max-width: 800px;
+  margin: 0 auto;
+  font-size: 1.1em;
+  color: #333;
+}
+
+/* FOOTER */
+.footer {
+  background: linear-gradient(90deg, var(--green-dark), var(--green));
+  color: #fff;
+  padding: 60px 6vw 30px;
+  text-align: center;
+}
+
+.footer-logo img {
+  width: 80px;
+}
+
+.footer-links a {
+  color: #fff;
+  text-decoration: none;
+  margin: 0 10px;
+  transition: 0.3s;
+}
+
+.footer-links a:hover {
+  color: var(--yellow);
+}
+
+.social-icons {
+  margin-top: 20px;
+  display: flex;
+  justify-content: center;
+  gap: 18px;
+}
+
+.social-icons img {
+  width: 32px;
+  height: 32px;
+  transition: transform 0.3s, opacity 0.3s;
+}
+
+.social-icons img:hover {
+  transform: scale(1.15);
+  opacity: 0.8;
+}
+
+.footer-copy {
+  margin-top: 40px;
+  font-size: 0.9em;
+  opacity: 0.9;
+}
+
+/* Centralizar todos os subtítulos (h2) das seções */
+section.container h2,
+section h2 {
+  text-align: center;
+  margin: 0 auto 1.5rem auto;
+}

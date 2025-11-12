@@ -1,0 +1,106 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Cadastro de Maquinário - TechSafra</title>
+    <link rel="stylesheet" href="/css/dashboard.css" />
+    <link rel="stylesheet" href="/css/formulariocadastro.css" />
+  </head>
+
+  <body>
+    <div class="container">
+      <h1>Cadastro de Novo Maquinário</h1>
+
+      <form id="formMaquinario">
+        <div>
+          <label for="nomeMaquinario">Nome da Máquinario:</label>
+          <input
+            type="text"
+            id="nomeMaquinario"
+            name="nomeMaquinario"
+            placeholder="Ex: Colheitadeira"
+            required
+          />
+        </div>
+
+        <div>
+          <label for="tipomaquinario">Tipo:</label>
+          <select id="tipomaquinario" name="tipomaquinario" required>
+            <option value="">Selecione...</option>
+            <option value="Máquina de preparo do solo">
+              Máquina de preparo do solo
+            </option>
+            <option value="Máquinas de plantio e semeadura">
+              Máquinas de plantio e semeadura
+            </option>
+            <option value="Máquinas para pulverização e fertilização">
+              Máquinas para pulverização e fertilização
+            </option>
+            <option value="Máquinas de colheita e processamento">
+              Máquinas de colheita e processamento
+            </option>
+            <option value="Outros tipos de máquinas">
+              Outros tipos de máquinas
+            </option>
+          </select>
+        </div>
+
+        <div style="display: flex; gap: 20px">
+          <div style="flex: 1">
+            <label for="horadia">Horas trabalhadas por dia:</label>
+            <input
+              type="Number"
+              id="horadia"
+              name="horadia"
+              placeholder="Ex: 12 horas/dia"
+              required
+            />
+          </div>
+
+          <div style="flex: 1">
+            <label for="horamanu">Horas previstas para manutenção:</label>
+            <input
+              type="Number"
+              id="horamanu"
+              name="horamanu"
+              required
+              placeholder="Ex: 50000 horas"
+            />
+          </div>
+        </div>
+
+        <div>
+          <label for="situacaomaquinario">Situação:</label>
+          <select id="situacaomaquinario" name="situacaomaquinario" required>
+            <option value="">Selecione...</option>
+            <option value="Ativo">Ativo</option>
+            <option value="Inativo">Inativo</option>
+          </select>
+        </div>
+
+        <div>
+          <label for="observacoesmaquinario">Observações:</label>
+          <textarea
+            id="observacoesmaquinario"
+            name="observacoesmaquinario"
+            placeholder="Adicione anotações importantes sobre o maquinário..."
+          ></textarea>
+        </div>
+
+        <div class="button-group">
+          <button type="submit">Salvar Maquinário</button>
+          <button
+            type="button"
+            class="secondary"
+            onclick="window.location.href='/template/dashboard.html'"
+          >
+            Voltar ao Dashboard
+          </button>
+        </div>
+      </form>
+    </div>
+  </body>
+
+  <script src="/js/cadastromaquinario.js" defer></script>
+</html>

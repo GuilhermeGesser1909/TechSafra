@@ -1,0 +1,272 @@
+/* dashboard_agricola.css */
+
+/* --- Configurações Gerais e Variáveis --- */
+:root {
+    /* Cores Institucionais Agrícolas */
+    --color-primary: #1e8449;   /* Verde Profundo (Agricultura) */
+    --color-secondary: #f4f6f9; /* Fundo de Dashboard Claro */
+    --color-text-dark: #2c3e50; /* Texto Principal */
+    --color-text-muted: #7f8c8d; /* Texto Secundário/Tendência */
+    --color-border: #e0e6ed;
+    --color-card-bg: #ffffff;
+
+    /* Cores de Status/Tendência */
+    --color-positive: #2ecc71;  /* Verde (Bom) */
+    --color-negative: #e74c3c;  /* Vermelho (Alerta/Ruim) */
+    --color-neutral: #f39c12;   /* Amarelo/Laranja (Atenção/Novo) */
+
+    --spacing-default: 20px;
+    --border-radius: 8px;
+    --shadow-default: 0 4px 12px rgba(0, 0, 0, 0.05);
+}
+
+* {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+}
+
+body {
+    font-family: 'Inter', 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    background-color: var(--color-secondary);
+    color: var(--color-text-dark);
+    line-height: 1.6;
+}
+
+/* --- Header (Barra Superior) --- */
+.dashboard-header {
+    background-color: var(--color-card-bg);
+    border-bottom: 2px solid var(--color-border);
+    padding: 15px var(--spacing-default);
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.03);
+}
+
+.dashboard-header h1 {
+    font-size: 1.8em;
+    color: var(--color-primary);
+    margin: 0;
+}
+
+.metadata {
+    font-size: 0.9em;
+    color: var(--color-text-muted);
+}
+
+/* --- Conteúdo Principal e Layout (MAIN) --- */
+.main-content {
+    padding: var(--spacing-default);
+}
+
+/* --- Painel de Filtros e Controles --- */
+.controls-panel {
+    background-color: var(--color-card-bg);
+    padding: var(--spacing-default);
+    border-radius: var(--border-radius);
+    margin-bottom: var(--spacing-default);
+    box-shadow: var(--shadow-default);
+}
+
+.filters-form {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 20px;
+    align-items: flex-end; /* Alinha o botão com os campos */
+}
+
+.filter-group {
+    display: flex;
+    flex-direction: column;
+}
+
+.filter-group label {
+    font-weight: 600;
+    margin-bottom: 5px;
+    font-size: 0.9em;
+}
+
+.filters-form select {
+    padding: 10px 12px;
+    border: 1px solid var(--color-border);
+    border-radius: 4px;
+    background-color: #fcfcfc;
+    min-width: 150px;
+    font-size: 1em;
+}
+
+.button-primary {
+    padding: 10px 20px;
+    background-color: var(--color-primary);
+    color: white;
+    border: none;
+    border-radius: 4px;
+    font-weight: bold;
+    cursor: pointer;
+    transition: background-color 0.2s, transform 0.1s;
+}
+
+.button-primary:hover {
+    background-color: #1a7442;
+}
+
+.button-primary:active {
+    transform: translateY(1px);
+}
+
+/* --- Resumo (KPIs) --- */
+.kpi-summary {
+    display: grid;
+    /* 4 colunas em telas grandes */
+    grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+    gap: var(--spacing-default);
+    margin-bottom: var(--spacing-default);
+}
+
+.kpi-card {
+    background-color: var(--color-card-bg);
+    border: 1px solid var(--color-border);
+    border-radius: var(--border-radius);
+    padding: var(--spacing-default);
+    box-shadow: var(--shadow-default);
+    transition: all 0.3s ease-in-out;
+}
+
+.kpi-card:hover {
+    border-color: var(--color-primary);
+    transform: translateY(-2px);
+}
+
+.kpi-card figcaption {
+    font-size: 0.9em;
+    font-weight: 500;
+    color: var(--color-text-muted);
+    margin-bottom: 5px;
+}
+
+.kpi-value {
+    font-size: 2.5em;
+    font-weight: 700;
+    color: var(--color-text-dark);
+    margin: 0;
+}
+
+.kpi-trend {
+    display: block;
+    font-size: 0.85em;
+    margin-top: 5px;
+    color: var(--color-text-muted);
+}
+
+/* Indicadores de Tendência */
+.trend-positive { color: var(--color-positive); font-weight: 600; }
+.trend-negative { color: var(--color-negative); font-weight: 600; }
+.trend-neutral { color: var(--color-neutral); font-weight: 600; }
+
+/* --- Seções de Relatório (Tabelas) --- */
+.report-section {
+    background-color: var(--color-card-bg);
+    padding: var(--spacing-default);
+    border-radius: var(--border-radius);
+    box-shadow: var(--shadow-default);
+    margin-bottom: var(--spacing-default);
+}
+
+.report-section h2 {
+    font-size: 1.5em;
+    color: var(--color-primary);
+    border-bottom: 1px solid var(--color-border);
+    padding-bottom: 10px;
+    margin-bottom: 15px;
+}
+
+.table-container {
+    overflow-x: auto; /* Garante que a tabela seja scrollável horizontalmente em telas pequenas */
+}
+
+.data-table {
+    width: 100%;
+    border-collapse: collapse;
+    font-size: 0.95em;
+}
+
+.data-table thead {
+    background-color: #f0f4f7;
+    border-top: 3px solid var(--color-primary);
+}
+
+.data-table th,
+.data-table td {
+    padding: 12px 15px;
+    text-align: left;
+    border-bottom: 1px solid var(--color-border);
+}
+
+.data-table th {
+    font-weight: 600;
+    color: var(--color-text-dark);
+    text-transform: uppercase;
+    font-size: 0.85em;
+}
+
+/* Efeito Zebrado */
+.data-table tbody tr:nth-child(even) {
+    background-color: #f9fbfd;
+}
+
+.data-table tbody tr:hover {
+    background-color: #f0fff4; /* Um verde bem suave ao passar o mouse */
+}
+
+/* Estilização de Status/Tendência nas Células */
+[data-status="critical"], [data-trend="negative"] {
+    color: var(--color-negative);
+    font-weight: 600;
+}
+
+[data-status="stable"], [data-trend="positive"] {
+    color: var(--color-positive);
+    font-weight: 600;
+}
+
+[data-status="new"] {
+    color: var(--color-neutral);
+    font-weight: 600;
+}
+
+/* --- Footer --- */
+.dashboard-footer {
+    padding: 15px var(--spacing-default);
+    text-align: center;
+    font-size: 0.8em;
+    color: var(--color-text-muted);
+    border-top: 1px solid var(--color-border);
+    background-color: var(--color-card-bg);
+}
+
+/* --- Responsividade --- */
+@media (max-width: 992px) {
+    .filters-form {
+        flex-direction: column;
+        align-items: stretch;
+    }
+
+    .filter-group {
+        width: 100%;
+    }
+
+    .filters-form select,
+    .button-primary {
+        width: 100%;
+    }
+}
+
+@media (max-width: 576px) {
+    .dashboard-header h1 {
+        font-size: 1.5em;
+    }
+    .kpi-value {
+        font-size: 2em;
+    }
+}

@@ -1,0 +1,80 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>Cadastrar Produto - TechSafra</title>
+    <link rel="stylesheet" href="/css/dashboard.css" />
+    <link rel="stylesheet" href="/css/formulariocadastro.css" />
+    <style></style>
+  </head>
+
+  <body>
+    <div class="container">
+      <h1>Cadastro de Novo Produto</h1>
+
+      <form id="formproduto">
+        <div>
+          <label for="nomeProduto">Nome do Produto:</label>
+          <input
+            type="text"
+            id="nomeProduto"
+            name="nomeProduto"
+            placeholder="Ex: Agrotóxico"
+            required
+          />
+        </div>
+
+        <div style="display: flex; gap: 20px">
+          <div style="flex: 1">
+            <label for="Quantidade">Quantidade:</label>
+            <input
+              type="Number"
+              id="Quantidade"
+              name="Quantidade"
+              placeholder="Ex: 236"
+              required
+            />
+          </div>
+
+          <div style="flex: 1">
+            <label for="Tipo">Tipo do Produto:</label>
+            <select id="Tipo" name="Tipo" required>
+              <option value="">Selecione...</option>
+              <option value="Sementes">Sementes</option>
+              <option value="Fertilizantes">Fertilizantes</option>
+              <option value="Adubos">Adubos</option>
+              <option value="Defensivos agrícolas">Defensivos agrícolas</option>
+              <option value="Suplementos">Suplementos</option>
+              <option value="Ferramentas">Ferramentas</option>
+              <option value="Outros">Outros</option>
+            </select>
+          </div>
+        </div>
+        <div>
+          <label for="custoproduto">Custo (R$):</label>
+          <input
+            type="number"
+            id="custoproduto"
+            name="custoproduto"
+            placeholder="Ex: R$1.500"
+            required
+          />
+        </div>
+
+        <div class="button-group">
+          <button type="submit">Salvar Produto</button>
+          <button
+            type="button"
+            class="secondary"
+            onclick="window.location.href='/template/dashboard.html'"
+          >
+            Voltar ao Dashboard
+          </button>
+        </div>
+      </form>
+    </div>
+  </body>
+
+  <script src="/js/cadastroproduto.js" defer></script>
+</html>
