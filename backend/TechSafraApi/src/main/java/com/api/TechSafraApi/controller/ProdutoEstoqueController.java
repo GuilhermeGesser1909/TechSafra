@@ -3,13 +3,15 @@ package com.api.TechSafraApi.controller;
 import com.api.TechSafraApi.dtos.ProdutoEstoqueDto;
 import com.api.TechSafraApi.model.ProdutoEstoqueModel;
 import com.api.TechSafraApi.service.ProdutoEstoqueService;
-import org.springframework.web.bind.annotation.*;
 
+import jakarta.validation.Valid;
+import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.*;
 import java.util.List;
-import java.util.UUID;
 
 @RestController
 @RequestMapping("/produtos-estoque")
+@CrossOrigin(origins = "*")
 public class ProdutoEstoqueController {
 
     private final ProdutoEstoqueService service;
@@ -19,22 +21,33 @@ public class ProdutoEstoqueController {
     }
 
     @GetMapping
-    public List<ProdutoEstoqueModel> listar() {
-        return service.listarTodas();
+    public ResponseEntity<List<ProdutoEstoqueModel>> listar() {
+        return ResponseEntity.ok(service.listarTodas());
     }
 
     @GetMapping("/{id}")
-    public ProdutoEstoqueModel buscar(@PathVariable UUID id) {
-        return service.buscarPorId(id);
+    public ResponseEntity<ProdutoEstoqueModel> buscar(@PathVariable Long id) {
+        ProdutoEstoqueModel produto = service.buscarPorId(id);
+        return ResponseEntity.ok(produto);
     }
 
     @PostMapping
-    public ProdutoEstoqueModel salvar(@RequestBody ProdutoEstoqueDto dto) {
-        return service.salvar(dto);
+    public ResponseEntity<ProdutoEstoqueModel> salvar(@RequestBody @Valid ProdutoEstoqueDto dto) {
+        ProdutoEstoqueModel novo = service.salvar(dto);
+        return ResponseEntity.ok(novo);
+    }
+
+    @PutMapping("/{id}")
+    public ResponseEntity<ProdutoEstoqueModel> atualizar(
+            @PathVariable Long id,
+            @RequestBody @Valid ProdutoEstoqueDto dto) {
+        ProdutoEstoqueModel atualizado = service.atualizar(id, dto);
+        return ResponseEntity.ok(atualizado);
     }
 
     @DeleteMapping("/{id}")
-    public void deletar(@PathVariable UUID id) {
+    public ResponseEntity<Void> deletar(@PathVariable Long id) {
         service.deletar(id);
+        return ResponseEntity.noContent().build();
     }
 }
