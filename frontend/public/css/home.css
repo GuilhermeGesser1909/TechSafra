@@ -1,7 +1,9 @@
 :root {
   --green-primary: #2e7d32;
   --green-light: #81c784;
-  --gold: #f9a825;
+  --green-dark: #2e7a3e;
+  --green: #45b649;
+  --gold: #f9d71c;
   --earth: #6d4c41;
   --white: #ffffff;
   --gray: #f7f8f7;
@@ -52,14 +54,15 @@ body {
   color: var(--white);
   text-decoration: none;
   padding: 0.6rem 1.4rem;
-  background-color: var(--gold);
+  background-color: var(--green-dark);
   border-radius: 25px;
   transition: 0.3s;
   font-weight: bold;
 }
 
 .btn-sair:hover {
-  background-color: #ffca28;
+  background-color: #f1fd09;
+  color: #153127;
   transform: scale(1.05);
 }
 
@@ -154,56 +157,6 @@ body {
   font-size: 0.95rem;
 }
 
-/* Notícias */
-.noticias {
-  background: #edf7ee;
-  padding: 3rem;
-  text-align: center;
-}
-
-.noticias h2 {
-  font-size: 2rem;
-  margin-bottom: 2rem;
-  color: var(--green-primary);
-}
-
-.news-grid {
-  display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
-  gap: 2rem;
-}
-
-.news-card {
-  background: var(--white);
-  border-radius: 14px;
-  overflow: hidden;
-  box-shadow: var(--shadow);
-  text-align: left;
-  transition: 0.3s ease;
-}
-
-.news-card img {
-  width: 100%;
-  height: 180px;
-  object-fit: cover;
-}
-
-.news-card h3 {
-  padding: 1rem;
-  font-size: 1.2rem;
-  color: var(--green-primary);
-}
-
-.news-card p {
-  padding: 0 1rem 1.5rem;
-  font-size: 0.95rem;
-  color: #555;
-}
-
-.news-card:hover {
-  transform: translateY(-6px);
-  box-shadow: 0 8px 25px rgba(0, 0, 0, 0.1);
-}
 
 /* 🌤️ Previsão do tempo */
 .weather-widget {
@@ -281,35 +234,6 @@ body {
   margin: 0 auto;
 }
 
-/* 💡 Curiosidades */
-.curiosidades {
-  background: #ffffff;
-  padding: 3rem;
-  text-align: center;
-}
-
-.curiosidades h2 {
-  color: var(--green-primary);
-  margin-bottom: 1.5rem;
-}
-
-.curiosidades-grid {
-  display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
-  gap: 1.5rem;
-}
-
-.curiosidade-item {
-  background: var(--gray);
-  border-radius: 12px;
-  padding: 1.2rem;
-  box-shadow: var(--shadow);
-  transition: 0.3s ease;
-}
-
-.curiosidade-item:hover {
-  transform: translateY(-6px);
-}
 
 /* Rodapé */
 footer {
@@ -327,6 +251,7 @@ footer {
     opacity: 0;
     transform: translateY(15px);
   }
+
   to {
     opacity: 1;
     transform: translateY(0);
@@ -348,10 +273,12 @@ a.botao {
   padding: 10px 15px;
   border-radius: 8px;
 }
+
 a.botao:hover {
   background-color: #2e7a3e;
 }
+
 a {
   text-decoration: none;
-  color: #000; 
+  color: #000;
 }
