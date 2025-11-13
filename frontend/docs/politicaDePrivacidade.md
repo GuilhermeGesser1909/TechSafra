@@ -61,3 +61,4 @@ Podemos atualizar esta Política de Privacidade periodicamente. A versão mais r
 ## 8. Contato
 Em caso de dúvidas sobre esta Política de Privacidade, entre em contato pelo e-mail: **privacidade@techsafra.com**
  
+teste Valéria.
