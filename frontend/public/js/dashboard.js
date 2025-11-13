@@ -130,10 +130,41 @@ document.addEventListener("DOMContentLoaded", async () => {
       if (!resp.ok) throw new Error("Erro ao buscar propriedade");
       const prop = await resp.json();
 
+      // 🔹 Mapeamento de nomes de estados para siglas
+      const mapaEstados = {
+        "Acre": "AC",
+        "Alagoas": "AL",
+        "Amapá": "AP",
+        "Amazonas": "AM",
+        "Bahia": "BA",
+        "Ceará": "CE",
+        "Distrito Federal": "DF",
+        "Espírito Santo": "ES",
+        "Goiás": "GO",
+        "Maranhão": "MA",
+        "Mato Grosso": "MT",
+        "Mato Grosso do Sul": "MS",
+        "Minas Gerais": "MG",
+        "Pará": "PA",
+        "Paraíba": "PB",
+        "Paraná": "PR",
+        "Pernambuco": "PE",
+        "Piauí": "PI",
+        "Rio de Janeiro": "RJ",
+        "Rio Grande do Norte": "RN",
+        "Rio Grande do Sul": "RS",
+        "Rondônia": "RO",
+        "Roraima": "RR",
+        "Santa Catarina": "SC",
+        "São Paulo": "SP",
+        "Sergipe": "SE",
+        "Tocantins": "TO"
+      };
+
       // Preenche todos os campos
       document.getElementById("edit-nomePropriedade").value = prop.nome || "";
       document.getElementById("edit-localizacaoPropriedade").value = prop.localizacao || "";
-      document.getElementById("edit-estado").value = prop.estado || "";
+      document.getElementById("edit-estado").value = mapaEstados[prop.estado] || prop.estado || "";
       document.getElementById("edit-areaHectares").value = prop.areaHectares || "";
       document.getElementById("edit-areaCultivavel").value = prop.areaCultivavel || "";
       document.getElementById("edit-areaReserva").value = prop.areaReserva || "";
@@ -165,10 +196,44 @@ document.addEventListener("DOMContentLoaded", async () => {
   document.getElementById("salvarEdicaoBtn")?.addEventListener("click", async () => {
     const id = document.getElementById("modalEditarPropriedade").dataset.id;
 
+    // 🔹 Mapeamento de siglas para nomes completos
+    const mapaSiglaParaNome = {
+      "AC": "Acre",
+      "AL": "Alagoas",
+      "AP": "Amapá",
+      "AM": "Amazonas",
+      "BA": "Bahia",
+      "CE": "Ceará",
+      "DF": "Distrito Federal",
+      "ES": "Espírito Santo",
+      "GO": "Goiás",
+      "MA": "Maranhão",
+      "MT": "Mato Grosso",
+      "MS": "Mato Grosso do Sul",
+      "MG": "Minas Gerais",
+      "PA": "Pará",
+      "PB": "Paraíba",
+      "PR": "Paraná",
+      "PE": "Pernambuco",
+      "PI": "Piauí",
+      "RJ": "Rio de Janeiro",
+      "RN": "Rio Grande do Norte",
+      "RS": "Rio Grande do Sul",
+      "RO": "Rondônia",
+      "RR": "Roraima",
+      "SC": "Santa Catarina",
+      "SP": "São Paulo",
+      "SE": "Sergipe",
+      "TO": "Tocantins"
+    };
+
+    const estadoSigla = document.getElementById("edit-estado").value;
+    const estadoNome = mapaSiglaParaNome[estadoSigla] || estadoSigla || "";
+
     const dadosAtualizados = {
       nome: document.getElementById("edit-nomePropriedade").value.trim(),
       localizacao: document.getElementById("edit-localizacaoPropriedade").value.trim(),
-      estado: document.getElementById("edit-estado").value,
+      estado: estadoNome, // ✅ envia o nome completo
       areaHectares: parseFloat(document.getElementById("edit-areaHectares").value) || 0,
       areaCultivavel: parseFloat(document.getElementById("edit-areaCultivavel").value) || 0,
       areaReserva: parseFloat(document.getElementById("edit-areaReserva").value) || 0,
