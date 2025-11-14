@@ -157,6 +157,40 @@ body {
   font-size: 0.95rem;
 }
 
+.card-link {
+  text-decoration: none;
+  color: inherit;
+}
+
+.card-link .card {
+  cursor: pointer;
+  transition: transform .2s, box-shadow .2s;
+}
+
+.card-link .card:hover {
+  transform: translateY(-5px);
+  box-shadow: 0 6px 15px rgba(0, 0, 0, 0.2);
+}
+
+.card-btn {
+  display: block;
+  text-decoration: none;
+  color: inherit;
+  cursor: pointer;
+}
+
+.card-btn {
+  transition: transform .2s, box-shadow .2s;
+}
+
+.card-btn:hover {
+  transform: translateY(-5px);
+  box-shadow: 0 6px 15px rgba(0, 0, 0, 0.2);
+}
+
+.card-section {
+  display: none;
+}
 
 /* 🌤️ Previsão do tempo */
 .weather-widget {

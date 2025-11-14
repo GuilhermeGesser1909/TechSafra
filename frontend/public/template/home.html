@@ -16,107 +16,81 @@
         <h1>TechSafra</h1>
       </div>
       <nav>
-        <a href="/PaginaInicial.html" class="btn-sair" onclick="logout()"
-          >Sair</a
-        >
+        <a href="/PaginaInicial.html" class="btn-sair" onclick="logout()">Sair</a>
       </nav>
     </header>
 
     <!-- 👋 Saudação -->
-    <section
-      class="saudacao"
-      id="saudacao-section"
-      style="text-align: center; padding: 2rem"
-    >
+    <section class="saudacao" id="saudacao-section" style="text-align: center; padding: 2rem">
       <h2 id="saudacao">Bem-vindo 👋</h2>
-      <p id="mensagem-dia">Sua produção na palma de suas!</p>
+      <p id="mensagem-dia">Gerenciando o campo com inteligência.</p>
     </section>
 
     <!-- 🌾 Hero -->
     <section class="hero">
       <div class="hero-overlay">
         <h1>Transformando o campo com tecnologia</h1>
-        <p>Gerencie e transforme seu negócio no campo com um clique.</p>
-        <a href="/template/dashboard.html" class="btn-entrar"
-          >Ir ao Painel de Controle</a
-        >
+        <p>Informações e ferramentas para decisões mais rápidas e lucrativas.</p>
+        <a href="/template/dashboard.html" class="btn-sair">Ir ao Painel de Controle</a>
       </div>
     </section>
+
+    <!-- 🧭 Atalhos rápidos -->
+    <section class="cards">
+
+  <a href="dashboard.html#section4" class="card card-btn">
+    <div class="icon-area" style="background: linear-gradient(135deg,#4caf50,#2e7d32)">📋</div>
+    <h3>Minhas Propriedades</h3>
+    <p>Acesse todas as áreas cadastradas.</p>
+  </a>
+
+  <a href="dashboard.html#section7" class="card card-btn">
+    <div class="icon-area" style="background: linear-gradient(135deg,#7cb342,#33691e)">🌾</div>
+    <h3>Lavouras</h3>
+    <p>Acompanhamento detalhado de culturas.</p>
+  </a>
+
+  <a href="dashboard.html#section3" class="card card-btn">
+    <div class="icon-area" style="background: linear-gradient(135deg,#8d6e63,#4e342e)">🚜</div>
+    <h3>Máquinas</h3>
+    <p>Controle e monitoramento da frota.</p>
+  </a>
+
+  <a href="dashboard.html#section9" class="card card-btn">
+    <div class="icon-area" style="background: linear-gradient(135deg,#009688,#00695c)">💰</div>
+    <h3>Finanças</h3>
+    <p>Gestão de custos e receitas.</p>
+  </a>
+
+</section>
 
     <!-- 💰 Cotações -->
     <section class="cotacoes">
       <h2>💰 Cotações do Agro</h2>
-      <div class="cotacoes-grid" id="cotacoes-grid">
-        <!-- Populado dinamicamente -->
-      </div>
+      <p style="margin-bottom: 1rem; color: #333;">Valores atualizados — CEPEA/ESALQ</p>
+      <div class="cotacoes-grid" id="cotacoes-grid"></div>
     </section>
 
-    <!-- 🌱 Destaques informativos -->
+    <!-- 📰 Últimas Notícias + Curiosidades -->
     <section class="cards">
       <div class="card">
-        <div
-          class="icon-area"
-          style="background: linear-gradient(135deg, #81c784, #43a047)"
-        >
-          🌾
-        </div>
-        <h3>Gestão da Lavoura</h3>
-        <p>
-          Planeje cada etapa da produção com ferramentas inteligentes e dados do
-          seu campo.
-        </p>
+        <div class="icon-area" style="background: linear-gradient(135deg, #43a047, #2e7d32)">📰</div>
+        <h3>Notícias do Agro</h3>
+        <p id="noticias-box">Carregando...</p>
       </div>
 
       <div class="card">
-        <div
-          class="icon-area"
-          style="background: linear-gradient(135deg, #a5d6a7, #2e7d32)"
-        >
-          🚜
-        </div>
-        <h3>Tecnologia no Agro</h3>
-        <p>
-          Conheça soluções com IA, sensores e drones para aumentar sua
-          produtividade.
-        </p>
-      </div>
-
-      <div class="card">
-        <div
-          class="icon-area"
-          style="background: linear-gradient(135deg, #c5e1a5, #8bc34a)"
-        >
-          📊
-        </div>
-        <h3>Controle Financeiro</h3>
-        <p>
-          Visualize custos, lucros e margens com relatórios fáceis de
-          interpretar.
-        </p>
-      </div>
-
-      <div class="card">
-        <div
-          class="icon-area"
-          style="background: linear-gradient(135deg, #aed581, #689f38)"
-        >
-          🌍
-        </div>
-        <h3>Sustentabilidade</h3>
-        <p>
-          Práticas sustentáveis que garantem o futuro do agronegócio e do
-          planeta.
-        </p>
+        <div class="icon-area" style="background: linear-gradient(135deg, #689f38, #33691e)">💡</div>
+        <h3>Dicas e Curiosidades</h3>
+        <p id="curiosidades-box">Carregando...</p>
       </div>
     </section>
 
     <!-- 🧑‍🌾 Produtor da Semana -->
     <section class="destaque-produtor">
       <h2>Produtor da Semana 🧑‍🌾</h2>
-      <p>
-        Destaque para <strong>Maria Silva</strong>, produtora de soja em Mato
-        Grosso, que reduziu 25% do consumo de água utilizando sensores de
-        irrigação.
+      <p id="produtor-semana">
+        Carregando informações do produtor em destaque...
       </p>
     </section>
 
