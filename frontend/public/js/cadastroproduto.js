@@ -1,47 +1,36 @@
-document.addEventListener("DOMContentLoaded", () => {
-  const form = document.getElementById("forproduto");
-  const resultado = document.getElementById("resultado");
-  const API_URL = "http://localhost:8080/produtos";
+const form = document.getElementById("formproduto");
 
-  const propriedadeId = localStorage.getItem("propriedadeId");
+form.addEventListener("submit", async (e) => {
+  e.preventDefault();
 
-  if (!propriedadeId) {
-    alert("Propriedade não selecionada! Cadastre ou selecione uma propriedade primeiro.");
-    window.location.href = "/template/cadastropropriedade.html";
-    return;
-  }
+  const dados = {
+    nomeProduto: document.getElementById("nomeProduto").value,
+    quantidade: parseFloat(document.getElementById("Quantidade").value),
+    tipoProduto: document.getElementById("Tipo").value,
+    custo: parseFloat(document.getElementById("custoproduto").value)
+  };
 
-  form.addEventListener("submit", async (event) => {
-    event.preventDefault();
+  try {
+    const resposta = await fetch("http://localhost:8080/produtos/cadastrar", {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify(dados),
+    });
 
-    const novoProduto = {
-      nome: document.getElementById("nomeProduto").value.trim(),
-      quantidade: parseFloat(document.getElementById("Quantidade").value),
-      tipo: document.getElementById("Tipo").value,
-      custo: parseFloat(document.getElementById("custos").value),
-      propriedadeId: parseInt(propriedadeId)
-    };
-    
-    try {
-      const response = await fetch(API_URL, {
-        method: "POST",
-        headers: { "Content-Type": "application/json" },
-        body: JSON.stringify(novoProduto),
-      });
-
-      if (!response.ok) throw new Error("Erro ao cadastrar produto.");
-
-      const produtoCriado = await response.json();
-      resultado.innerHTML = `<p class="success">✅ Produto <strong>${produtoCriado.nome}</strong> cadastrado com sucesso!</p>`;
-
-      form.reset();
-
-      setTimeout(() => {
-        window.location.href = "/template/dashboard.html";
-      }, 2000);
-    } catch (error) {
-      console.error(error);
-      resultado.innerHTML = `<p class="error">❌ Falha ao cadastrar produto. Tente novamente.</p>`; 
+    if (!resposta.ok) {
+      const erro = await resposta.text();
+      alert("Erro ao cadastrar: " + erro);
+      return;
     }
-  });
+
+    alert("Produto cadastrado com sucesso!");
+
+    window.location.href = "/template/dashboard.html";
+
+  } catch (error) {
+    alert("Erro ao conectar com o servidor!");
+    console.error(error);
+  }
 });
