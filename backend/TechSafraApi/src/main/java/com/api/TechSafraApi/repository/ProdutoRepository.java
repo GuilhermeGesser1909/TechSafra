@@ -1,13 +1,6 @@
 package com.api.TechSafraApi.repository;
 
-import com.api.TechSafraApi.model.ProdutoEstoqueModel;
+import com.api.TechSafraApi.model.ProdutoModel;
 import org.springframework.data.jpa.repository.JpaRepository;
 
-import java.util.Optional;
-
-public interface ProdutoEstoqueRepository extends JpaRepository<ProdutoEstoqueModel, Long> {
-
-    void deleteById(Long id);
-
-    Optional<ProdutoEstoqueModel> findById(Long id);
-}
+public interface ProdutoRepository extends JpaRepository<ProdutoModel, Long> { }

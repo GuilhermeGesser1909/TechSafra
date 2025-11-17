@@ -1,17 +1,27 @@
 package com.api.TechSafraApi.service;
 
-import com.api.TechSafraApi.dtos.ProdutoEstoqueDto;
-import com.api.TechSafraApi.model.ProdutoEstoqueModel;
+import com.api.TechSafraApi.dtos.ProdutoDto;
+import com.api.TechSafraApi.model.ProdutoModel;
+import com.api.TechSafraApi.repository.ProdutoRepository;
+import org.springframework.stereotype.Service;
 
-import jakarta.validation.Valid;
+@Service
+public class ProdutoService {
 
-import java.util.List;
+    private final ProdutoRepository repository;
 
-public interface ProdutoEstoqueService {
-    List<ProdutoEstoqueModel> listarTodas();
-    ProdutoEstoqueModel salvar(ProdutoEstoqueModel produto);
-    ProdutoEstoqueModel buscarPorId(Long id);
-    void deletar(Long id);
-    ProdutoEstoqueModel salvar(ProdutoEstoqueDto dto);
-	ProdutoEstoqueModel atualizar(Long id, @Valid ProdutoEstoqueDto dto);
+    public ProdutoService(ProdutoRepository repository) {
+        this.repository = repository;
+    }
+
+    public ProdutoModel salvar(ProdutoDto dto) {
+
+        ProdutoModel model = new ProdutoModel();
+        model.setNomeProduto(dto.getNomeProduto());
+        model.setQuantidade(dto.getQuantidade());
+        model.setTipoProduto(dto.getTipoProduto());
+        model.setCusto(dto.getCusto());
+
+        return repository.save(model);
+    }
 }

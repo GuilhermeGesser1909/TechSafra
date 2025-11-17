@@ -1,28 +1,22 @@
-package com.api.TechSafraApi.model;
+package com.api.TechSafraApi.dtos;
 
-import jakarta.persistence.*;
+import jakarta.validation.constraints.NotBlank;
+import jakarta.validation.constraints.NotNull;
 import java.math.BigDecimal;
 
-@Entity
-@Table(name = "produtos")
-public class ProdutoModel {
+public class ProdutoDto {
 
-    @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Long id;
-
+    @NotBlank(message = "O nome do produto é obrigatório.")
     private String nomeProduto;
+
+    @NotNull(message = "A quantidade é obrigatória.")
     private Double quantidade;
+
+    @NotBlank(message = "O tipo é obrigatório.")
     private String tipoProduto;
+
+    @NotNull(message = "O custo é obrigatório.")
     private BigDecimal custo;
-
-    public Long getId() {
-        return id;
-    }
-
-    public void setId(Long id) {
-        this.id = id;
-    }
 
     public String getNomeProduto() {
         return nomeProduto;

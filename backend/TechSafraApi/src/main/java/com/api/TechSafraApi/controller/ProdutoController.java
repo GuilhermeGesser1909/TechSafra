@@ -1,53 +1,27 @@
 package com.api.TechSafraApi.controller;
 
-import com.api.TechSafraApi.dtos.ProdutoEstoqueDto;
-import com.api.TechSafraApi.model.ProdutoEstoqueModel;
-import com.api.TechSafraApi.service.ProdutoEstoqueService;
+import com.api.TechSafraApi.dtos.ProdutoDto;
+import com.api.TechSafraApi.model.ProdutoModel;
+import com.api.TechSafraApi.service.ProdutoService;
 
 import jakarta.validation.Valid;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
-import java.util.List;
 
 @RestController
-@RequestMapping("/produtos-estoque")
+@RequestMapping("/produtos")
 @CrossOrigin(origins = "*")
-public class ProdutoEstoqueController {
+public class ProdutoController {
 
-    private final ProdutoEstoqueService service;
+    private final ProdutoService service;
 
-    public ProdutoEstoqueController(ProdutoEstoqueService service) {
+    public ProdutoController(ProdutoService service) {
         this.service = service;
     }
 
-    @GetMapping
-    public ResponseEntity<List<ProdutoEstoqueModel>> listar() {
-        return ResponseEntity.ok(service.listarTodas());
-    }
-
-    @GetMapping("/{id}")
-    public ResponseEntity<ProdutoEstoqueModel> buscar(@PathVariable Long id) {
-        ProdutoEstoqueModel produto = service.buscarPorId(id);
-        return ResponseEntity.ok(produto);
-    }
-
-    @PostMapping
-    public ResponseEntity<ProdutoEstoqueModel> salvar(@RequestBody @Valid ProdutoEstoqueDto dto) {
-        ProdutoEstoqueModel novo = service.salvar(dto);
-        return ResponseEntity.ok(novo);
-    }
-
-    @PutMapping("/{id}")
-    public ResponseEntity<ProdutoEstoqueModel> atualizar(
-            @PathVariable Long id,
-            @RequestBody @Valid ProdutoEstoqueDto dto) {
-        ProdutoEstoqueModel atualizado = service.atualizar(id, dto);
-        return ResponseEntity.ok(atualizado);
-    }
-
-    @DeleteMapping("/{id}")
-    public ResponseEntity<Void> deletar(@PathVariable Long id) {
-        service.deletar(id);
-        return ResponseEntity.noContent().build();
+    @PostMapping("/cadastrar")
+    public ResponseEntity<ProdutoModel> cadastrar(@RequestBody @Valid ProdutoDto dto) {
+        ProdutoModel salvo = service.salvar(dto);
+        return ResponseEntity.ok(salvo);
     }
 }
