@@ -355,41 +355,33 @@
     </section>
 
     <section id="section7" class="card-section" hidden>
-      <div class="card">
-        <h3>📅 Planejamento de Safra</h3>
+  <div class="card">
+    <h3>📅 Planejamento de Safras</h3>
 
-        <div class="card-actions">
-          <button class="btn add-btn" onclick="location.href='/template/cadastrosafra.html'">
-            + Nova Safra
-          </button>
-          <button class="btn edit-btn" onclick="abrirModal('modalEditarSafra')">
-            Editar
-          </button>
-          <button class="btn delete-btn" onclick="abrirModal('modalExcluir')">
-            Excluir
-          </button>
-        </div>
+    <div class="card-actions">
+      <button class="btn add-btn" onclick="location.href='/template/cadastrosafra.html'">
+        + Nova Safra
+      </button>
+      <button class="btn edit-btn" onclick="abrirModalEditarSafra()">
+        Editar
+      </button>
+      <button class="btn delete-btn" onclick="abrirModalExcluirSafra()">
+        Excluir
+      </button>
+    </div>
 
-        <div class="safra-item">
-          <h4>Safra de Milho - Fazenda São João</h4>
-          <p>Início: 15/09/2023 | Fim: 15/02/2024</p>
-          <p>Status: Em andamento</p>
-          <p>Área: 20 hectares | Produtividade esperada: 8 ton/ha</p>
-        </div>
+    <div id="listaSafras">
+      <!-- As safras serão carregadas automaticamente via JS -->
+    </div>
+  </div>
 
-        <div class="safra-item">
-          <h4>Safra de Soja - Rancho das Orquídeas</h4>
-          <p>Início: 01/10/2023 | Fim: 01/03/2024</p>
-          <p>Status: Planejada</p>
-          <p>Área: 15 hectares | Produtividade esperada: 3 ton/ha</p>
-        </div>
-      </div>
+  <div class="card chart-card">
+    <h3 class="chart-title">Evolução de Produção (Últimos 12 meses)</h3>
+    <canvas id="graficoSafra" height="120"></canvas>
+  </div>
+</section>
 
-      <div class="card chart-card">
-        <h3 class="chart-title">Evolução de Produção (Últimos 12 meses)</h3>
-        <canvas id="graficoSafra" height="120"></canvas>
-      </div>
-    </section>
+
 
     <section id="section8" class="card-section" hidden>
       <div class="card">
@@ -656,35 +648,57 @@
     </div>
   </div>
 
-  <div id="modalEditarSafra" class="modal" aria-hidden="true">
-    <div class="modal-content large">
-      <span class="close" onclick="fecharModal('modalEditarSafra')">&times;</span>
-      <h2>Editar Safra</h2>
-      <div class="modal-body">
-        <div class="form-section">
-          <label>Nome da Safra</label><input type="text" id="nomeSafra" />
-          <label>Área (ha)</label><input type="number" id="areaSafra" />
-          <label>Cultura</label><input type="text" id="culturaSafra" />
-          <label>Observações</label><textarea id="obsSafra"></textarea>
-        </div>
-        <div class="report-section">
-          <h3>Resumo Atual</h3>
-          <p><strong>Nome:</strong> Milho 2024</p>
-          <p><strong>Área:</strong> 12 ha</p>
-          <p><strong>Cultura:</strong> Milho</p>
-          <p><strong>Última atualização:</strong> 20/10/2025</p>
-        </div>
-      </div>
-      <div class="modal-actions">
-        <button class="btn save-btn" onclick="salvarSafra()">
-          Salvar Alterações
-        </button>
-        <button class="btn cancel-btn" onclick="fecharModal('modalEditarSafra')">
-          Cancelar
-        </button>
-      </div>
-    </div>
+  <!-- Modal Editar Safra -->
+<div id="modalEditarSafra" class="modal">
+  <div class="modal-content">
+    <span class="close" onclick="fecharModal('modalEditarSafra')">&times;</span>
+    <h3>Editar Safra</h3>
+
+    <form id="formEditarSafra">
+      <input type="hidden" id="editSafraId">
+
+      <label>Nome:</label>
+      <input type="text" id="editNomeSafra" required>
+
+      <label>Cultura:</label>
+      <input type="text" id="editCultura" required>
+
+      <label>Data Início:</label>
+      <input type="date" id="editDataInicio" required>
+
+      <label>Data Fim:</label>
+      <input type="date" id="editDataFim" required>
+
+      <label>Área (ha):</label>
+      <input type="number" id="editArea" required>
+
+      <label>Produção (ton):</label>
+      <input type="number" id="editProducao" required>
+
+      <label>Custos (R$):</label>
+      <input type="number" id="editCustos" required>
+
+      <label>Observações:</label>
+      <textarea id="editObservacoes"></textarea>
+
+      <button type="submit" class="btn save-btn">Salvar Alterações</button>
+    </form>
   </div>
+</div>
+
+<!-- Modal Excluir -->
+<div id="modalExcluirSafra" class="modal">
+  <div class="modal-content">
+    <span class="close" onclick="fecharModal('modalExcluirSafra')">&times;</span>
+    <h3>Excluir Safra</h3>
+
+    <p>Digite o ID da Safra para confirmar:</p>
+    <input type="number" id="deleteSafraId" placeholder="ID">
+
+    <button class="btn delete-btn" onclick="confirmarExcluirSafra()">Excluir</button>
+  </div>
+</div>
+
 
   <div id="modalEditarAnalise" class="modal" aria-hidden="true">
     <div class="modal-content large">
