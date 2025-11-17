@@ -21,17 +21,6 @@ function saudacaoPersonalizada() {
   if (mensagemDiaEl) mensagemDiaEl.textContent = "Sua produção na palma de suas mãos!";
 }
 
-// 🌤️ Clima (simulado)
-function carregarClima() {
-  const el = document.getElementById("weather-info");
-  const previsoes = [
-    "☀️ Sol com nuvens — Máx: 32°C / Mín: 20°C",
-    "🌦️ Pancadas de chuva — Máx: 28°C / Mín: 18°C",
-    "🌤️ Céu limpo e seco — Máx: 30°C / Mín: 19°C",
-  ];
-  el.textContent = previsoes[Math.floor(Math.random() * previsoes.length)];
-}
-
 // 💰 Cotações - usando links reais do CEPEA
 function carregarCotacoes() {
   const grid = document.getElementById("cotacoes-grid");
@@ -59,6 +48,57 @@ function carregarCotacoes() {
 // Chamar assim que a página carregar
 document.addEventListener("DOMContentLoaded", carregarCotacoes);
 
+// Noticias
+
+async function carregarNoticiasAgro() {
+  const box = document.getElementById("noticias-box");
+  box.innerHTML = "Carregando...";
+
+  try {
+    const resposta = await fetch("http://localhost:8080/api/agro-news");
+    const dados = await resposta.json();
+
+    box.innerHTML = "";
+
+    const noticias = dados.articles.slice(0, 5); // só as 5 primeiras
+
+    noticias.forEach(noticia => {
+      const li = document.createElement("li");
+      li.innerHTML = `
+        <a href="${noticia.url}" target="_blank">
+          ${noticia.title}
+        </a>
+      `;
+      box.appendChild(li);
+    });
+
+  } catch (error) {
+    console.error("Erro ao carregar notícias:", error);
+    box.innerHTML = "<li>Erro ao carregar notícias.</li>";
+  }
+}
+
+//Curiosidades
+
+function carregarCuriosidades() {
+  const curiosidades = [
+    "O Brasil é o maior produtor mundial de soja.",
+    "A agricultura de precisão pode aumentar a produtividade em até 20%.",
+    "Uso de sensores de umidade reduz o gasto de água em até 40%.",
+    "Drones já são usados para mapear pragas com precisão.",
+    "Estufas inteligentes conseguem regular clima automaticamente."
+  ];
+
+  const box = document.getElementById("curiosidades-box");
+  box.innerHTML = "";
+
+  curiosidades.slice(0, 4).forEach(c => {
+    const li = document.createElement("li");
+    li.textContent = c;
+    box.appendChild(li);
+  });
+}
+
 // 🚪 Logout
 function logout() {
   localStorage.removeItem("loggedUser");
@@ -69,8 +109,7 @@ function logout() {
 // Inicialização
 window.addEventListener("DOMContentLoaded", () => {
   saudacaoPersonalizada();
-  carregarClima();
   carregarCotacoes();
-  carregarNoticias();
+  carregarNoticiasAgro();
   carregarCuriosidades();
 });
