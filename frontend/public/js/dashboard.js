@@ -63,27 +63,6 @@ document.addEventListener("DOMContentLoaded", async () => {
     });
   });
 
-  window.addEventListener("DOMContentLoaded", () => {
-    const hash = window.location.hash; // ex: #section4
-
-    if (hash) {
-      const section = document.querySelector(hash);
-
-      if (section) {
-        // esconde todas as sections
-        document.querySelectorAll(".card-section").forEach(sec =>
-          sec.style.display = "none"
-        );
-
-        // mostra a section desejada
-        section.style.display = "block";
-
-        // rola até ela
-        section.scrollIntoView({ behavior: "smooth" });
-      }
-    }
-  });
-
   // ==========================
   // 🌱 CRUD DE PROPRIEDADES
   // ==========================
@@ -322,7 +301,7 @@ document.addEventListener("DOMContentLoaded", async () => {
   listarPropriedades();
 });
 
-//CRUD de safra
+//CRUD DE SAFRAS
 
 document.addEventListener("DOMContentLoaded", () => {
   carregarSafras();
