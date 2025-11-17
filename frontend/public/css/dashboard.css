@@ -510,6 +510,25 @@ body {
   color: #555;
 }
 
+.weather-card {
+  width: 100%;
+  max-width: 900px;
+  background: var(--white);
+  border-radius: 20px;
+  box-shadow: var(--shadow);
+  padding: 2.5rem;
+  display: flex;
+  flex-direction: column;
+  gap: 2rem;
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+
+  /* 🔥 IMAGEM DE FUNDO */
+  background-image: url("/img/sunny.jpg");
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
+}
+
 /* ===== Responsivo ===== */
 @media (max-width: 768px) {
   .weather-card {
