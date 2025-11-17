@@ -53,7 +53,7 @@ header img {
 .nav a:hover {
   background: var(--yellow);
   color: #153127;
-  box-shadow: 0 4px 10px rgba(249, 215, 28, 0.4);
+  box-shadow: 0 4px 10px rgba(232, 228, 22, 0.916);
 }
 
 /* HERO */
