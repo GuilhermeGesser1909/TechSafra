@@ -4,6 +4,7 @@
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Nova Safra | TechSafra</title>
+
     <link rel="stylesheet" href="/css/dashboard.css" />
     <link rel="stylesheet" href="/css/formulariocadastro.css" />
     <link rel="icon" href="/img/logo.png" />
@@ -29,12 +30,12 @@
           <label for="cultura">Cultura:</label>
           <select id="cultura" name="cultura" required>
             <option value="">Selecione...</option>
-            <option value="soja">Soja</option>
-            <option value="milho">Milho</option>
-            <option value="trigo">Trigo</option>
-            <option value="arroz">Arroz</option>
-            <option value="café">Café</option>
-            <option value="outra">Outra</option>
+            <option value="Soja">Soja</option>
+            <option value="Milho">Milho</option>
+            <option value="Trigo">Trigo</option>
+            <option value="Arroz">Arroz</option>
+            <option value="Café">Café</option>
+            <option value="Outra">Outra</option>
           </select>
         </div>
 
@@ -80,16 +81,16 @@
             type="number"
             id="custos"
             name="custos"
-            placeholder="Ex: R$150000"
+            placeholder="Ex: 15000"
             required
           />
         </div>
 
         <div>
-          <label for="observacoessafra">Observações:</label>
+          <label for="observacoes">Observações:</label>
           <textarea
-            id="observacoessafra"
-            name="observacoessafra"
+            id="observacoes"
+            name="observacoes"
             placeholder="Adicione anotações importantes sobre a safra..."
           ></textarea>
         </div>
@@ -104,8 +105,11 @@
             Voltar ao Dashboard
           </button>
         </div>
+
+        <div id="resultado"></div>
       </form>
     </div>
   </body>
+
   <script src="/js/cadastrosafra.js" defer></script>
 </html>

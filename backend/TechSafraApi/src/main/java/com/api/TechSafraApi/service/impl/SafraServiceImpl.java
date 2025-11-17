@@ -22,11 +22,33 @@ public class SafraServiceImpl implements SafraService {
 	        this.repository = repository;
 	    }
 	    private SafraResponseDto toDto(SafraModel s) {
-	        return new SafraResponseDto(s.getId(), s.getNome(), s.getCultura(), s.getAno(), s.getAreaPlantada());
+	        return new SafraResponseDto(
+	            s.getId(),
+	            s.getNome(),
+	            s.getCultura(),
+	            s.getDataInicio(),
+	            s.getDataFim(),
+	            s.getAreaPlantada(),
+	            s.getProducaoEsperada(),
+	            s.getCustos(),
+	            s.getObservacoes()
+	        );
 	    }
+
 	    private SafraModel fromDto(SafraRequestDto dto) {
-	        return new SafraModel(dto.getNome(), dto.getCultura(), dto.getAno(), dto.getAreaPlantada());
+	        return new SafraModel(
+	            dto.getNome(),
+	            dto.getCultura(),
+	            dto.getDataInicio(),
+	            dto.getDataFim(),
+	            dto.getAreaPlantada(),
+	            dto.getProducaoEsperada(),
+	            dto.getCustos(),
+	            dto.getObservacoes()
+	            
+	        );
 	    }
+
 	    @Override
 	    public SafraResponseDto criar(SafraRequestDto dto) {
 	        SafraModel nova = fromDto(dto);
@@ -44,8 +66,13 @@ public class SafraServiceImpl implements SafraService {
 	                .orElseThrow(() -> new ResourceNotFoundException("Safra não encontrada com id: " + id));
 	        existente.setNome(dto.getNome());
 	        existente.setCultura(dto.getCultura());
-	        existente.setAno(dto.getAno());
+	        existente.setDataInicio(dto.getDataInicio());
+	        existente.setDataFim(dto.getDataFim());
 	        existente.setAreaPlantada(dto.getAreaPlantada());
+	        existente.setProducaoEsperada(dto.getProducaoEsperada());
+	        existente.setCustos(dto.getCustos());
+	        existente.setObservacoes(dto.getObservacoes());
+
 	        SafraModel atualizada = repository.save(existente);
 	        return toDto(atualizada);
 	    }

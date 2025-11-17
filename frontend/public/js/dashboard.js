@@ -321,3 +321,96 @@ document.addEventListener("DOMContentLoaded", async () => {
   // 🔹 Carrega automaticamente na abertura do dashboard
   listarPropriedades();
 });
+
+//CRUD de safra
+
+document.addEventListener("DOMContentLoaded", () => {
+  carregarSafras();
+});
+
+// ===================== LISTAR =====================
+
+async function carregarSafras() {
+  const lista = document.getElementById("listaSafras");
+  lista.innerHTML = "<p>Carregando...</p>";
+
+  try {
+    const resposta = await fetch("http://localhost:8080/safras");
+    const safras = await resposta.json();
+
+    if (safras.length === 0) {
+      lista.innerHTML = "<p>Nenhuma safra cadastrada.</p>";
+      return;
+    }
+
+    lista.innerHTML = safras.map(s => `
+      <div class="safra-item">
+        <h4>${s.nomeSafra}</h4>
+        <p><strong>Cultura:</strong> ${s.cultura}</p>
+        <p><strong>Período:</strong> ${s.dataInicio} até ${s.dataFim}</p>
+        <p><strong>Área:</strong> ${s.area} ha</p>
+        <p><strong>Produção Esperada:</strong> ${s.producao} ton</p>
+        <p><strong>Custos:</strong> R$ ${s.custos}</p>
+        <p><strong>ID:</strong> ${s.id}</p>
+      </div>
+    `).join("");
+
+  } catch (err) {
+    lista.innerHTML = "<p style='color:red'>Erro ao carregar as safras.</p>";
+  }
+}
+
+// ===================== EDITAR =====================
+
+function abrirModalEditarSafra() {
+  document.getElementById("modalEditarSafra").style.display = "block";
+}
+
+function fecharModal(id) {
+  document.getElementById(id).style.display = "none";
+}
+
+document.getElementById("formEditarSafra").addEventListener("submit", async (e) => {
+  e.preventDefault();
+
+  const id = document.getElementById("editSafraId").value;
+
+  const safraAtualizada = {
+    nomeSafra: document.getElementById("editNomeSafra").value,
+    cultura: document.getElementById("editCultura").value,
+    dataInicio: document.getElementById("editDataInicio").value,
+    dataFim: document.getElementById("editDataFim").value,
+    area: document.getElementById("editArea").value,
+    producao: document.getElementById("editProducao").value,
+    custos: document.getElementById("editCustos").value,
+    observacoes: document.getElementById("editObservacoes").value
+  };
+
+  await fetch(`http://localhost:8080/safras/${id}`, {
+    method: "PUT",
+    headers: { "Content-Type": "application/json" },
+    body: JSON.stringify(safraAtualizada)
+  });
+
+  fecharModal("modalEditarSafra");
+  carregarSafras();
+  alert("Safra atualizada com sucesso!");
+});
+
+// ===================== EXCLUIR =====================
+
+function abrirModalExcluirSafra() {
+  document.getElementById("modalExcluirSafra").style.display = "block";
+}
+
+async function confirmarExcluirSafra() {
+  const id = document.getElementById("deleteSafraId").value;
+
+  await fetch(`http://localhost:8080/safras/${id}`, {
+    method: "DELETE"
+  });
+
+  fecharModal("modalExcluirSafra");
+  carregarSafras();
+  alert("Safra excluída!");
+}
