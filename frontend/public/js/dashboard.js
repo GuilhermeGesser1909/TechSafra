@@ -331,6 +331,10 @@ async function carregarSafras() {
     <p><strong>Produção Esperada:</strong> ${s.producaoEsperada} ton</p>
     <p><strong>Custos:</strong> R$ ${s.custos}</p>
     <p><strong>ID:</strong> ${s.id}</p>
+
+    <button class="btn edit-btn" onclick="carregarDadosParaEdicao(${s.id})">Editar</button>
+    <button class="btn delete-btn" onclick="abrirModalExcluirSafra(${s.id})">Excluir</button>
+
   </div>
 `).join("");
 
@@ -340,6 +344,24 @@ async function carregarSafras() {
 }
 
 // ===================== EDITAR =====================
+
+async function carregarDadosParaEdicao(id) {
+  abrirModalEditarSafra();
+
+  const res = await fetch(`http://localhost:8080/safras/${id}`);
+  const safra = await res.json();
+
+  document.getElementById("editSafraId").value = safra.id;
+  document.getElementById("editNomeSafra").value = safra.nome;
+  document.getElementById("editCultura").value = safra.cultura;
+  document.getElementById("editDataInicio").value = safra.dataInicio;
+  document.getElementById("editDataFim").value = safra.dataFim;
+  document.getElementById("editArea").value = safra.areaPlantada;
+  document.getElementById("editProducao").value = safra.producaoEsperada;
+  document.getElementById("editCustos").value = safra.custos;
+  document.getElementById("editObservacoes").value = safra.observacoes ?? "";
+}
+
 
 function abrirModalEditarSafra() {
   document.getElementById("modalEditarSafra").style.display = "block";
