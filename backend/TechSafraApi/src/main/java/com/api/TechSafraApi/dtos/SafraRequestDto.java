@@ -65,11 +65,15 @@ public class SafraRequestDto {
 	public void setObservacoes(String observacoes) {
 		this.observacoes = observacoes;
 	}
+
 	public Integer getPropriedadeId() {
-		return null;
+	    return propriedadeId;
 	}
 
-   
+	public void setPropriedadeId(Integer propriedadeId) {
+	    this.propriedadeId = propriedadeId;
+	}
+
 }
 
 
