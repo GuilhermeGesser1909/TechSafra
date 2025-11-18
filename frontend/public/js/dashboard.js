@@ -323,16 +323,16 @@ async function carregarSafras() {
     }
 
     lista.innerHTML = safras.map(s => `
-      <div class="safra-item">
-        <h4>${s.nomeSafra}</h4>
-        <p><strong>Cultura:</strong> ${s.cultura}</p>
-        <p><strong>Período:</strong> ${s.dataInicio} até ${s.dataFim}</p>
-        <p><strong>Área:</strong> ${s.area} ha</p>
-        <p><strong>Produção Esperada:</strong> ${s.producao} ton</p>
-        <p><strong>Custos:</strong> R$ ${s.custos}</p>
-        <p><strong>ID:</strong> ${s.id}</p>
-      </div>
-    `).join("");
+  <div class="safra-item">
+    <h4>${s.nome}</h4>
+    <p><strong>Cultura:</strong> ${s.cultura}</p>
+    <p><strong>Período:</strong> ${s.dataInicio} até ${s.dataFim}</p>
+    <p><strong>Área:</strong> ${s.areaPlantada} ha</p>
+    <p><strong>Produção Esperada:</strong> ${s.producaoEsperada} ton</p>
+    <p><strong>Custos:</strong> R$ ${s.custos}</p>
+    <p><strong>ID:</strong> ${s.id}</p>
+  </div>
+`).join("");
 
   } catch (err) {
     lista.innerHTML = "<p style='color:red'>Erro ao carregar as safras.</p>";
@@ -355,12 +355,12 @@ document.getElementById("formEditarSafra").addEventListener("submit", async (e) 
   const id = document.getElementById("editSafraId").value;
 
   const safraAtualizada = {
-    nomeSafra: document.getElementById("editNomeSafra").value,
+    nome: document.getElementById("editNomeSafra").value,
     cultura: document.getElementById("editCultura").value,
     dataInicio: document.getElementById("editDataInicio").value,
     dataFim: document.getElementById("editDataFim").value,
-    area: document.getElementById("editArea").value,
-    producao: document.getElementById("editProducao").value,
+    areaPlantada: document.getElementById("editArea").value,
+    producaoEsperada: document.getElementById("editProducao").value,
     custos: document.getElementById("editCustos").value,
     observacoes: document.getElementById("editObservacoes").value
   };
