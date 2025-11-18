@@ -451,3 +451,53 @@ document.querySelectorAll(".sidebar nav a").forEach(link => {
 window.addEventListener("load", () => {
   document.querySelector('[data-target="section1"]').click();
 });
+
+
+// SECAO MAQUINARIO 
+
+document.addEventListener("DOMContentLoaded", () => {
+  carregarMaquinarios();
+});
+
+let maquinarioSelecionado = null;
+
+async function carregarMaquinarios() {
+  const lista = document.getElementById("listaMaquinarios");
+  lista.innerHTML = "<p>Carregando...</p>";
+
+  try {
+    const response = await fetch("http://localhost:8080/maquinarios");
+    const dados = await response.json();
+
+    if (!dados.length) {
+      lista.innerHTML = "<p>Nenhum maquinário cadastrado.</p>";
+      return;
+    }
+
+    lista.innerHTML = "";
+
+    dados.forEach(m => {
+      const item = document.createElement("div");
+      item.classList.add("machine-item");
+
+      item.innerHTML = `
+        <h4>${m.nome}</h4>
+        <p><strong>Tipo:</strong> ${m.tipo}</p>
+        <p><strong>Situação:</strong> ${m.situacao}</p>
+        <p><strong>Horas/dia:</strong> ${m.horasTrabalhadasDia}</p>
+      `;
+
+      item.onclick = () => {
+        document.querySelectorAll(".machine-item").forEach(el =>
+          el.classList.remove("selected")
+        );
+        item.classList.add("selected");
+        maquinarioSelecionado = m.id;
+      };
+
+      lista.appendChild(item);
+    });
+  } catch (erro) {
+    lista.innerHTML = "<p>Erro ao carregar maquinários.</p>";
+  }
+}

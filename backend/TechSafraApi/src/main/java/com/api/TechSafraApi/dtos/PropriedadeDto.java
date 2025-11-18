@@ -1,7 +1,5 @@
 package com.api.TechSafraApi.dtos;
 
-import java.util.UUID;
-
 import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.NotNull;
 import jakarta.validation.constraints.Positive;
@@ -29,5 +27,5 @@ public record PropriedadeDto(
         String latitude,
         String longitude,
         String observacoes,
-        @NotNull UUID usuarioId
+        @NotNull Long usuarioId
 ) { }
