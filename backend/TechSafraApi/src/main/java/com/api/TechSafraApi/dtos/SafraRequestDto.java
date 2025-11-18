@@ -2,6 +2,8 @@ package com.api.TechSafraApi.dtos;
 
 import java.time.LocalDate;
 
+import jakarta.validation.constraints.NotNull;
+
 public class SafraRequestDto {
 
     private String nome;
@@ -12,6 +14,8 @@ public class SafraRequestDto {
     private double producaoEsperada;
     private double custos;
     private String observacoes;
+    @NotNull(message = "O ID da propriedade é obrigatório") 
+    private Integer propriedadeId;
     
 	public String getNome() {
 		return nome;
@@ -60,6 +64,9 @@ public class SafraRequestDto {
 	}
 	public void setObservacoes(String observacoes) {
 		this.observacoes = observacoes;
+	}
+	public Integer getPropriedadeId() {
+		return null;
 	}
 
    

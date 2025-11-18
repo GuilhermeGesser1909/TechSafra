@@ -31,7 +31,8 @@ public class SafraServiceImpl implements SafraService {
 	            s.getAreaPlantada(),
 	            s.getProducaoEsperada(),
 	            s.getCustos(),
-	            s.getObservacoes()
+	            s.getObservacoes(),
+	            s.getPropriedadeId()
 	        );
 	    }
 
@@ -44,7 +45,8 @@ public class SafraServiceImpl implements SafraService {
 	            dto.getAreaPlantada(),
 	            dto.getProducaoEsperada(),
 	            dto.getCustos(),
-	            dto.getObservacoes()
+	            dto.getObservacoes(),
+	            dto.getPropriedadeId()
 	            
 	        );
 	    }
@@ -72,6 +74,7 @@ public class SafraServiceImpl implements SafraService {
 	        existente.setProducaoEsperada(dto.getProducaoEsperada());
 	        existente.setCustos(dto.getCustos());
 	        existente.setObservacoes(dto.getObservacoes());
+	        existente.setPropriedadeId(dto.getPropriedadeId());
 
 	        SafraModel atualizada = repository.save(existente);
 	        return toDto(atualizada);
