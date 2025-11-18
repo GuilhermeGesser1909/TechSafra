@@ -549,21 +549,28 @@ body {
 }
 
 /* Machines, properties, stock, analysis */
-.machine {
-  padding: 14px;
-  border-radius: 10px;
+.machine-list {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+
+.machine-item {
+  padding: 15px;
+  background: #fff;
+  border-radius: 8px;
   border: 1px solid #eef6ee;
-  margin-bottom: 12px;
-  background: linear-gradient(180deg, #fff, #fbfff8);
+  cursor: pointer;
+  transition: 0.3s;
 }
 
-.machine.operational {
-  border-left: 5px solid #4caf50;
+.machine-item:hover {
+  transform: scale(1.01);
 }
 
-.machine.maintenance {
-  border-left: 5px solid #f39c12;
-  background: linear-gradient(180deg, #fff8f6, #fff);
+.machine-item.selected {
+  border: 2px solid #4caf50;
+  background: #f3fff3;
 }
 
 .properties-list {

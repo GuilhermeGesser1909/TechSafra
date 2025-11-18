@@ -331,6 +331,10 @@ async function carregarSafras() {
     <p><strong>Produção Esperada:</strong> ${s.producaoEsperada} ton</p>
     <p><strong>Custos:</strong> R$ ${s.custos}</p>
     <p><strong>ID:</strong> ${s.id}</p>
+
+    <button class="btn edit-btn" onclick="carregarDadosParaEdicao(${s.id})">Editar</button>
+    <button class="btn delete-btn" onclick="abrirModalExcluirSafra(${s.id})">Excluir</button>
+
   </div>
 `).join("");
 
@@ -340,6 +344,24 @@ async function carregarSafras() {
 }
 
 // ===================== EDITAR =====================
+
+async function carregarDadosParaEdicao(id) {
+  abrirModalEditarSafra();
+
+  const res = await fetch(`http://localhost:8080/safras/${id}`);
+  const safra = await res.json();
+
+  document.getElementById("editSafraId").value = safra.id;
+  document.getElementById("editNomeSafra").value = safra.nome;
+  document.getElementById("editCultura").value = safra.cultura;
+  document.getElementById("editDataInicio").value = safra.dataInicio;
+  document.getElementById("editDataFim").value = safra.dataFim;
+  document.getElementById("editArea").value = safra.areaPlantada;
+  document.getElementById("editProducao").value = safra.producaoEsperada;
+  document.getElementById("editCustos").value = safra.custos;
+  document.getElementById("editObservacoes").value = safra.observacoes ?? "";
+}
+
 
 function abrirModalEditarSafra() {
   document.getElementById("modalEditarSafra").style.display = "block";
@@ -429,3 +451,53 @@ document.querySelectorAll(".sidebar nav a").forEach(link => {
 window.addEventListener("load", () => {
   document.querySelector('[data-target="section1"]').click();
 });
+
+
+// SECAO MAQUINARIO 
+
+document.addEventListener("DOMContentLoaded", () => {
+  carregarMaquinarios();
+});
+
+let maquinarioSelecionado = null;
+
+async function carregarMaquinarios() {
+  const lista = document.getElementById("listaMaquinarios");
+  lista.innerHTML = "<p>Carregando...</p>";
+
+  try {
+    const response = await fetch("http://localhost:8080/maquinarios");
+    const dados = await response.json();
+
+    if (!dados.length) {
+      lista.innerHTML = "<p>Nenhum maquinário cadastrado.</p>";
+      return;
+    }
+
+    lista.innerHTML = "";
+
+    dados.forEach(m => {
+      const item = document.createElement("div");
+      item.classList.add("machine-item");
+
+      item.innerHTML = `
+        <h4>${m.nome}</h4>
+        <p><strong>Tipo:</strong> ${m.tipo}</p>
+        <p><strong>Situação:</strong> ${m.situacao}</p>
+        <p><strong>Horas/dia:</strong> ${m.horasTrabalhadasDia}</p>
+      `;
+
+      item.onclick = () => {
+        document.querySelectorAll(".machine-item").forEach(el =>
+          el.classList.remove("selected")
+        );
+        item.classList.add("selected");
+        maquinarioSelecionado = m.id;
+      };
+
+      lista.appendChild(item);
+    });
+  } catch (erro) {
+    lista.innerHTML = "<p>Erro ao carregar maquinários.</p>";
+  }
+}

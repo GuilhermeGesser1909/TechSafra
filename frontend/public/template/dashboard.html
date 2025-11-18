@@ -21,7 +21,7 @@
 
  <aside class="sidebar" aria-label="Barra lateral">
     <div class="logo">
-      <a hr ef="/template/home.html"><img src="/img/logo.png" alt="TechSafra logo" /></a>
+      <a href="/template/home.html"><img src="/img/logo.png" alt="TechSafra logo" /></a>
     </div>
 
     <nav>
@@ -208,47 +208,26 @@
     </section>
 
     <section id="section3" class="card-section hidden">
-      <div class="card">
-        <h3>🚜 Status do Maquinário</h3>
+  <div class="card">
+    <h3>🚜 Status do Maquinário</h3>
 
-        <div class="card-actions">
-          <a class="btn add-btn" href="/template/cadastromaquinario.html"><i class="fas fa-plus"></i> Novo
-            Maquinário</a>
-          <button class="btn edit-btn" onclick="abrirModal('modalEditarMaquinario')">
-            Editar
-          </button>
-          <button class="btn delete-btn" onclick="abrirModal('modalExcluir')">
-            Excluir
-          </button>
-        </div>
+    <div class="card-actions">
+      <a class="btn add-btn" href="/template/cadastromaquinario.html">
+        <i class="fas fa-plus"></i> Novo Maquinário
+      </a>
+      <button class="btn edit-btn" onclick="editarSelecionado()">
+        Editar
+      </button>
+      <button class="btn delete-btn" onclick="deletarSelecionado()">
+        Excluir
+      </button>
+    </div>
 
-        <div class="machine operational">
-          <h4>Trator John Deere 5075E</h4>
-          <p>1250h / 2000h de uso</p>
-          <p>Última manutenção: 15 dias atrás</p>
-          <p>Próxima manutenção: <strong>Em 45 dias</strong></p>
-        </div>
+    <!-- LISTA DINÂMICA -->
+    <div id="listaMaquinarios" class="machine-list"></div>
+  </div>
+</section>
 
-        <div class="machine maintenance">
-          <h4>Pulverizador Jacto</h4>
-          <p>850h / 1500h de uso</p>
-          <p>Última manutenção: Em manutenção</p>
-          <p>Próxima manutenção: <strong>Aguardando</strong></p>
-        </div>
-
-        <div class="machine operational">
-          <h4>Colheitadeira Case</h4>
-          <p>2800h / 3000h de uso</p>
-          <p>Última manutenção: 30 dias atrás</p>
-          <p>Próxima manutenção: <strong>Em 15 dias</strong></p>
-        </div>
-
-        <div class="summary">
-          <span>✅ 2 Operacionais</span>
-          <span>⚠️ 1 Manutenção Necessária</span>
-        </div>
-      </div>
-    </section>
 
   <!-- 🌱 MINHAS PROPRIEDADES -->
     <section id="section4" class="card-section hidden">
@@ -361,12 +340,6 @@
     <div class="card-actions">
       <button class="btn add-btn" onclick="location.href='/template/cadastrosafra.html'">
         + Nova Safra
-      </button>
-      <button class="btn edit-btn" onclick="abrirModalEditarSafra()">
-        Editar
-      </button>
-      <button class="btn delete-btn" onclick="abrirModalExcluirSafra()">
-        Excluir
       </button>
     </div>
 
