@@ -8,6 +8,7 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.Map;
+import java.util.UUID;
 
 @RestController
 @RequestMapping("/usuarios")
@@ -70,7 +71,7 @@ public class UsuarioController {
 
     // 🔹 (Opcional) Buscar usuário por ID
     @GetMapping("/{id}")
-    public ResponseEntity<Usuario> buscarPorId(@PathVariable Long id) {
+    public ResponseEntity<Usuario> buscarPorId(@PathVariable UUID id) {
         Usuario usuario = usuarioService.buscarPorId(id);
         return ResponseEntity.ok(usuario);
     }

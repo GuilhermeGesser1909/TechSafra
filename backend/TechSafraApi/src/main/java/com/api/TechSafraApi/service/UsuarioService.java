@@ -7,6 +7,7 @@ import org.springframework.stereotype.Service;
 
 import java.util.List;
 import java.util.Optional;
+import java.util.UUID;
 
 @Service
 public class UsuarioService {
@@ -68,7 +69,7 @@ public class UsuarioService {
     }
 
     // 🔹 Buscar um usuário pelo ID
-    public Usuario buscarPorId(Long id) {
+    public Usuario buscarPorId(UUID id) {
         return usuarioRepository.findById(id)
                 .orElseThrow(() -> new RuntimeException("Usuário não encontrado com ID: " + id));
     }
