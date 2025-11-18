@@ -2,6 +2,7 @@ package com.api.TechSafraApi.model;
 
 import java.time.LocalDate;
 
+import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
@@ -24,11 +25,13 @@ public class SafraModel {
     private double producaoEsperada;
     private double custos;
     private String observacoes;
+    @Column(nullable = false)
+    private Integer propriedadeId;
 
     public SafraModel() {}
 
     public SafraModel(String nome, String cultura, LocalDate dataInicio, LocalDate dataFim,
-                      double areaPlantada, double producaoEsperada, double custos, String observacoes) {
+                      double areaPlantada, double producaoEsperada, double custos, String observacoes, Integer propriedadeId) {
         this.setNome(nome);
         this.setCultura(cultura);
         this.setDataInicio(dataInicio);
@@ -37,6 +40,7 @@ public class SafraModel {
         this.setProducaoEsperada(producaoEsperada);
         this.setCustos(custos);
         this.setObservacoes(observacoes);
+        this.setPropriedadeId(propriedadeId);
     }
 
 	public String getNome() {
@@ -109,6 +113,14 @@ public class SafraModel {
 
     public void setId(Long id) {
         this.id = id;
+    }
+    
+    public Integer getPropriedadeId() {
+        return propriedadeId;
+    }
+
+    public void setPropriedadeId(Integer propriedadeId) {
+        this.propriedadeId = propriedadeId;
     }
 
 }

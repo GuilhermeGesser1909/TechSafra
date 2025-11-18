@@ -13,9 +13,10 @@ public class SafraResponseDto {
     private double producaoEsperada;
     private double custos;
     private String observacoes;
+    private Integer propriedadeId;
 
     public SafraResponseDto(Long id, String nome, String cultura, LocalDate dataInicio, LocalDate dataFim,
-                            double areaPlantada, double producaoEsperada, double custos, String observacoes) {
+                            double areaPlantada, double producaoEsperada, double custos, String observacoes, Integer propriedadeId) {
         this.setId(id);
         this.setNome(nome);
         this.setCultura(cultura);
@@ -25,6 +26,7 @@ public class SafraResponseDto {
         this.setProducaoEsperada(producaoEsperada);
         this.setCustos(custos);
         this.setObservacoes(observacoes);
+        this.setPropriedadeId(propriedadeId);
     }
 
 	public Long getId() {
@@ -97,6 +99,14 @@ public class SafraResponseDto {
 
 	public void setObservacoes(String observacoes) {
 		this.observacoes = observacoes;
+	}
+
+	public Integer getPropriedadeId() {
+		return propriedadeId;
+	}
+
+	public void setPropriedadeId(Integer propriedadeId) {
+		this.propriedadeId = propriedadeId;
 	}
 
    
