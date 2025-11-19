@@ -10,6 +10,7 @@ import java.util.UUID;
 
 @RestController
 @RequestMapping("/maquinarios")
+@CrossOrigin(origins = "*")
 public class MaquinarioController {
 
     private final MaquinarioService service;
