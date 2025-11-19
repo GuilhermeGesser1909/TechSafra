@@ -15,32 +15,71 @@ public class MaquinarioModel implements Serializable {
     private UUID id;
 
     private String nome;
-    private String fabricante;
-    private int anoAquisicao;
-    private String estado; // ex: 'operacional', 'manutencao', 'descartado'
+    private String tipo;
+    private int horasTrabalhadasDia;
+    private int horasManutencaoPrevista;
+    private String situacao;
     
+    @Column(columnDefinition = "TEXT")
+    private String observacoes;
+
+    @ManyToOne
+    @JoinColumn(name = "usuario_id", nullable = false)
+    private Usuario usuario;
+
 	public String getNome() {
 		return nome;
 	}
+
 	public void setNome(String nome) {
 		this.nome = nome;
 	}
-	public String getFabricante() {
-		return fabricante;
+
+	public String getTipo() {
+		return tipo;
 	}
-	public void setFabricante(String fabricante) {
-		this.fabricante = fabricante;
+
+	public void setTipo(String tipo) {
+		this.tipo = tipo;
 	}
-	public int getAnoAquisicao() {
-		return anoAquisicao;
+
+	public int getHorasTrabalhadasDia() {
+		return horasTrabalhadasDia;
 	}
-	public void setAnoAquisicao(int anoAquisicao) {
-		this.anoAquisicao = anoAquisicao;
+
+	public void setHorasTrabalhadasDia(int horasTrabalhadasDia) {
+		this.horasTrabalhadasDia = horasTrabalhadasDia;
 	}
-	public String getEstado() {
-		return estado;
+
+	public int getHorasManutencaoPrevista() {
+		return horasManutencaoPrevista;
 	}
-	public void setEstado(String estado) {
-		this.estado = estado;
+
+	public void setHorasManutencaoPrevista(int horasManutencaoPrevista) {
+		this.horasManutencaoPrevista = horasManutencaoPrevista;
 	}
+
+	public String getSituacao() {
+		return situacao;
+	}
+
+	public void setSituacao(String situacao) {
+		this.situacao = situacao;
+	}
+
+	public String getObservacoes() {
+        return observacoes;
+    }
+
+    public void setObservacoes(String observacoes) {
+        this.observacoes = observacoes;
+    }
+
+    public Usuario getUsuario() {
+        return usuario;
+    }
+
+    public void setUsuario(Usuario usuario) {
+        this.usuario = usuario;
+    }
 }
