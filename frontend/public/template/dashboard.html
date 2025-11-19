@@ -215,12 +215,6 @@
       <a class="btn add-btn" href="/template/cadastromaquinario.html">
         <i class="fas fa-plus"></i> Novo Maquinário
       </a>
-      <button class="btn edit-btn" onclick="abrirModal('modalEditarMaquinario')">
-        Editar
-      </button>
-      <button class="btn delete-btn" onclick="abrirModal('modalExcluir')">
-        Excluir
-      </button>
     </div>
 
     <!-- LISTA DINÂMICA -->
@@ -592,23 +586,26 @@
     <div class="modal-content large">
       <span class="close" onclick="fecharModal('modalEditarMaquinario')">&times;</span>
       <h2>Editar Maquinário</h2>
+      <input type="hidden" id="editMaquinarioId" /> 
       <div class="modal-body">
         <div class="form-section">
-          <label>Tipo de Máquina</label><input type="text" id="tipoMaquinario" /> <label>Modelo</label><input
-            type="text" id="modeloMaquinario" /> <label>Ano</label><input type="number" id="anoMaquinario" />
-          <label>Estado de Conservação</label><input type="text" id="estadoMaquinario" />
-          <label>Observações</label><textarea id="obsMaquinario"></textarea>
+          <label>Nome do Maquinário</label><input type="text" id="edit-nomeMaquinario" /> 
+          <label>Tipo de Máquina</label><input type="text" id="edit-tipoMaquinario" />
+          <label>Horas Trabalhadas (dia)</label><input type="number" id="edit-horasTrabalhadasDia" />
+          <label>Horas Previstas Manutenção</label><input type="number" id="edit-horasManutencaoPrevista" />
+          <label>Situação</label><input type="text" id="edit-situacaoMaquinario" />
+          <label>Observações</label><textarea id="edit-obsMaquinario"></textarea>
         </div>
         <div class="report-section">
           <h3>Resumo Atual</h3>
-          <p><strong>Máquina:</strong> Trator John Deere 6110J</p>
-          <p><strong>Ano:</strong> 2020</p>
-          <p><strong>Horas trabalhadas:</strong> 3200h</p>
-          <p><strong>Última manutenção:</strong> 03/09/2025</p>
+          <p><strong>Nome:</strong> <span id="resumo-nomeMaquinario">Carregando...</span></p>
+          <p><strong>Tipo:</strong> <span id="resumo-tipoMaquinario">Carregando...</span></p>
+          <p><strong>Situação:</strong> <span id="resumo-situacao">Carregando...</span></p>
+          <p><strong>Manutenção Prevista:</strong> <span id="resumo-manutencao">Carregando...</span></p>
         </div>
       </div>
       <div class="modal-actions">
-        <button class="btn save-btn">Salvar</button>
+        <button class="btn save-btn" onclick="salvarEdicaoMaquinario()">Salvar Alterações</button>
         <button class="btn cancel-btn" onclick="fecharModal('modalEditarMaquinario')">
           Cancelar
         </button>
