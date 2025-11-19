@@ -215,16 +215,16 @@
       <a class="btn add-btn" href="/template/cadastromaquinario.html">
         <i class="fas fa-plus"></i> Novo Maquinário
       </a>
-      <button class="btn edit-btn" onclick="editarSelecionado()">
+      <button class="btn edit-btn" onclick="abrirModal('modalEditarMaquinario')">
         Editar
       </button>
-      <button class="btn delete-btn" onclick="deletarSelecionado()">
+      <button class="btn delete-btn" onclick="abrirModal('modalExcluir')">
         Excluir
       </button>
     </div>
 
     <!-- LISTA DINÂMICA -->
-    <div id="listaMaquinarios" class="machine-list"></div>
+    <div id="listaMaquinarios" class="properties-list"></div>
   </div>
 </section>
 
