@@ -1,6 +1,7 @@
 package com.api.TechSafraApi.service.impl;
 
 import com.api.TechSafraApi.dtos.MaquinarioDto;
+import com.api.TechSafraApi.exception.ResourceNotFoundException;
 import com.api.TechSafraApi.model.MaquinarioModel;
 import com.api.TechSafraApi.repository.MaquinarioRepository;
 import com.api.TechSafraApi.repository.UsuarioRepository;
@@ -57,4 +58,18 @@ public class MaquinarioServiceImpl implements MaquinarioService {
         return repository.save(model);
     }
 
+ public MaquinarioModel atualizar(UUID id, MaquinarioDto dto) {
+     MaquinarioModel maquinarioExistente = repository.findById(id)
+         .orElseThrow(() -> new ResourceNotFoundException("Maquinário não encontrado com ID: " + id));
+
+     maquinarioExistente.setNome(dto.nome());
+     maquinarioExistente.setTipo(dto.tipo());
+     maquinarioExistente.setHorasTrabalhadasDia(dto.horasTrabalhadasDia());
+     maquinarioExistente.setHorasManutencaoPrevista(dto.horasManutencaoPrevista());
+     maquinarioExistente.setSituacao(dto.situacao());
+     maquinarioExistente.setObservacoes(dto.observacoes());
+
+     return repository.save(maquinarioExistente);
+ }
+ 
 }

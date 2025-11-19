@@ -18,7 +18,6 @@ public class UsuarioService {
         this.usuarioRepository = usuarioRepository;
     }
 
-    // 🔹 Cadastrar novo usuário
     public String cadastrarUsuario(String nome, String email, String senha, String confirmarSenha) {
         if (nome == null || nome.trim().isEmpty()) {
             return "O nome é obrigatório!";
@@ -43,7 +42,6 @@ public class UsuarioService {
         return "Usuário cadastrado com sucesso!";
     }
 
-    // 🔹 Login de usuário
     public String loginUsuario(String email, String senha) {
         if (email == null || email.trim().isEmpty() || senha == null || senha.trim().isEmpty()) {
             return "E-mail e senha são obrigatórios!";
@@ -62,18 +60,15 @@ public class UsuarioService {
         return "Login realizado com sucesso!";
     }
 
-    // 🔹 Listar todos os usuários (para teste ou administração)
     public List<Usuario> listarTodos() {
         return usuarioRepository.findAll();
     }
 
-    // 🔹 Buscar um usuário pelo ID
     public Usuario buscarPorId(Long id) {
         return usuarioRepository.findById(id)
                 .orElseThrow(() -> new RuntimeException("Usuário não encontrado com ID: " + id));
     }
     
-    //Buscar um usuario pelo email (para o login)
     public Usuario buscarPorEmail(String email) {
         return usuarioRepository.findByEmail(email)
             .orElseThrow(() -> new RuntimeException("Usuário não encontrado"));
