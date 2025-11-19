@@ -453,51 +453,128 @@ window.addEventListener("load", () => {
 });
 
 
-// SECAO MAQUINARIO 
+//  (SEÇÃO MAQUINÁRIO - COMPLETO CRUD)
 
 document.addEventListener("DOMContentLoaded", () => {
+
   carregarMaquinarios();
+  // Você deve chamar aqui também as funções de carregar Propriedades e Safras, se existirem.
 });
 
+// Variável para armazenar o ID do maquinário selecionado, se aplicável (mantido do seu original).
 let maquinarioSelecionado = null;
 
+// --- FUNÇÃO PRINCIPAL: READ (Listagem) ---
 async function carregarMaquinarios() {
-  const lista = document.getElementById("listaMaquinarios");
-  lista.innerHTML = "<p>Carregando...</p>";
+  // DOCUMENTAÇÃO: 'listaMaquinarios' é o ID do contêiner da lista que padronizamos no HTML.
+  const listaMaquinariosDiv = document.getElementById("listaMaquinarios");
+  listaMaquinariosDiv.innerHTML = '<p>Carregando maquinários...</p>';
 
   try {
+    // DOCUMENTAÇÃO: Endpoint para buscar todos os maquinários.
     const response = await fetch("http://localhost:8080/maquinarios");
-    const dados = await response.json();
 
-    if (!dados.length) {
-      lista.innerHTML = "<p>Nenhum maquinário cadastrado.</p>";
+    if (!response.ok) {
+      throw new Error("Falha na comunicação com a API de maquinários.");
+    }
+
+    const maquinarios = await response.json();
+
+    if (maquinarios.length === 0) {
+      listaMaquinariosDiv.innerHTML = '<p class="info-message">Você não tem nenhum maquinário cadastrado.</p>';
       return;
     }
 
-    lista.innerHTML = "";
+    listaMaquinariosDiv.innerHTML = ''; // Limpa a mensagem de carregamento
 
-    dados.forEach(m => {
-      const item = document.createElement("div");
-      item.classList.add("machine-item");
+    maquinarios.forEach(maquinario => {
+      // DOCUMENTAÇÃO: Cria a estrutura de listagem padronizada (usando 'list-item').
+      const itemDiv = document.createElement('div');
+      itemDiv.classList.add('list-item');
+      // O ID do item é essencial para Editar/Deletar
+      itemDiv.dataset.id = maquinario.id;
 
-      item.innerHTML = `
-        <h4>${m.nome}</h4>
-        <p><strong>Tipo:</strong> ${m.tipo}</p>
-        <p><strong>Situação:</strong> ${m.situacao}</p>
-        <p><strong>Horas/dia:</strong> ${m.horasTrabalhadasDia}</p>
-      `;
+      // Conteúdo principal do item (HTML)
+      itemDiv.innerHTML = `
+                <div class="item-details">
+                    <span class="item-nome">${maquinario.nome}</span> 
+                    <span class="item-tipo">Tipo: ${maquinario.tipo}</span>
+                    <span class="item-situacao">Situação: ${maquinario.situacao}</span>
+                    <span class="item-horas">Horas p/ Manutenção: ${maquinario.horasManutencaoPrevista}h</span>
+                </div>
+                <div class="action-buttons">
+                    <button class="btn-edit" data-id="${maquinario.id}"><img src="/img/pencil-square.svg" alt="Editar"></button>
+                    <button class="btn-delete" data-id="${maquinario.id}"><img src="/img/trash3.svg" alt="Deletar"></button>
+                </div>
+            `;
 
-      item.onclick = () => {
-        document.querySelectorAll(".machine-item").forEach(el =>
+      // Lógica de seleção (mantida do seu código)
+      itemDiv.onclick = () => {
+        document.querySelectorAll(".list-item").forEach(el =>
           el.classList.remove("selected")
         );
-        item.classList.add("selected");
-        maquinarioSelecionado = m.id;
+        itemDiv.classList.add("selected");
+        maquinarioSelecionado = maquinario.id;
       };
 
-      lista.appendChild(item);
+      listaMaquinariosDiv.appendChild(itemDiv);
     });
-  } catch (erro) {
-    lista.innerHTML = "<p>Erro ao carregar maquinários.</p>";
+
+    // DOCUMENTAÇÃO: Chama a função que ativa a lógica de Edição e Deleção
+    anexarEventosBotoesMaquinario();
+
+  } catch (error) {
+    console.error("Erro ao carregar maquinários:", error);
+    listaMaquinariosDiv.innerHTML = `<p class="error-message">Erro ao carregar maquinários. Status: ${error.message}</p>`;
   }
 }
+
+// --- FUNÇÃO AUXILIAR: ANEXAR EVENTOS ---
+// DOCUMENTAÇÃO: Esta função separa a lógica de anexar os listeners da lógica de carregamento.
+function anexarEventosBotoesMaquinario() {
+
+  // 🔹 1. Lógica para o botão DELETAR (DELETE)
+  document.querySelectorAll('#listaMaquinarios .btn-delete').forEach(button => {
+    button.addEventListener('click', (event) => {
+      event.stopPropagation(); // Evita que o clique acione a seleção do item
+      const maquinarioId = event.currentTarget.dataset.id;
+      deletarMaquinario(maquinarioId);
+    });
+  });
+
+  // 🔹 2. Lógica para o botão EDITAR (UPDATE)
+  document.querySelectorAll('#listaMaquinarios .btn-edit').forEach(button => {
+    button.addEventListener('click', (event) => {
+      event.stopPropagation(); // Evita que o clique acione a seleção do item
+      const maquinarioId = event.currentTarget.dataset.id;
+
+      // DOCUMENTAÇÃO: Redireciona para a tela de cadastro, passando o ID na URL para o modo edição.
+      window.location.href = `/template/cadastromaquinario.html?id=${maquinarioId}`;
+    });
+  });
+}
+
+
+// --- FUNÇÃO: DELETE (Exclusão) ---
+async function deletarMaquinario(id) {
+  if (confirm("Tem certeza que deseja excluir este maquinário? Esta ação é irreversível.")) {
+    try {
+      const response = await fetch(`http://localhost:8080/maquinarios/${id}`, {
+        method: 'DELETE' // Usa o método DELETE
+      });
+
+      if (response.ok) {
+        alert("Maquinário excluído com sucesso!");
+        // DOCUMENTAÇÃO: Recarrega a lista para mostrar a exclusão.
+        carregarMaquinarios();
+      } else {
+        alert(`Erro ao excluir o maquinário. Status: ${response.status}. Verifique o console.`);
+      }
+    } catch (error) {
+      console.error("Erro na comunicação com a API de exclusão:", error);
+      alert("Falha de rede ao tentar excluir o maquinário.");
+    }
+  }
+}
+
+// --- FIM DA SEÇÃO MAQUINÁRIO ---
