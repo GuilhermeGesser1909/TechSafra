@@ -1359,3 +1359,131 @@ body {
 .hidden {
   display: none !important;
 }
+
+/* ============================*/
+
+.properties-list {
+  display: flex;
+  flex-direction: column;
+  gap: 15px;
+  margin-top: 20px;
+}
+
+/* CARD DO ITEM DO ESTOQUE */
+.property-card {
+  background: #ffffff;
+  padding: 18px 20px;
+  border-radius: 12px;
+  box-shadow: 0 3px 8px rgba(0,0,0,0.12);
+  border-left: 5px solid #4CAF50;
+  transition: transform 0.2s ease, box-shadow 0.2s ease;
+}
+
+.property-card:hover {
+  transform: scale(1.02);
+  box-shadow: 0 6px 14px rgba(0,0,0,0.18);
+}
+
+.property-card h4 {
+  margin: 0 0 6px 0;
+  font-size: 18px;
+  color: #2b2b2b;
+  font-weight: bold;
+}
+
+.property-card p {
+  margin: 4px 0;
+  color: #444;
+}
+
+/* ------------------------------------------- */
+/* Estilo das Ações (Maquinários - .action-buttons) */
+/* ------------------------------------------- */
+/* Botões iguais aos da sessão de Propriedades */
+/* Botões de ações na seção de Maquinários */
+.action-buttons {
+  display: flex;
+  gap: 10px;
+}
+
+/* Botão Editar */
+.action-buttons .btn-edit {
+  background: linear-gradient(90deg, #e4b93c, #f2d16a);
+  color: #1f1f1f;
+  padding: 10px 18px;
+  border-radius: 10px;
+/* AÇÕES (EDITAR / EXCLUIR) */
+.property-actions {
+  margin-top: 12px;
+  display: flex;
+  gap: 12px;
+}
+
+.property-actions button {
+  padding: 8px 14px;
+  border: none;
+  border-radius: 10px;
+  cursor: pointer;
+  font-family: "Poppins", sans-serif;
+  font-size: 0.95rem;
+  font-weight: 500;
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  transition: 0.2s ease;
+}
+
+.action-buttons .btn-edit:hover {
+  box-shadow: 0 0 14px rgba(228, 185, 60, 0.5);
+  transform: translateY(-2px);
+}
+
+/* Botão Excluir */
+.action-buttons .btn-delete {
+  background: linear-gradient(90deg, #d23b3b, #e74c3c);
+  color: #fff;
+  padding: 10px 18px;
+  border-radius: 10px;
+  border: none;
+  cursor: pointer;
+  font-family: "Poppins", sans-serif;
+  font-size: 0.95rem;
+  font-weight: 500;
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  transition: 0.2s ease;
+}
+
+.action-buttons .btn-delete:hover {
+  box-shadow: 0 0 14px rgba(231, 76, 60, 0.5);
+  transform: translateY(-2px);
+}
+  font-weight: bold;
+  font-size: 14px;
+  transition: 0.2s;
+}
+
+/* BOTÃO EDITAR */
+.property-actions button:first-child {
+  background: #4caf50;
+  color: white;
+}
+
+.property-actions button:first-child:hover {
+  background: #4caf50;
+}
+
+/* BOTÃO EXCLUIR */
+.property-actions button:last-child {
+  background: #f44336;
+  color: white;
+}
+
+.property-actions button:last-child:hover {
+  background: #d32f2f;
+}
+
+
+/* ============================
+   MODAIS
