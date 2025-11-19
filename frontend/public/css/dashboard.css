@@ -549,21 +549,28 @@ body {
 }
 
 /* Machines, properties, stock, analysis */
-.machine {
-  padding: 14px;
-  border-radius: 10px;
+.machine-list {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+
+.machine-item {
+  padding: 15px;
+  background: #fff;
+  border-radius: 8px;
   border: 1px solid #eef6ee;
-  margin-bottom: 12px;
-  background: linear-gradient(180deg, #fff, #fbfff8);
+  cursor: pointer;
+  transition: 0.3s;
 }
 
-.machine.operational {
-  border-left: 5px solid #4caf50;
+.machine-item:hover {
+  transform: scale(1.01);
 }
 
-.machine.maintenance {
-  border-left: 5px solid #f39c12;
-  background: linear-gradient(180deg, #fff8f6, #fff);
+.machine-item.selected {
+  border: 2px solid #4caf50;
+  background: #f3fff3;
 }
 
 .properties-list {
@@ -1142,6 +1149,103 @@ body {
 }
 
 /* ===============================
+   Lista de Safras
+   =============================== */
+
+#listaSafras {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+  gap: 18px;
+  margin-top: 10px;
+}
+
+/* Item da safra */
+.safra-item {
+  background: linear-gradient(145deg, #ffffff, #f8fff5);
+  border-radius: 16px;
+  border: 2px solid rgba(99, 194, 98, 0.15);
+  box-shadow: 0 6px 16px rgba(63, 162, 77, 0.12);
+  padding: 18px;
+  position: relative;
+  overflow: hidden;
+  transition: 0.25s ease;
+}
+
+.safra-item:hover {
+  transform: translateY(-6px);
+  box-shadow: 0 12px 24px rgba(63, 162, 77, 0.2);
+}
+
+.safra-item::before {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 7px;
+  background: linear-gradient(90deg, var(--green-700), var(--gold-500));
+  border-radius: 12px 12px 0 0;
+}
+
+.safra-item h4 {
+  font-size: 1.2rem;
+  color: var(--green-900);
+  margin-bottom: 4px;
+  font-family: "Poppins", sans-serif;
+}
+
+.safra-item p {
+  color: #4a5b4a;
+  margin: 0;
+  font-size: 0.95rem;
+}
+
+/* ===============================
+   Card do Gráfico
+   =============================== */
+
+.chart-card {
+  background: linear-gradient(145deg, #ffffff, #f8fff5);
+  border-radius: 16px;
+  border: 2px solid rgba(99, 194, 98, 0.15);
+  padding: 20px;
+  box-shadow: 0 8px 18px rgba(63, 162, 77, 0.12);
+  position: relative;
+  overflow: hidden;
+}
+
+.chart-card::before {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 8px;
+  background: linear-gradient(90deg, var(--green-700), var(--gold-500));
+  border-radius: 12px 12px 0 0;
+}
+
+.chart-title {
+  font-size: 1.3rem;
+  color: var(--green-900);
+  margin-bottom: 15px;
+  font-family: "Poppins", sans-serif;
+}
+
+/* Animação suave */
+@keyframes fadeInCard {
+  from {
+    opacity: 0;
+    transform: translateY(12px);
+  }
+
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+/* ===============================
    🌾 MODAIS (visual agro premium)
    =============================== */
 
@@ -1248,4 +1352,10 @@ body {
 .modal-content .close:hover {
   color: var(--red-500);
   transform: scale(1.1);
+}
+
+
+
+.hidden {
+  display: none !important;
 }

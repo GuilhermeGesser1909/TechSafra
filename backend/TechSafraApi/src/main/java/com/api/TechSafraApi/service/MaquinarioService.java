@@ -8,7 +8,6 @@ import java.util.UUID;
 
 public interface MaquinarioService {
     List<MaquinarioModel> listarTodas();
-    MaquinarioModel salvar(MaquinarioModel maquinario);
     MaquinarioModel buscarPorId(UUID id);
     void deletar(UUID id);
     MaquinarioModel salvar(MaquinarioDto dto);
