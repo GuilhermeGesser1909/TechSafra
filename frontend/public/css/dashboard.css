@@ -1359,3 +1359,170 @@ body {
 .hidden {
   display: none !important;
 }
+
+/* ============================*/
+
+.properties-list {
+  display: flex;
+  flex-direction: column;
+  gap: 15px;
+  margin-top: 20px;
+}
+
+/* CARD DO ITEM DO ESTOQUE */
+.property-card {
+  background: #ffffff;
+  padding: 18px 20px;
+  border-radius: 12px;
+  box-shadow: 0 3px 8px rgba(0,0,0,0.12);
+  border-left: 5px solid #4CAF50;
+  transition: transform 0.2s ease, box-shadow 0.2s ease;
+}
+
+.property-card:hover {
+  transform: scale(1.02);
+  box-shadow: 0 6px 14px rgba(0,0,0,0.18);
+}
+
+.property-card h4 {
+  margin: 0 0 6px 0;
+  font-size: 18px;
+  color: #2b2b2b;
+  font-weight: bold;
+}
+
+.property-card p {
+  margin: 4px 0;
+  color: #444;
+}
+
+/* AÇÕES (EDITAR / EXCLUIR) */
+.property-actions {
+  margin-top: 12px;
+  display: flex;
+  gap: 12px;
+}
+
+.property-actions button {
+  padding: 8px 14px;
+  border: none;
+  border-radius: 10px;
+  cursor: pointer;
+  font-weight: bold;
+  font-size: 14px;
+  transition: 0.2s;
+}
+
+/* BOTÃO EDITAR */
+.property-actions button:first-child {
+  background: #4caf50;
+  color: white;
+}
+
+.property-actions button:first-child:hover {
+  background: #4caf50;
+}
+
+/* BOTÃO EXCLUIR */
+.property-actions button:last-child {
+  background: #f44336;
+  color: white;
+}
+
+.property-actions button:last-child:hover {
+  background: #d32f2f;
+}
+
+
+/* ============================
+   MODAIS
+===============================*/
+
+.modal {
+  display: none;
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: rgba(0,0,0,0.45);
+  justify-content: center;
+  align-items: center;
+  z-index: 1000;
+}
+
+.modal-conteudo,
+.modal-content {
+  background: #fff;
+  width: 95%;
+  max-width: 420px;
+  padding: 25px;
+  border-radius: 16px;
+  box-shadow: 0 3px 10px rgba(0,0,0,0.25);
+  animation: fadeIn 0.25s ease;
+}
+
+@keyframes fadeIn {
+  from { opacity: 0; transform: scale(0.85); }
+  to   { opacity: 1; transform: scale(1); }
+}
+
+.modal-conteudo h2,
+.modal-content h2 {
+  margin-bottom: 15px;
+  font-size: 20px;
+  color: #333;
+  font-weight: 600;
+}
+
+.modal-conteudo label {
+  display: block;
+  margin-top: 10px;
+  font-weight: 600;
+  color: #444;
+}
+
+.modal-conteudo input,
+.modal-conteudo textarea {
+  width: 100%;
+  padding: 10px;
+  border-radius: 10px;
+  border: 1px solid #bbb;
+  margin-top: 4px;
+  font-size: 14px;
+  outline: none;
+}
+
+.modal-buttons {
+  margin-top: 20px;
+  display: flex;
+  justify-content: space-between;
+}
+
+.btn-cancelar {
+  padding: 10px 16px;
+  border-radius: 12px;
+  background: #9e9e9e;
+  color: white;
+  font-weight: bold;
+  border: none;
+}
+
+.btn-cancelar:hover {
+  background: #7e7e7e;
+}
+
+.btn-salvar,
+.btnConfirmar {
+  padding: 10px 16px;
+  border-radius: 12px;
+  background: #4CAF50;
+  color: white;
+  border: none;
+  font-weight: bold;
+}
+
+.btn-salvar:hover,
+.btnConfirmar:hover {
+  background: #3e8e41;
+}
