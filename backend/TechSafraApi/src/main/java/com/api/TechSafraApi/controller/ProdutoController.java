@@ -24,4 +24,36 @@ public class ProdutoController {
         ProdutoModel salvo = service.salvar(dto);
         return ResponseEntity.ok(salvo);
     }
+
+    @GetMapping("/listar")
+    public ResponseEntity<?> listarTodos() {
+        return ResponseEntity.ok(service.listarTodos());
+    }
+
+    @GetMapping("/{id}")
+    public ResponseEntity<?> buscarPorId(@PathVariable Long id) {
+        ProdutoModel model = service.buscarPorId(id);
+        if (model == null) {
+            return ResponseEntity.notFound().build();
+        }
+        return ResponseEntity.ok(model);
+    }
+
+    @PutMapping("/editar/{id}")
+    public ResponseEntity<?> editar(@PathVariable Long id, @RequestBody @Valid ProdutoDto dto) {
+        ProdutoModel atualizado = service.editar(id, dto);
+        if (atualizado == null) {
+            return ResponseEntity.notFound().build();
+        }
+        return ResponseEntity.ok(atualizado);
+    }
+
+    @DeleteMapping("/excluir/{id}")
+    public ResponseEntity<?> excluir(@PathVariable Long id) {
+        boolean apagou = service.excluir(id);
+        if (!apagou) {
+            return ResponseEntity.notFound().build();
+        }
+        return ResponseEntity.noContent().build();
+    }
 }

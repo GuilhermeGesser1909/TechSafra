@@ -59,6 +59,10 @@ document.addEventListener("DOMContentLoaded", async () => {
         if (targetId === "section4") {
           listarPropriedades();
         }
+
+        if (targetId === "section5") {
+          carregarEstoque();
+        }
       }
     });
   });
@@ -616,3 +620,35 @@ const Maquinarios = {
 
 // Disponibiliza no global para o botão do modal
 window.salvarEdicaoMaquinario = () => Maquinarios.save();
+function abrirModal(id) {
+  const modal = document.getElementById(id);
+  if (!modal) {
+    console.error(`❌ Modal ${id} não encontrado`);
+    return;
+  }
+  modal.style.display = "flex";
+  modal.setAttribute("aria-hidden", "false");
+}
+
+function fecharModal(id) {
+  const modal = document.getElementById(id);
+  if (!modal) return;
+  modal.style.display = "none";
+  modal.setAttribute("aria-hidden", "true");
+}
+
+window.addEventListener("click", (event) => {
+  if (event.target.classList.contains("modal")) {
+    event.target.style.display = "none";
+    event.target.setAttribute("aria-hidden", "true");
+  }
+});
+
+document.addEventListener("DOMContentLoaded", () => {
+  carregarProdutos();
+});
+
+const API_PRODUTOS = "http://localhost:8080/produtos";
+
+/* ================================
+   1. LISTAR PRODUTOS
