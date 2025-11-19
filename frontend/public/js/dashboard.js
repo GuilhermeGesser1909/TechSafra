@@ -457,82 +457,169 @@ window.addEventListener("load", () => {
 });
 
 
-//  (SEÇÃO MAQUINÁRIO - COMPLETO CRUD)
+// ===============================
+//  CRUD MAQUINÁRIO (VERSÃO RESUMIDA)
+// ===============================
 
-document.addEventListener("DOMContentLoaded", () => {
+document.addEventListener("DOMContentLoaded", () => Maquinarios.init());
 
-  carregarMaquinarios();
-  // Você deve chamar aqui também as funções de carregar Propriedades e Safras, se existirem.
-});
+const Maquinarios = {
+  api: "http://localhost:8080/maquinarios",
+  selecionado: null,
 
-// Variável para armazenar o ID do maquinário selecionado, se aplicável (mantido do seu original).
-let maquinarioSelecionado = null;
+  init() {
+    this.elLista = document.getElementById("listaMaquinarios");
+    this.load();
+  },
 
-// --- FUNÇÃO PRINCIPAL: READ (Listagem) ---
-async function carregarMaquinarios() {
-  // DOCUMENTAÇÃO: 'listaMaquinarios' é o ID do contêiner da lista que padronizamos no HTML.
-  const listaMaquinariosDiv = document.getElementById("listaMaquinarios");
-  listaMaquinariosDiv.innerHTML = '<p>Carregando maquinários...</p>';
+  // READ -------------------------
+  async load() {
+    this.elLista.innerHTML = "<p>Carregando maquinários...</p>";
 
-  try {
-    // DOCUMENTAÇÃO: Endpoint para buscar todos os maquinários.
-    const response = await fetch("http://localhost:8080/maquinarios");
+    try {
+      const resp = await fetch(this.api);
+      const data = await resp.json();
 
-    if (!response.ok) {
-      throw new Error("Falha na comunicação com a API de maquinários.");
+      if (!data.length) {
+        this.elLista.innerHTML = "<p class='info-message'>Nenhum maquinário cadastrado.</p>";
+        return;
+      }
+
+      this.elLista.innerHTML = data.map(m => this.card(m)).join("");
+      this.attachEvents();
+
+    } catch (e) {
+      this.elLista.innerHTML = "<p class='error-message'>Erro ao carregar maquinários.</p>";
+      console.error(e);
     }
+  },
 
-    const maquinarios = await response.json();
+  // Template do item
+  card(m) {
+    return `
+      <div class="list-item" data-id="${m.id}">
+          <div class="item-details">
+              <span class="item-nome">${m.nome}</span>
+              <span>Tipo: ${m.tipo}</span>
+              <span>Situação: ${m.situacao}</span>
+              <span>Manutenção: ${m.horasManutencaoPrevista}h</span>
+          </div>
+          <div class="action-buttons">
+              <button class="btn edit-btn" data-edit="${m.id}"><i class="fas fa-edit"></i> Editar</button>
+              <button class="btn delete-btn" data-del="${m.id}"><i class="fas fa-trash"></i> Excluir</button>
+          </div>
+      </div>
+    `;
+  },
 
-    if (maquinarios.length === 0) {
-      listaMaquinariosDiv.innerHTML = '<p class="info-message">Você não tem nenhum maquinário cadastrado.</p>';
-      return;
-    }
+  // EVENTOS ----------------------
+  attachEvents() {
 
-    listaMaquinariosDiv.innerHTML = ''; // Limpa a mensagem de carregamento
-
-    maquinarios.forEach(maquinario => {
-      // DOCUMENTAÇÃO: Cria a estrutura de listagem padronizada (usando 'list-item').
-      const itemDiv = document.createElement('div');
-      itemDiv.classList.add('list-item');
-      // O ID do item é essencial para Editar/Deletar
-      itemDiv.dataset.id = maquinario.id;
-
-      // Conteúdo principal do item (HTML)
-      itemDiv.innerHTML = `
-                <div class="item-details">
-                    <span class="item-nome">${maquinario.nome}</span> 
-                    <span class="item-tipo">Tipo: ${maquinario.tipo}</span>
-                    <span class="item-situacao">Situação: ${maquinario.situacao}</span>
-                    <span class="item-horas">Horas p/ Manutenção: ${maquinario.horasManutencaoPrevista}h</span>
-                </div>
-                <div class="action-buttons">
-                    <button class="btn-edit" data-id="${maquinario.id}"><img src="/img/pencil-square.svg" alt="Editar"></button>
-                    <button class="btn-delete" data-id="${maquinario.id}"><img src="/img/trash3.svg" alt="Deletar"></button>
-                </div>
-            `;
-
-      // Lógica de seleção (mantida do seu código)
-      itemDiv.onclick = () => {
-        document.querySelectorAll(".list-item").forEach(el =>
-          el.classList.remove("selected")
-        );
-        itemDiv.classList.add("selected");
-        maquinarioSelecionado = maquinario.id;
+    // Seleção
+    document.querySelectorAll(".list-item").forEach(el => {
+      el.onclick = () => {
+        document.querySelectorAll(".list-item").forEach(i => i.classList.remove("selected"));
+        el.classList.add("selected");
+        this.selecionado = el.dataset.id;
       };
-
-      listaMaquinariosDiv.appendChild(itemDiv);
     });
 
-    // DOCUMENTAÇÃO: Chama a função que ativa a lógica de Edição e Deleção
-    anexarEventosBotoesMaquinario();
+    // Editar
+    document.querySelectorAll("[data-edit]").forEach(btn =>
+      btn.onclick = e => {
+        e.stopPropagation();
+        this.loadEdit(btn.dataset.edit);
+      }
+    );
 
-  } catch (error) {
-    console.error("Erro ao carregar maquinários:", error);
-    listaMaquinariosDiv.innerHTML = `<p class="error-message">Erro ao carregar maquinários. Status: ${error.message}</p>`;
+    // Excluir
+    document.querySelectorAll("[data-del]").forEach(btn =>
+      btn.onclick = e => {
+        e.stopPropagation();
+        this.delete(btn.dataset.del);
+      }
+    );
+  },
+
+  // BUSCAR PARA EDIÇÃO --------------------
+  async loadEdit(id) {
+    try {
+      const resp = await fetch(`${this.api}/${id}`);
+      const m = await resp.json();
+
+      document.getElementById("editMaquinarioId").value = m.id;
+      document.getElementById("edit-nomeMaquinario").value = m.nome;
+      document.getElementById("edit-tipoMaquinario").value = m.tipo;
+      document.getElementById("edit-horasTrabalhadasDia").value = m.horasTrabalhadasDia;
+      document.getElementById("edit-horasManutencaoPrevista").value = m.horasManutencaoPrevista;
+      document.getElementById("edit-situacaoMaquinario").value = m.situacao;
+      document.getElementById("edit-obsMaquinario").value = m.observacoes;
+
+      document.getElementById("resumo-nomeMaquinario").textContent = m.nome;
+      document.getElementById("resumo-tipoMaquinario").textContent = m.tipo;
+      document.getElementById("resumo-situacao").textContent = m.situacao;
+      document.getElementById("resumo-manutencao").textContent = `${m.horasManutencaoPrevista} horas`;
+
+      abrirModal("modalEditarMaquinario");
+
+    } catch (e) {
+      alert("Erro ao carregar dados.");
+      console.error(e);
+    }
+  },
+
+  // DELETE -----------------------
+  async delete(id) {
+    if (!confirm("Tem certeza que deseja excluir?")) return;
+
+    try {
+      const resp = await fetch(`${this.api}/${id}`, { method: "DELETE" });
+      if (!resp.ok) return alert("Erro ao excluir.");
+
+      alert("Excluído com sucesso!");
+      this.load();
+
+    } catch (e) {
+      alert("Erro de rede");
+      console.error(e);
+    }
+  },
+
+  // UPDATE -----------------------
+  async save() {
+    const id = document.getElementById("editMaquinarioId").value;
+
+    const payload = {
+      nome: document.getElementById("edit-nomeMaquinario").value,
+      tipo: document.getElementById("edit-tipoMaquinario").value,
+      horasTrabalhadasDia: +document.getElementById("edit-horasTrabalhadasDia").value,
+      horasManutencaoPrevista: +document.getElementById("edit-horasManutencaoPrevista").value,
+      situacao: document.getElementById("edit-situacaoMaquinario").value,
+      observacoes: document.getElementById("edit-obsMaquinario").value
+    };
+
+    try {
+      const resp = await fetch(`${this.api}/${id}`, {
+        method: "PUT",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify(payload)
+      });
+
+      if (!resp.ok) return alert("Erro ao salvar");
+
+      alert("Atualizado!");
+      fecharModal("modalEditarMaquinario");
+      this.load();
+
+    } catch (e) {
+      alert("Erro de rede");
+      console.error(e);
+    }
   }
-}
+};
 
+// Disponibiliza no global para o botão do modal
+window.salvarEdicaoMaquinario = () => Maquinarios.save();
 function abrirModal(id) {
   const modal = document.getElementById(id);
   if (!modal) {

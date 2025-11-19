@@ -1396,6 +1396,22 @@ body {
   color: #444;
 }
 
+/* ------------------------------------------- */
+/* Estilo das Ações (Maquinários - .action-buttons) */
+/* ------------------------------------------- */
+/* Botões iguais aos da sessão de Propriedades */
+/* Botões de ações na seção de Maquinários */
+.action-buttons {
+  display: flex;
+  gap: 10px;
+}
+
+/* Botão Editar */
+.action-buttons .btn-edit {
+  background: linear-gradient(90deg, #e4b93c, #f2d16a);
+  color: #1f1f1f;
+  padding: 10px 18px;
+  border-radius: 10px;
 /* AÇÕES (EDITAR / EXCLUIR) */
 .property-actions {
   margin-top: 12px;
@@ -1408,6 +1424,41 @@ body {
   border: none;
   border-radius: 10px;
   cursor: pointer;
+  font-family: "Poppins", sans-serif;
+  font-size: 0.95rem;
+  font-weight: 500;
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  transition: 0.2s ease;
+}
+
+.action-buttons .btn-edit:hover {
+  box-shadow: 0 0 14px rgba(228, 185, 60, 0.5);
+  transform: translateY(-2px);
+}
+
+/* Botão Excluir */
+.action-buttons .btn-delete {
+  background: linear-gradient(90deg, #d23b3b, #e74c3c);
+  color: #fff;
+  padding: 10px 18px;
+  border-radius: 10px;
+  border: none;
+  cursor: pointer;
+  font-family: "Poppins", sans-serif;
+  font-size: 0.95rem;
+  font-weight: 500;
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  transition: 0.2s ease;
+}
+
+.action-buttons .btn-delete:hover {
+  box-shadow: 0 0 14px rgba(231, 76, 60, 0.5);
+  transform: translateY(-2px);
+}
   font-weight: bold;
   font-size: 14px;
   transition: 0.2s;
