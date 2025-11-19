@@ -59,6 +59,10 @@ document.addEventListener("DOMContentLoaded", async () => {
         if (targetId === "section4") {
           listarPropriedades();
         }
+
+        if (targetId === "section5") {
+          carregarEstoque();
+        }
       }
     });
   });
@@ -529,52 +533,35 @@ async function carregarMaquinarios() {
   }
 }
 
-// --- FUNÇÃO AUXILIAR: ANEXAR EVENTOS ---
-// DOCUMENTAÇÃO: Esta função separa a lógica de anexar os listeners da lógica de carregamento.
-function anexarEventosBotoesMaquinario() {
-
-  // 🔹 1. Lógica para o botão DELETAR (DELETE)
-  document.querySelectorAll('#listaMaquinarios .btn-delete').forEach(button => {
-    button.addEventListener('click', (event) => {
-      event.stopPropagation(); // Evita que o clique acione a seleção do item
-      const maquinarioId = event.currentTarget.dataset.id;
-      deletarMaquinario(maquinarioId);
-    });
-  });
-
-  // 🔹 2. Lógica para o botão EDITAR (UPDATE)
-  document.querySelectorAll('#listaMaquinarios .btn-edit').forEach(button => {
-    button.addEventListener('click', (event) => {
-      event.stopPropagation(); // Evita que o clique acione a seleção do item
-      const maquinarioId = event.currentTarget.dataset.id;
-
-      // DOCUMENTAÇÃO: Redireciona para a tela de cadastro, passando o ID na URL para o modo edição.
-      window.location.href = `/template/cadastromaquinario.html?id=${maquinarioId}`;
-    });
-  });
-}
-
-
-// --- FUNÇÃO: DELETE (Exclusão) ---
-async function deletarMaquinario(id) {
-  if (confirm("Tem certeza que deseja excluir este maquinário? Esta ação é irreversível.")) {
-    try {
-      const response = await fetch(`http://localhost:8080/maquinarios/${id}`, {
-        method: 'DELETE' // Usa o método DELETE
-      });
-
-      if (response.ok) {
-        alert("Maquinário excluído com sucesso!");
-        // DOCUMENTAÇÃO: Recarrega a lista para mostrar a exclusão.
-        carregarMaquinarios();
-      } else {
-        alert(`Erro ao excluir o maquinário. Status: ${response.status}. Verifique o console.`);
-      }
-    } catch (error) {
-      console.error("Erro na comunicação com a API de exclusão:", error);
-      alert("Falha de rede ao tentar excluir o maquinário.");
-    }
+function abrirModal(id) {
+  const modal = document.getElementById(id);
+  if (!modal) {
+    console.error(`❌ Modal ${id} não encontrado`);
+    return;
   }
+  modal.style.display = "flex";
+  modal.setAttribute("aria-hidden", "false");
 }
 
-// --- FIM DA SEÇÃO MAQUINÁRIO ---
+function fecharModal(id) {
+  const modal = document.getElementById(id);
+  if (!modal) return;
+  modal.style.display = "none";
+  modal.setAttribute("aria-hidden", "true");
+}
+
+window.addEventListener("click", (event) => {
+  if (event.target.classList.contains("modal")) {
+    event.target.style.display = "none";
+    event.target.setAttribute("aria-hidden", "true");
+  }
+});
+
+document.addEventListener("DOMContentLoaded", () => {
+  carregarProdutos();
+});
+
+const API_PRODUTOS = "http://localhost:8080/produtos";
+
+/* ================================
+   1. LISTAR PRODUTOS

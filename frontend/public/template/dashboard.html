@@ -11,7 +11,7 @@
     rel="stylesheet" />
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css" />
 
-  <link rel="stylesheet" href="/css/dashboard.css"/>
+  <link rel="stylesheet" href="/css/dashboard.css" />
   <link rel="icon" href="/img/logo.png" />
 
   <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
@@ -19,7 +19,7 @@
 
 <body>
 
- <aside class="sidebar" aria-label="Barra lateral">
+  <aside class="sidebar" aria-label="Barra lateral">
     <div class="logo">
       <a href="/template/home.html"><img src="/img/logo.png" alt="TechSafra logo" /></a>
     </div>
@@ -208,28 +208,26 @@
     </section>
 
     <section id="section3" class="card-section hidden">
-  <div class="card">
-    <h3>🚜 Status do Maquinário</h3>
+      <div class="card">
+        <h3>🚜 Status do Maquinário</h3>
 
-    <div class="card-actions">
-      <a class="btn add-btn" href="/template/cadastromaquinario.html">
-        <i class="fas fa-plus"></i> Novo Maquinário
-      </a>
-      <button class="btn edit-btn" onclick="abrirModal('modalEditarMaquinario')">
-        Editar
-      </button>
-      <button class="btn delete-btn" onclick="abrirModal('modalExcluir')">
-        Excluir
-      </button>
-    </div>
+        <div class="card-actions">
+          <a class="btn add-btn" href="/template/cadastromaquinario.html">
+            <i class="fas fa-plus"></i> Novo Maquinário
+          </a>
+          <button class="btn edit-btn" onclick="editarSelecionado()">
+            Editar
+          </button>
+          <button class="btn delete-btn" onclick="deletarSelecionado()">
+            Excluir
+          </button>
+        </div>
 
-    <!-- LISTA DINÂMICA -->
-    <div id="listaMaquinarios" class="properties-list"></div>
-  </div>
-</section>
+        <div id="listaMaquinarios" class="machine-list"></div>
+      </div>
+    </section>
 
 
-  <!-- 🌱 MINHAS PROPRIEDADES -->
     <section id="section4" class="card-section hidden">
       <div class="card">
         <h3>🌱 Minhas Propriedades</h3>
@@ -240,7 +238,6 @@
           </button>
         </div>
 
-        <!-- 🔹 JS insere aqui as propriedades reais -->
         <div id="listaPropriedades" class="properties-list">
           <p>Carregando propriedades...</p>
         </div>
@@ -248,52 +245,73 @@
     </section>
 
     <section id="section5" class="card-section hidden">
-      <div class="card">
-        <h3>📦 Estoque de Insumos</h3>
+  <div class="card">
+    <h3>📦 Estoque de Insumos</h3>
 
-        <div class="card-actions">
-          <button class="btn add-btn" onclick="location.href='./cadastroproduto.html'">
-            <i class="fas fa-plus"></i> Adicionar Insumos
-          </button>
-          <button class="btn edit-btn" onclick="abrirModal('modalEditarEstoque')">
-            Editar
-          </button>
-          <button class="btn delete-btn" onclick="abrirModal('modalExcluir')">
-            Excluir
-          </button>
-        </div>
+    <div class="card-actions">
+      <button class="btn add-btn" onclick="location.href='./cadastroproduto.html'">
+        <i class="fas fa-plus"></i> Adicionar Insumos
+      </button>
+    </div>
 
-        <div class="cardProduto">
-          <div class="item">
-            <span id="spannomeproduto">Sementes de Milho</span><span class="status low">Baixo</span>
-            <div class="bar red" style="width: 30%"></div>
-            <small id="smallpesoproduto">150/500 kg</small>
-          </div>
+    <!-- LISTA DE PRODUTOS (VISUAL IGUAL A PROPRIEDADES) -->
+    <div id="listaEstoque" class="properties-list">
+      <p>Carregando estoque...</p>
+    </div>
+  </div>
 
-          <div class="item">
-            <span>Fertilizante NPK</span>
-            <div class="bar green" style="width: 80%"></div>
-            <small>800/1000 kg</small>
-          </div>
+  <!-- MODAL EDITAR -->
+  <div id="modalEditarEstoque" class="modal">
+    <div class="modal-conteudo">
+      <h2>Editar Produto do Estoque</h2>
 
-          <div class="item">
-            <span>Defensivo Agrícola</span>
-            <div class="bar yellow" style="width: 50%"></div>
-            <small>25/50 L</small>
-          </div>
+      <label>Nome do Produto</label>
+      <input type="text" id="edit-nomeProduto">
 
-          <div class="item">
-            <span>Combustível</span>
-            <div class="bar green" style="width: 65%"></div>
-            <small>200/300 L</small>
-          </div>
+      <label>Quantidade</label>
+      <input type="number" id="edit-quantidade">
 
-          <div class="total">
-            Valor total em estoque <strong>R$ 12.450,00</strong>
-          </div>
-        </div>
+      <label>Tipo do Produto</label>
+      <input type="text" id="edit-tipoProduto">
+
+      <label>Custo</label>
+      <input type="number" id="edit-custo" step="0.01">
+
+      <label>Observação</label>
+      <textarea id="edit-observacao"></textarea>
+
+      <div class="modal-buttons">
+        <button onclick="fecharModal('modalEditarEstoque')" class="btn-cancelar">
+          Cancelar
+        </button>
+        <button id="salvarEdicaoEstoqueBtn" class="btn-salvar">
+          Salvar
+        </button>
       </div>
-    </section>
+    </div>
+  </div>
+
+  <!-- MODAL EXCLUIR -->
+  <div id="modalExcluirProduto" class="modal">
+    <div class="modal-content">
+      <h2>Excluir Produto</h2>
+      <p>Tem certeza que deseja excluir este produto?</p>
+
+      <input type="hidden" id="deleteProdutoId">
+
+      <div class="modal-buttons">
+        <button onclick="fecharModal('modalExcluirProduto')" class="btn-cancelar">
+          Cancelar
+        </button>
+        <button class="btnConfirmar" onclick="excluirProduto()">
+          Excluir
+        </button>
+      </div>
+    </div>
+  </div>
+</section>
+
+
 
     <section id="section6" class="card-section hidden">
       <div class="card">
@@ -334,20 +352,20 @@
     </section>
 
     <section id="section7" class="card-section hidden">
-  <div class="card">
-    <h3>📅 Planejamento de Safras</h3>
+      <div class="card">
+        <h3>📅 Planejamento de Safras</h3>
 
-    <div class="card-actions">
-      <button class="btn add-btn" onclick="location.href='/template/cadastrosafra.html'">
-        + Nova Safra
-      </button>
-    </div>
+        <div class="card-actions">
+          <button class="btn add-btn" onclick="location.href='/template/cadastrosafra.html'">
+            + Nova Safra
+          </button>
+        </div>
 
-    <div id="listaSafras">
-      <!-- As safras serão carregadas automaticamente via JS -->
-    </div>
-  </div>
-</section>
+        <div id="listaSafras">
+          <!-- As safras serão carregadas automaticamente via JS -->
+        </div>
+      </div>
+    </section>
 
 
 
@@ -432,158 +450,128 @@
     © 2025 TechSafra — Informação e Inovação para o Agronegócio
   </footer>
 
- <!-- 🔹 MODAL EDITAR PROPRIEDADE -->
-<div id="modalEditarPropriedade" class="modal" aria-hidden="true">
-  <div class="modal-content large">
-    <span class="close" onclick="fecharModal('modalEditarPropriedade')">&times;</span>
-    <h2>Editar Propriedade</h2>
-
-    <div class="modal-body">
-      <div class="form-section">
-
-        <label for="edit-nomePropriedade">Nome da Fazenda</label>
-        <input type="text" id="edit-nomePropriedade" required />
-
-        <label for="edit-localizacaoPropriedade">Cidade</label>
-        <input type="text" id="edit-localizacaoPropriedade" required />
-
-        <label for="edit-estado">Estado</label>
-        <select id="edit-estado" required>
-          <option value="">Selecione...</option>
-          <option value="AC">Acre</option>
-          <option value="AL">Alagoas</option>
-          <option value="AP">Amapá</option>
-          <option value="AM">Amazonas</option>
-          <option value="BA">Bahia</option>
-          <option value="CE">Ceará</option>
-          <option value="DF">Distrito Federal</option>
-          <option value="ES">Espírito Santo</option>
-          <option value="GO">Goiás</option>
-          <option value="MA">Maranhão</option>
-          <option value="MT">Mato Grosso</option>
-          <option value="MS">Mato Grosso do Sul</option>
-          <option value="MG">Minas Gerais</option>
-          <option value="PA">Pará</option>
-          <option value="PB">Paraíba</option>
-          <option value="PR">Paraná</option>
-          <option value="PE">Pernambuco</option>
-          <option value="PI">Piauí</option>
-          <option value="RJ">Rio de Janeiro</option>
-          <option value="RN">Rio Grande do Norte</option>
-          <option value="RS">Rio Grande do Sul</option>
-          <option value="RO">Rondônia</option>
-          <option value="RR">Roraima</option>
-          <option value="SC">Santa Catarina</option>
-          <option value="SP">São Paulo</option>
-          <option value="SE">Sergipe</option>
-          <option value="TO">Tocantins</option>
-        </select>
-
-        <label for="edit-areaHectares">Área Total (ha)</label>
-        <input type="number" id="edit-areaHectares" required />
-
-        <label for="edit-areaCultivavel">Área Cultivável (ha)</label>
-        <input type="number" id="edit-areaCultivavel" />
-
-        <label for="edit-areaReserva">Área de Reserva (ha)</label>
-        <input type="number" id="edit-areaReserva" />
-
-        <label for="edit-solo">Tipo de Solo</label>
-        <select id="edit-solo" required>
-          <option value="">Selecione...</option>
-          <option value="Argiloso">Argiloso</option>
-          <option value="Arenoso">Arenoso</option>
-          <option value="Mistura">Mistura</option>
-        </select>
-
-        <label for="edit-topografia">Topografia</label>
-        <select id="edit-topografia" required>
-          <option value="">Selecione...</option>
-          <option value="Plana">Plana</option>
-          <option value="Levemente ondulada">Levemente ondulada</option>
-          <option value="Ondulada">Ondulada</option>
-        </select>
-
-        <label for="edit-irrigacao">Sistema de Irrigação</label>
-        <select id="edit-irrigacao" required>
-          <option value="">Selecione...</option>
-          <option value="Pivô">Pivô</option>
-          <option value="Gotejamento">Gotejamento</option>
-          <option value="Aspersão">Aspersão</option>
-          <option value="Sem irrigação">Sem irrigação</option>
-        </select>
-
-        <label for="edit-culturaPrincipal">Cultura Principal</label>
-        <input type="text" id="edit-culturaPrincipal" />
-
-        <label for="edit-culturaSecundaria">Cultura Secundária</label>
-        <input type="text" id="edit-culturaSecundaria" />
-
-        <label for="edit-numTalhoes">Número de Talhões</label>
-        <input type="number" id="edit-numTalhoes" />
-
-        <label for="edit-responsavel">Responsável</label>
-        <input type="text" id="edit-responsavel" required />
-
-        <label for="edit-telefone">Telefone</label>
-        <input type="tel" id="edit-telefone" required />
-
-        <label for="edit-emailContato">Email de Contato</label>
-        <input type="email" id="edit-emailContato" required />
-
-        <label for="edit-cnpjCpf">CNPJ/CPF</label>
-        <input type="text" id="edit-cnpjCpf" required />
-
-        <label for="edit-cep">CEP</label>
-        <input type="text" id="edit-cep" required />
-
-        <label for="edit-endereco">Endereço</label>
-        <input type="text" id="edit-endereco" required />
-
-        <label for="edit-latitude">Latitude</label>
-        <input type="text" id="edit-latitude" />
-
-        <label for="edit-longitude">Longitude</label>
-        <input type="text" id="edit-longitude" />
-
-        <label for="edit-observacoes">Observações</label>
-        <textarea id="edit-observacoes"></textarea>
-      </div>
-    </div>
-
-    <div class="modal-actions">
-      <button class="btn save-btn" id="salvarEdicaoBtn">Salvar Alterações</button>
-      <button class="btn cancel-btn" onclick="fecharModal('modalEditarPropriedade')">Cancelar</button>
-    </div>
-  </div>
-</div>
-
-
-  <div id="modalEditarEstoque" class="modal" aria-hidden="true">
+  <!-- 🔹 MODAL EDITAR PROPRIEDADE -->
+  <div id="modalEditarPropriedade" class="modal" aria-hidden="true">
     <div class="modal-content large">
-      <span class="close" onclick="fecharModal('modalEditarEstoque')">&times;</span>
-      <h2>Editar Estoque</h2>
+      <span class="close" onclick="fecharModal('modalEditarPropriedade')">&times;</span>
+      <h2>Editar Propriedade</h2>
+
       <div class="modal-body">
         <div class="form-section">
-          <label>Produto</label><input type="text" id="produtoEstoque" />
-          <label>Quantidade</label><input type="number" id="quantidadeEstoque" />
-          <label>Valor Unitário (R$)</label><input type="number" id="valorUnitarioEstoque" step="0.01" />
-          <label>Fornecedor</label><input type="text" id="fornecedorEstoque" />
-          <label>Observações</label><textarea id="obsEstoque"></textarea>
-        </div>
-        <div class="report-section">
-          <h3>Resumo do Produto</h3>
-          <p><strong>Item:</strong> Adubo NPK 20-20-20</p>
-          <p><strong>Em estoque:</strong> 350 sacos</p>
-          <p><strong>Valor total:</strong> R$ 21.000,00</p>
-          <p><strong>Última entrada:</strong> 18/10/2025</p>
+
+          <label for="edit-nomePropriedade">Nome da Fazenda</label>
+          <input type="text" id="edit-nomePropriedade" required />
+
+          <label for="edit-localizacaoPropriedade">Cidade</label>
+          <input type="text" id="edit-localizacaoPropriedade" required />
+
+          <label for="edit-estado">Estado</label>
+          <select id="edit-estado" required>
+            <option value="">Selecione...</option>
+            <option value="AC">Acre</option>
+            <option value="AL">Alagoas</option>
+            <option value="AP">Amapá</option>
+            <option value="AM">Amazonas</option>
+            <option value="BA">Bahia</option>
+            <option value="CE">Ceará</option>
+            <option value="DF">Distrito Federal</option>
+            <option value="ES">Espírito Santo</option>
+            <option value="GO">Goiás</option>
+            <option value="MA">Maranhão</option>
+            <option value="MT">Mato Grosso</option>
+            <option value="MS">Mato Grosso do Sul</option>
+            <option value="MG">Minas Gerais</option>
+            <option value="PA">Pará</option>
+            <option value="PB">Paraíba</option>
+            <option value="PR">Paraná</option>
+            <option value="PE">Pernambuco</option>
+            <option value="PI">Piauí</option>
+            <option value="RJ">Rio de Janeiro</option>
+            <option value="RN">Rio Grande do Norte</option>
+            <option value="RS">Rio Grande do Sul</option>
+            <option value="RO">Rondônia</option>
+            <option value="RR">Roraima</option>
+            <option value="SC">Santa Catarina</option>
+            <option value="SP">São Paulo</option>
+            <option value="SE">Sergipe</option>
+            <option value="TO">Tocantins</option>
+          </select>
+
+          <label for="edit-areaHectares">Área Total (ha)</label>
+          <input type="number" id="edit-areaHectares" required />
+
+          <label for="edit-areaCultivavel">Área Cultivável (ha)</label>
+          <input type="number" id="edit-areaCultivavel" />
+
+          <label for="edit-areaReserva">Área de Reserva (ha)</label>
+          <input type="number" id="edit-areaReserva" />
+
+          <label for="edit-solo">Tipo de Solo</label>
+          <select id="edit-solo" required>
+            <option value="">Selecione...</option>
+            <option value="Argiloso">Argiloso</option>
+            <option value="Arenoso">Arenoso</option>
+            <option value="Mistura">Mistura</option>
+          </select>
+
+          <label for="edit-topografia">Topografia</label>
+          <select id="edit-topografia" required>
+            <option value="">Selecione...</option>
+            <option value="Plana">Plana</option>
+            <option value="Levemente ondulada">Levemente ondulada</option>
+            <option value="Ondulada">Ondulada</option>
+          </select>
+
+          <label for="edit-irrigacao">Sistema de Irrigação</label>
+          <select id="edit-irrigacao" required>
+            <option value="">Selecione...</option>
+            <option value="Pivô">Pivô</option>
+            <option value="Gotejamento">Gotejamento</option>
+            <option value="Aspersão">Aspersão</option>
+            <option value="Sem irrigação">Sem irrigação</option>
+          </select>
+
+          <label for="edit-culturaPrincipal">Cultura Principal</label>
+          <input type="text" id="edit-culturaPrincipal" />
+
+          <label for="edit-culturaSecundaria">Cultura Secundária</label>
+          <input type="text" id="edit-culturaSecundaria" />
+
+          <label for="edit-numTalhoes">Número de Talhões</label>
+          <input type="number" id="edit-numTalhoes" />
+
+          <label for="edit-responsavel">Responsável</label>
+          <input type="text" id="edit-responsavel" required />
+
+          <label for="edit-telefone">Telefone</label>
+          <input type="tel" id="edit-telefone" required />
+
+          <label for="edit-emailContato">Email de Contato</label>
+          <input type="email" id="edit-emailContato" required />
+
+          <label for="edit-cnpjCpf">CNPJ/CPF</label>
+          <input type="text" id="edit-cnpjCpf" required />
+
+          <label for="edit-cep">CEP</label>
+          <input type="text" id="edit-cep" required />
+
+          <label for="edit-endereco">Endereço</label>
+          <input type="text" id="edit-endereco" required />
+
+          <label for="edit-latitude">Latitude</label>
+          <input type="text" id="edit-latitude" />
+
+          <label for="edit-longitude">Longitude</label>
+          <input type="text" id="edit-longitude" />
+
+          <label for="edit-observacoes">Observações</label>
+          <textarea id="edit-observacoes"></textarea>
         </div>
       </div>
+
       <div class="modal-actions">
-        <button class="btn save-btn">Salvar</button>
-        <button class="btn cancel-btn" onclick="fecharModal('modalEditarEstoque')">
-          Cancelar
-        </button>
+        <button class="btn save-btn" id="salvarEdicaoBtn">Salvar Alterações</button>
+        <button class="btn cancel-btn" onclick="fecharModal('modalEditarPropriedade')">Cancelar</button>
       </div>
     </div>
   </div>
@@ -617,55 +605,55 @@
   </div>
 
   <!-- Modal Editar Safra -->
-<div id="modalEditarSafra" class="modal">
-  <div class="modal-content">
-    <span class="close" onclick="fecharModal('modalEditarSafra')">&times;</span>
-    <h3>Editar Safra</h3>
+  <div id="modalEditarSafra" class="modal">
+    <div class="modal-content">
+      <span class="close" onclick="fecharModal('modalEditarSafra')">&times;</span>
+      <h3>Editar Safra</h3>
 
-    <form id="formEditarSafra">
-      <input type="hidden" id="editSafraId">
+      <form id="formEditarSafra">
+        <input type="hidden" id="editSafraId">
 
-      <label>Nome:</label>
-      <input type="text" id="editNomeSafra" required>
+        <label>Nome:</label>
+        <input type="text" id="editNomeSafra" required>
 
-      <label>Cultura:</label>
-      <input type="text" id="editCultura" required>
+        <label>Cultura:</label>
+        <input type="text" id="editCultura" required>
 
-      <label>Data Início:</label>
-      <input type="date" id="editDataInicio" required>
+        <label>Data Início:</label>
+        <input type="date" id="editDataInicio" required>
 
-      <label>Data Fim:</label>
-      <input type="date" id="editDataFim" required>
+        <label>Data Fim:</label>
+        <input type="date" id="editDataFim" required>
 
-      <label>Área (ha):</label>
-      <input type="number" id="editArea" required>
+        <label>Área (ha):</label>
+        <input type="number" id="editArea" required>
 
-      <label>Produção (ton):</label>
-      <input type="number" id="editProducao" required>
+        <label>Produção (ton):</label>
+        <input type="number" id="editProducao" required>
 
-      <label>Custos (R$):</label>
-      <input type="number" id="editCustos" required>
+        <label>Custos (R$):</label>
+        <input type="number" id="editCustos" required>
 
-      <label>Observações:</label>
-      <textarea id="editObservacoes"></textarea>
+        <label>Observações:</label>
+        <textarea id="editObservacoes"></textarea>
 
-      <button type="submit" class="btn save-btn">Salvar Alterações</button>
-    </form>
+        <button type="submit" class="btn save-btn">Salvar Alterações</button>
+      </form>
+    </div>
   </div>
-</div>
 
-<!-- Modal Excluir -->
-<div id="modalExcluirSafra" class="modal">
-  <div class="modal-content">
-    <span class="close" onclick="fecharModal('modalExcluirSafra')">&times;</span>
-    <h3>Excluir Safra</h3>
+  <!-- Modal Excluir -->
+  <div id="modalExcluirSafra" class="modal">
+    <div class="modal-content">
+      <span class="close" onclick="fecharModal('modalExcluirSafra')">&times;</span>
+      <h3>Excluir Safra</h3>
 
-    <p>Digite o ID da Safra para confirmar:</p>
-    <input type="number" id="deleteSafraId" placeholder="ID">
+      <p>Digite o ID da Safra para confirmar:</p>
+      <input type="number" id="deleteSafraId" placeholder="ID">
 
-    <button class="btn delete-btn" onclick="confirmarExcluirSafra()">Excluir</button>
+      <button class="btn delete-btn" onclick="confirmarExcluirSafra()">Excluir</button>
+    </div>
   </div>
-</div>
 
 
   <div id="modalEditarAnalise" class="modal" aria-hidden="true">
@@ -701,20 +689,20 @@
   </div>
 
   <!-- 🔹 MODAL EXCLUIR -->
-<div id="modalExcluir" class="modal" aria-hidden="true">
-  <div class="modal-content small">
-    <span class="close" onclick="fecharModal('modalExcluir')">&times;</span>
-    <h2>Confirmar Exclusão</h2>
-    <p>Tem certeza que deseja excluir esta propriedade?</p>
-    <div class="modal-actions">
-      <!-- ✅ O JS usa este ID -->
-      <button class="btn save-btn" id="confirmarExclusaoBtn">Sim, Excluir</button>
-      <button class="btn cancel-btn" onclick="fecharModal('modalExcluir')">
-        Cancelar
-      </button>
+  <div id="modalExcluir" class="modal" aria-hidden="true">
+    <div class="modal-content small">
+      <span class="close" onclick="fecharModal('modalExcluir')">&times;</span>
+      <h2>Confirmar Exclusão</h2>
+      <p>Tem certeza que deseja excluir esta propriedade?</p>
+      <div class="modal-actions">
+        <!-- ✅ O JS usa este ID -->
+        <button class="btn save-btn" id="confirmarExclusaoBtn">Sim, Excluir</button>
+        <button class="btn cancel-btn" onclick="fecharModal('modalExcluir')">
+          Cancelar
+        </button>
+      </div>
     </div>
   </div>
-</div>
 
 
   <script src="/js/dashboard.js"></script>
