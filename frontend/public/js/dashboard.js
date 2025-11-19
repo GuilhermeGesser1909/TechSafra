@@ -457,79 +457,52 @@ window.addEventListener("load", () => {
 });
 
 
-//  (SEÇÃO MAQUINÁRIO - COMPLETO CRUD)
+// SECAO MAQUINARIO 
 
 document.addEventListener("DOMContentLoaded", () => {
-
   carregarMaquinarios();
-  // Você deve chamar aqui também as funções de carregar Propriedades e Safras, se existirem.
 });
 
-// Variável para armazenar o ID do maquinário selecionado, se aplicável (mantido do seu original).
 let maquinarioSelecionado = null;
 
-// --- FUNÇÃO PRINCIPAL: READ (Listagem) ---
 async function carregarMaquinarios() {
-  // DOCUMENTAÇÃO: 'listaMaquinarios' é o ID do contêiner da lista que padronizamos no HTML.
-  const listaMaquinariosDiv = document.getElementById("listaMaquinarios");
-  listaMaquinariosDiv.innerHTML = '<p>Carregando maquinários...</p>';
+  const lista = document.getElementById("listaMaquinarios");
+  lista.innerHTML = "<p>Carregando...</p>";
 
   try {
-    // DOCUMENTAÇÃO: Endpoint para buscar todos os maquinários.
     const response = await fetch("http://localhost:8080/maquinarios");
+    const dados = await response.json();
 
-    if (!response.ok) {
-      throw new Error("Falha na comunicação com a API de maquinários.");
-    }
-
-    const maquinarios = await response.json();
-
-    if (maquinarios.length === 0) {
-      listaMaquinariosDiv.innerHTML = '<p class="info-message">Você não tem nenhum maquinário cadastrado.</p>';
+    if (!dados.length) {
+      lista.innerHTML = "<p>Nenhum maquinário cadastrado.</p>";
       return;
     }
 
-    listaMaquinariosDiv.innerHTML = ''; // Limpa a mensagem de carregamento
+    lista.innerHTML = "";
 
-    maquinarios.forEach(maquinario => {
-      // DOCUMENTAÇÃO: Cria a estrutura de listagem padronizada (usando 'list-item').
-      const itemDiv = document.createElement('div');
-      itemDiv.classList.add('list-item');
-      // O ID do item é essencial para Editar/Deletar
-      itemDiv.dataset.id = maquinario.id;
+    dados.forEach(m => {
+      const item = document.createElement("div");
+      item.classList.add("machine-item");
 
-      // Conteúdo principal do item (HTML)
-      itemDiv.innerHTML = `
-                <div class="item-details">
-                    <span class="item-nome">${maquinario.nome}</span> 
-                    <span class="item-tipo">Tipo: ${maquinario.tipo}</span>
-                    <span class="item-situacao">Situação: ${maquinario.situacao}</span>
-                    <span class="item-horas">Horas p/ Manutenção: ${maquinario.horasManutencaoPrevista}h</span>
-                </div>
-                <div class="action-buttons">
-                    <button class="btn-edit" data-id="${maquinario.id}"><img src="/img/pencil-square.svg" alt="Editar"></button>
-                    <button class="btn-delete" data-id="${maquinario.id}"><img src="/img/trash3.svg" alt="Deletar"></button>
-                </div>
-            `;
+      item.innerHTML = `
+        <h4>${m.nome}</h4>
+        <p><strong>Tipo:</strong> ${m.tipo}</p>
+        <p><strong>Situação:</strong> ${m.situacao}</p>
+        <p><strong>Horas/dia:</strong> ${m.horasTrabalhadasDia}</p>
+      `;
 
-      // Lógica de seleção (mantida do seu código)
-      itemDiv.onclick = () => {
-        document.querySelectorAll(".list-item").forEach(el =>
+      item.onclick = () => {
+        document.querySelectorAll(".machine-item").forEach(el =>
           el.classList.remove("selected")
         );
-        itemDiv.classList.add("selected");
-        maquinarioSelecionado = maquinario.id;
+        item.classList.add("selected");
+        maquinarioSelecionado = m.id;
       };
 
-      listaMaquinariosDiv.appendChild(itemDiv);
+      lista.appendChild(item);
     });
-
-    // DOCUMENTAÇÃO: Chama a função que ativa a lógica de Edição e Deleção
-    anexarEventosBotoesMaquinario();
-
-  } catch (error) {
-    console.error("Erro ao carregar maquinários:", error);
-    listaMaquinariosDiv.innerHTML = `<p class="error-message">Erro ao carregar maquinários. Status: ${error.message}</p>`;
+  } catch (erro) {
+    lista.innerHTML = "<p>Erro ao carregar maquinários.</p>";
   }
 }
 
@@ -565,3 +538,137 @@ const API_PRODUTOS = "http://localhost:8080/produtos";
 
 /* ================================
    1. LISTAR PRODUTOS
+================================*/
+async function carregarProdutos() {
+  const lista = document.getElementById("listaEstoque");
+  lista.innerHTML = "<p>Carregando...</p>";
+
+  try {
+    const resp = await fetch(`${API_PRODUTOS}/listar`);
+    if (!resp.ok) throw new Error("Erro ao buscar produtos");
+
+    const produtos = await resp.json();
+
+    if (produtos.length === 0) {
+      lista.innerHTML = "<p>Nenhum produto cadastrado.</p>";
+      return;
+    }
+
+    // VISUAL IGUAL PROPRIEDADES
+    lista.innerHTML = produtos.map(p => `
+  <div class="property-card">
+      <h4>${p.nomeProduto}</h4>
+      <p><strong>Quantidade:</strong> ${p.quantidade}</p>
+      <p><strong>Tipo:</strong> ${p.tipoProduto}</p>
+      <p><strong>Custo:</strong> R$ ${p.custo}</p>
+      <div class="property-actions">
+          <button onclick="editarProduto(${p.id})">✏️ Editar</button>
+          <button onclick="abrirModalExcluirProduto(${p.id})">🗑 Excluir</button>
+      </div>
+  </div>
+`).join("");
+
+  } catch (error) {
+    lista.innerHTML = "<p style='color:red;'>Erro ao carregar produtos.</p>";
+    console.error(error);
+  }
+}
+
+/* ================================
+   2. ABRIR / FECHAR MODAL EXCLUIR
+================================*/
+function abrirModalExcluirProduto(id) {
+  document.getElementById("deleteProdutoId").value = id;
+  document.getElementById("modalExcluirProduto").style.display = "flex";
+}
+
+function abrirModal(id) {
+  document.getElementById(id).style.display = "flex";
+}
+
+function fecharModal(id) {
+  document.getElementById(id).style.display = "none";
+}
+
+/* ================================
+   3. EDITAR (GET)
+================================*/
+async function editarProduto(id) {
+  try {
+    const resp = await fetch(`${API_PRODUTOS}/${id}`);
+
+    if (!resp.ok) throw new Error("Erro ao buscar produto");
+
+    const p = await resp.json();
+
+    document.getElementById("edit-nomeProduto").value = p.nomeProduto;
+    document.getElementById("edit-quantidade").value = p.quantidade;
+    document.getElementById("edit-tipoProduto").value = p.tipoProduto;
+    document.getElementById("edit-custo").value = p.custo;
+    document.getElementById("edit-observacao").value = p.observacao || "";
+    document.getElementById("modalEditarEstoque").dataset.id = id;
+
+    abrirModal("modalEditarEstoque");
+
+  } catch (e) {
+    alert("Erro ao carregar produto para edição!");
+    console.error(e);
+  }
+}
+
+/* ================================
+   4. SALVAR (PUT)
+================================*/
+document.getElementById("salvarEdicaoEstoqueBtn").addEventListener("click", async () => {
+
+  const id = document.getElementById("modalEditarEstoque").dataset.id;
+
+  const dados = {
+    nomeProduto: document.getElementById("edit-nomeProduto").value,
+    quantidade: parseFloat(document.getElementById("edit-quantidade").value),
+    tipoProduto: document.getElementById("edit-tipoProduto").value,
+    custo: parseFloat(document.getElementById("edit-custo").value),
+    observacao: document.getElementById("edit-observacao").value
+  };
+
+  try {
+    const resp = await fetch(`${API_PRODUTOS}/editar/${id}`, {
+      method: "PUT",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify(dados)
+    });
+
+    if (resp.ok) {
+      fecharModal("modalEditarEstoque");
+      carregarProdutos();
+    } else {
+      alert("Erro ao atualizar produto.");
+    }
+
+  } catch (e) {
+    alert("Erro ao atualizar.");
+    console.error(e);
+  }
+});
+
+async function excluirProduto() {
+  const id = document.getElementById("deleteProdutoId").value;
+
+  try {
+    const resp = await fetch(`${API_PRODUTOS}/excluir/${id}`, {
+      method: "DELETE"
+    });
+
+    if (resp.status === 204) {
+      fecharModal("modalExcluirProduto");
+      carregarProdutos();
+    } else {
+      alert("Erro ao excluir produto.");
+    }
+
+  } catch (e) {
+    alert("Erro ao excluir produto.");
+    console.error(e);
+  }
+}
+
