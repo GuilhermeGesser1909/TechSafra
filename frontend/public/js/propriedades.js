@@ -60,9 +60,37 @@ document.addEventListener("DOMContentLoaded", () => {
             if (!resp.ok) throw new Error("Erro ao buscar propriedade");
             const prop = await resp.json();
 
-            // Preencher modal (certifique-se de que todos os campos existem no HTML)
+            // Preencher modal com os dados da propriedade selecionada
             document.getElementById("edit-nomePropriedade").value = prop.nome || "";
-            // ... outros campos
+            document.getElementById("edit-localizacaoPropriedade").value = prop.localizacao || "";
+            document.getElementById("edit-estado").value = prop.estado || "";
+            document.getElementById("edit-areaHectares").value = prop.areaHectares || 0;
+            document.getElementById("edit-areaCultivavel").value = prop.areaCultivavel || 0;
+            document.getElementById("edit-areaReserva").value = prop.areaReserva || 0;
+
+            document.getElementById("edit-solo").value = prop.solo || "";
+            document.getElementById("edit-topografia").value = prop.topografia || "";
+            document.getElementById("edit-irrigacao").value = prop.irrigacao || "";
+
+            document.getElementById("edit-culturaPrincipal").value = prop.culturaPrincipal || "";
+            document.getElementById("edit-culturaSecundaria").value = prop.culturaSecundaria || "";
+
+            document.getElementById("edit-numTalhoes").value = prop.numTalhoes || 0;
+
+            document.getElementById("edit-responsavel").value = prop.responsavel || "";
+            document.getElementById("edit-telefone").value = prop.telefone || "";
+            document.getElementById("edit-emailContato").value = prop.emailContato || "";
+            document.getElementById("edit-cnpjCpf").value = prop.cnpjCpf || "";
+
+            document.getElementById("edit-cep").value = prop.cep || "";
+            document.getElementById("edit-endereco").value = prop.endereco || "";
+
+            document.getElementById("edit-latitude").value = prop.latitude || "";
+            document.getElementById("edit-longitude").value = prop.longitude || "";
+
+            document.getElementById("edit-observacoes").value = prop.observacoes || "";
+
+
 
             document.getElementById("modalEditarPropriedade").dataset.id = id;
             abrirModal("modalEditarPropriedade");
@@ -72,17 +100,44 @@ document.addEventListener("DOMContentLoaded", () => {
         }
     };
 
-    window.excluirPropriedade = (id) => {
-        document.getElementById("modalExcluir").dataset.id = id;
-        abrirModal("modalExcluir");
-    };
-
     document.getElementById("salvarEdicaoBtn")?.addEventListener("click", async () => {
         const id = document.getElementById("modalEditarPropriedade").dataset.id;
         const dadosAtualizados = {
             nome: document.getElementById("edit-nomePropriedade").value.trim(),
-            // ... outros campos
+            localizacao: document.getElementById("edit-localizacaoPropriedade").value.trim(),
+            estado: document.getElementById("edit-estado").value,
+
+            areaHectares: parseFloat(document.getElementById("edit-areaHectares").value) || 0,
+            areaCultivavel: parseFloat(document.getElementById("edit-areaCultivavel").value) || 0,
+            areaReserva: parseFloat(document.getElementById("edit-areaReserva").value) || 0,
+
+            solo: document.getElementById("edit-solo").value,
+            topografia: document.getElementById("edit-topografia").value,
+            irrigacao: document.getElementById("edit-irrigacao").value,
+
+            culturaPrincipal: document.getElementById("edit-culturaPrincipal").value.trim(),
+            culturaSecundaria: document.getElementById("edit-culturaSecundaria").value.trim(),
+
+            numTalhoes: parseInt(document.getElementById("edit-numTalhoes").value) || 0,
+
+            responsavel: document.getElementById("edit-responsavel").value.trim(),
+            telefone: document.getElementById("edit-telefone").value.trim(),
+            emailContato: document.getElementById("edit-emailContato").value.trim(),
+            cnpjCpf: document.getElementById("edit-cnpjCpf").value.trim(),
+
+            cep: document.getElementById("edit-cep").value.trim(),
+            endereco: document.getElementById("edit-endereco").value.trim(),
+
+            latitude: document.getElementById("edit-latitude").value.trim(),
+            longitude: document.getElementById("edit-longitude").value.trim(),
+
+            observacoes: document.getElementById("edit-observacoes").value.trim(),
+
+            usuarioId: parseInt(usuarioId),
         };
+
+        console.log("Dados atualizados:", dadosAtualizados);
+
         try {
             const resp = await fetch(`${API_URL}/${id}`, {
                 method: "PUT",
@@ -101,6 +156,11 @@ document.addEventListener("DOMContentLoaded", () => {
             alert("Falha ao atualizar.");
         }
     });
+
+    window.excluirPropriedade = (id) => {
+        document.getElementById("modalExcluir").dataset.id = id;
+        abrirModal("modalExcluir");
+    };
 
     document.getElementById("confirmarExclusaoBtn")?.addEventListener("click", async () => {
         const id = document.getElementById("modalExcluir").dataset.id;
