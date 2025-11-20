@@ -1,78 +1,62 @@
 <!DOCTYPE html>
 <html lang="pt-br">
-  <head>
-    <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Nova Análise de Solo - TechSafra</title>
-    <link rel="stylesheet" href="/css/dashboard.css" />
-    <link rel="stylesheet" href="/css/formulariocadastro.css" />
-    <link rel="icon" href="/img/logo.png" />
-  </head>
 
-  <body>
-    <div class="container">
-      <h1>Cadastro de Nova Amostra</h1>
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Nova Análise de Solo - TechSafra</title>
+  <link rel="stylesheet" href="/css/dashboard.css" />
+  <link rel="stylesheet" href="/css/formulariocadastro.css" />
+  <link rel="icon" href="/img/logo.png" />
+</head>
 
-      <form id="formAnaliseSolo">
-        <div>
-          <label for="formAmostra">Nome da Amostra:</label>
-          <input
-            type="text"
-            id="nomeAmostra"
-            name="nomeAmostra"
-            placeholder="Ex: Coleta 01"
-            required
-          />
+<body>
+  <div class="container">
+    <h1>Cadastro de Nova Amostra</h1>
+
+    <div id="mensagem" style="display:none"></div>
+
+    <form id="formAnaliseSolo">
+      <div>
+        <label for="formAmostra">Nome da Amostra:</label>
+        <input type="text" id="nomeAmostra" name="nomeAmostra" placeholder="Ex: Coleta 01" required />
+      </div>
+
+      <div>
+        <label for="cultura">Tipo de analise desejada:</label>
+        <select id="analise" name="analise" required>
+          <option value="">Selecione...</option>
+          <option value="soja">Física</option>
+          <option value="milho">Química</option>
+        </select>
+      </div>
+
+      <div style="display: flex; gap: 70px">
+        <div style="flex: 1">
+          <label for="DataColeta">Data da Coleta:</label>
+          <input type="date" id="dataColeta" name="ataColeta" required />
         </div>
 
-        <div>
-          <label for="cultura">Tipo de analise desejada:</label>
-          <select id="analise" name="analise" required>
-            <option value="">Selecione...</option>
-            <option value="soja">Física</option>
-            <option value="milho">Química</option>
-          </select>
+        <div style="flex: 1">
+          <label for="nivelph">Nível de PH do solo:</label>
+          <input type="number" id="nivelph" name="nivelph" required placeholder="5,5" />
         </div>
+      </div>
+      <div>
+        <label for="observacoes">Principais Nutrientes:</label>
+        <textarea id="observacoes" name="observacoes" placeholder="Ex: Nitrogênio, Fósforo, Potássio..."></textarea>
+      </div>
 
-        <div style="display: flex; gap: 70px">
-          <div style="flex: 1">
-            <label for="DataColeta">Data da Coleta:</label>
-            <input type="date" id="dataColeta" name="ataColeta" required />
-          </div>
+      <div class="button-group">
+        <button type="submit">Salvar Amostra</button>
+        <button type="button" class="secondary" onclick="window.location.href='/template/dashboard.html'">
+          Voltar ao Dashboard
+        </button>
+      </div>
+    </form>
+  </div>
+</body>
 
-          <div style="flex: 1">
-            <label for="nivelph">Nível de PH do solo:</label>
-            <input
-              type="number"
-              id="nivelph"
-              name="nivelph"
-              required
-              placeholder="5,5"
-            />
-          </div>
-        </div>
-        <div>
-          <label for="observacoes">Principais Nutrientes:</label>
-          <textarea
-            id="observacoes"
-            name="observacoes"
-            placeholder="Ex: Nitrogênio, Fósforo, Potássio..."
-          ></textarea>
-        </div>
+<script src="/js/cadastroanalisesolo.js" defer></script>
 
-        <div class="button-group">
-          <button type="submit">Salvar Amostra</button>
-          <button
-            type="button"
-            class="secondary"
-            onclick="window.location.href='/template/dashboard.html'"
-          >
-            Voltar ao Dashboard
-          </button>
-        </div>
-      </form>
-    </div>
-  </body>
-
-  <script src="/js/cadastroanalisesolo.js" defer></script>
 </html>
