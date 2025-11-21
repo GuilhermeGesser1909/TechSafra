@@ -1736,3 +1736,50 @@ body {
   box-shadow: 0 0 14px rgba(231, 76, 60, 0.4);
   transform: none;
 }
+
+/* =======================================
+   REGRAS FINAIS DE ESTILO (MAQUINÁRIO -> PREMIUM)
+   ======================================= */
+
+/* Mudar o Layout da Lista de Maquinário para GRID (igual a properties-list) */
+.machine-list {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+  gap: 20px;
+  margin-top: 20px;
+  padding: 10px;
+}
+
+/* Aplicar o Estilo Premium aos Cards */
+.machine-item,
+.list-item {
+  background: linear-gradient(145deg, #ffffff, #f8fff5);
+  border-radius: 16px;
+  border: 2px solid rgba(99, 194, 98, 0.15);
+  box-shadow: 0 8px 18px rgba(63, 162, 77, 0.12);
+  padding: 20px;
+  transition: transform 0.2s ease, box-shadow 0.25s ease;
+  position: relative;
+  overflow: hidden;
+  margin-bottom: 0;
+}
+
+/* Adicionar a Barra Superior Colorida */
+.machine-item::before,
+.list-item::before {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 8px;
+  background: linear-gradient(90deg, var(--green-700), var(--gold-500));
+  border-radius: 12px 12px 0 0;
+}
+
+/* Efeito Hover */
+.machine-item:hover,
+.list-item:hover {
+  transform: translateY(-6px);
+  box-shadow: 0 12px 24px rgba(63, 162, 77, 0.2);
+}
