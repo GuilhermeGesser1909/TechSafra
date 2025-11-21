@@ -1374,14 +1374,14 @@ body {
   background: #ffffff;
   padding: 18px 20px;
   border-radius: 12px;
-  box-shadow: 0 3px 8px rgba(0,0,0,0.12);
+  box-shadow: 0 3px 8px rgba(0, 0, 0, 0.12);
   border-left: 5px solid #4CAF50;
   transition: transform 0.2s ease, box-shadow 0.2s ease;
 }
 
 .property-card:hover {
   transform: scale(1.02);
-  box-shadow: 0 6px 14px rgba(0,0,0,0.18);
+  box-shadow: 0 6px 14px rgba(0, 0, 0, 0.18);
 }
 
 .property-card h4 {
@@ -1412,53 +1412,55 @@ body {
   color: #1f1f1f;
   padding: 10px 18px;
   border-radius: 10px;
-/* AÇÕES (EDITAR / EXCLUIR) */
-.property-actions {
-  margin-top: 12px;
-  display: flex;
-  gap: 12px;
-}
 
-.property-actions button {
-  padding: 8px 14px;
-  border: none;
-  border-radius: 10px;
-  cursor: pointer;
-  font-family: "Poppins", sans-serif;
-  font-size: 0.95rem;
-  font-weight: 500;
-  display: flex;
-  align-items: center;
-  gap: 6px;
-  transition: 0.2s ease;
-}
+  /* AÇÕES (EDITAR / EXCLUIR) */
+  .property-actions {
+    margin-top: 12px;
+    display: flex;
+    gap: 12px;
+  }
 
-.action-buttons .btn-edit:hover {
-  box-shadow: 0 0 14px rgba(228, 185, 60, 0.5);
-  transform: translateY(-2px);
-}
+  .property-actions button {
+    padding: 8px 14px;
+    border: none;
+    border-radius: 10px;
+    cursor: pointer;
+    font-family: "Poppins", sans-serif;
+    font-size: 0.95rem;
+    font-weight: 500;
+    display: flex;
+    align-items: center;
+    gap: 6px;
+    transition: 0.2s ease;
+  }
 
-/* Botão Excluir */
-.action-buttons .btn-delete {
-  background: linear-gradient(90deg, #d23b3b, #e74c3c);
-  color: #fff;
-  padding: 10px 18px;
-  border-radius: 10px;
-  border: none;
-  cursor: pointer;
-  font-family: "Poppins", sans-serif;
-  font-size: 0.95rem;
-  font-weight: 500;
-  display: flex;
-  align-items: center;
-  gap: 6px;
-  transition: 0.2s ease;
-}
+  .action-buttons .btn-edit:hover {
+    box-shadow: 0 0 14px rgba(228, 185, 60, 0.5);
+    transform: translateY(-2px);
+  }
 
-.action-buttons .btn-delete:hover {
-  box-shadow: 0 0 14px rgba(231, 76, 60, 0.5);
-  transform: translateY(-2px);
-}
+  /* Botão Excluir */
+  .action-buttons .btn-delete {
+    background: linear-gradient(90deg, #d23b3b, #e74c3c);
+    color: #fff;
+    padding: 10px 18px;
+    border-radius: 10px;
+    border: none;
+    cursor: pointer;
+    font-family: "Poppins", sans-serif;
+    font-size: 0.95rem;
+    font-weight: 500;
+    display: flex;
+    align-items: center;
+    gap: 6px;
+    transition: 0.2s ease;
+  }
+
+  .action-buttons .btn-delete:hover {
+    box-shadow: 0 0 14px rgba(231, 76, 60, 0.5);
+    transform: translateY(-2px);
+  }
+
   font-weight: bold;
   font-size: 14px;
   transition: 0.2s;
@@ -1496,7 +1498,7 @@ body {
   left: 0;
   width: 100%;
   height: 100%;
-  background: rgba(0,0,0,0.45);
+  background: rgba(0, 0, 0, 0.45);
   justify-content: center;
   align-items: center;
   z-index: 1000;
@@ -1509,13 +1511,20 @@ body {
   max-width: 420px;
   padding: 25px;
   border-radius: 16px;
-  box-shadow: 0 3px 10px rgba(0,0,0,0.25);
+  box-shadow: 0 3px 10px rgba(0, 0, 0, 0.25);
   animation: fadeIn 0.25s ease;
 }
 
 @keyframes fadeIn {
-  from { opacity: 0; transform: scale(0.85); }
-  to   { opacity: 1; transform: scale(1); }
+  from {
+    opacity: 0;
+    transform: scale(0.85);
+  }
+
+  to {
+    opacity: 1;
+    transform: scale(1);
+  }
 }
 
 .modal-conteudo h2,
@@ -1620,4 +1629,110 @@ body {
 .property-actions .delete-btn:hover {
   box-shadow: 0 0 14px rgba(231, 76, 60, 0.5);
   transform: translateY(-2px);
+}
+
+/* =======================================
+   ESTILOS ESPECÍFICOS PARA MODAIS DE SAFRA
+   (Visual Agro Premium Scoped)
+   ======================================= */
+
+/* 1. Container Principal do Conteúdo (Modal Editar/Excluir) */
+#modalEditarSafra .modal-content,
+#modalExcluirSafra .modal-content {
+  /* Estilos do visual premium que você já tem */
+  background: linear-gradient(145deg, #ffffff, #f9fff6);
+  border: 2px solid rgba(99, 194, 98, 0.15);
+  border-radius: 16px;
+  padding: 28px;
+  box-shadow: 0 20px 40px rgba(0, 0, 0, 0.2);
+  max-height: 85vh;
+  overflow-y: auto;
+  margin: 0;
+  position: relative;
+  animation: fadeInModal 0.3s ease;
+}
+
+/* 2. Título (h3) */
+#modalEditarSafra h3,
+#modalExcluirSafra h3 {
+  font-family: "Poppins", sans-serif;
+  color: var(--green-900);
+  border-bottom: 2px solid rgba(99, 194, 98, 0.2);
+  padding-bottom: 10px;
+  margin-bottom: 20px;
+  font-size: 1.5rem;
+}
+
+/* 3. Estilo dos Labels e Inputs */
+#formEditarSafra label {
+  display: block;
+  /* Garante que o label ocupe sua própria linha */
+  color: var(--green-900);
+  font-weight: 600;
+  margin-top: 10px;
+}
+
+#formEditarSafra input,
+#formEditarSafra textarea {
+  width: 100%;
+  padding: 10px 12px;
+  border-radius: 10px;
+  border: 1.5px solid rgba(99, 194, 98, 0.25);
+  background: #fcfffb;
+  margin-bottom: 12px;
+  font-size: 1rem;
+}
+
+/* Foco */
+#formEditarSafra input:focus,
+#formEditarSafra textarea:focus {
+  border-color: var(--green-500);
+  box-shadow: 0 0 8px rgba(99, 194, 98, 0.3);
+  outline: none;
+}
+
+/* 4. Botão Salvar (do modal de edição) */
+#formEditarSafra .save-btn {
+  width: 100%;
+  margin-top: 20px;
+  background: linear-gradient(90deg, var(--green-500), var(--green-700));
+  color: #fff;
+  padding: 12px 20px;
+  border-radius: 10px;
+  font-weight: 600;
+}
+
+#formEditarSafra .save-btn:hover {
+  box-shadow: 0 0 14px rgba(63, 162, 77, 0.5);
+  transform: none;
+  /* remove transform para evitar quebra no design */
+}
+
+/* 5. Modal de Exclusão (ajuste de largura e botão) */
+#modalExcluirSafra .modal-content {
+  max-width: 350px;
+  /* Mais estreito para exclusão */
+  text-align: center;
+}
+
+#modalExcluirSafra #deleteSafraId {
+  width: 60%;
+  text-align: center;
+  border: 1.5px solid var(--red-500);
+  border-radius: 10px;
+  padding: 10px 12px;
+  margin: 10px auto 20px auto;
+}
+
+#modalExcluirSafra .delete-btn {
+  background: linear-gradient(90deg, var(--red-500), #ff7878);
+  width: 100%;
+  padding: 12px 20px;
+  border-radius: 10px;
+  font-weight: 600;
+}
+
+#modalExcluirSafra .delete-btn:hover {
+  box-shadow: 0 0 14px rgba(231, 76, 60, 0.4);
+  transform: none;
 }

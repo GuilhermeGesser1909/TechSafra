@@ -48,7 +48,10 @@ async function carregarDadosParaEdicao(id) {
   const res = await fetch(`http://localhost:8080/safras/${id}`);
   const safra = await res.json();
 
+  const propriedadeId = safra.propriedadeId || safra.propriedade.id;
+
   document.getElementById("editSafraId").value = safra.id;
+  document.getElementById("editPropriedadeId").value = safra.propriedadeId;
   document.getElementById("editNomeSafra").value = safra.nome;
   document.getElementById("editCultura").value = safra.cultura;
   document.getElementById("editDataInicio").value = safra.dataInicio;
@@ -61,7 +64,7 @@ async function carregarDadosParaEdicao(id) {
 
 
 function abrirModalEditarSafra() {
-  document.getElementById("modalEditarSafra").style.display = "block";
+  document.getElementById("modalEditarSafra").style.display = "flex";
 }
 
 function fecharModal(id) {
@@ -72,8 +75,10 @@ document.getElementById("formEditarSafra").addEventListener("submit", async (e) 
   e.preventDefault();
 
   const id = document.getElementById("editSafraId").value;
+  const propriedadeId = document.getElementById("editPropriedadeId").value;
 
   const safraAtualizada = {
+    propriedadeId: parseInt(propriedadeId),
     nome: document.getElementById("editNomeSafra").value,
     cultura: document.getElementById("editCultura").value,
     dataInicio: document.getElementById("editDataInicio").value,
@@ -98,7 +103,7 @@ document.getElementById("formEditarSafra").addEventListener("submit", async (e) 
 // ===================== EXCLUIR =====================
 
 function abrirModalExcluirSafra() {
-  document.getElementById("modalExcluirSafra").style.display = "block";
+  document.getElementById("modalExcluirSafra").style.display = "flex";
 }
 
 async function confirmarExcluirSafra() {

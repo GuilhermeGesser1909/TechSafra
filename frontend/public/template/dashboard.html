@@ -224,6 +224,37 @@
 
         <div id="listaMaquinarios" class="machine-list"></div>
       </div>
+
+      <div id="modalEditarMaquinario" class="modal" aria-hidden="true">
+    <div class="modal-content large">
+      <span class="close" onclick="fecharModal('modalEditarMaquinario')">&times;</span>
+      <h2>Editar Maquinário</h2>
+      <input type="hidden" id="editMaquinarioId" /> 
+      <div class="modal-body">
+        <div class="form-section">
+          <label>Nome do Maquinário</label><input type="text" id="edit-nomeMaquinario" /> 
+          <label>Tipo de Máquina</label><input type="text" id="edit-tipoMaquinario" />
+          <label>Horas Trabalhadas (dia)</label><input type="number" id="edit-horasTrabalhadasDia" />
+          <label>Horas Previstas Manutenção</label><input type="number" id="edit-horasManutencaoPrevista" />
+          <label>Situação</label><input type="text" id="edit-situacaoMaquinario" />
+          <label>Observações</label><textarea id="edit-obsMaquinario"></textarea>
+        </div>
+        <div class="report-section">
+          <h3>Resumo Atual</h3>
+          <p><strong>Nome:</strong> <span id="resumo-nomeMaquinario">Carregando...</span></p>
+          <p><strong>Tipo:</strong> <span id="resumo-tipoMaquinario">Carregando...</span></p>
+          <p><strong>Situação:</strong> <span id="resumo-situacao">Carregando...</span></p>
+          <p><strong>Manutenção Prevista:</strong> <span id="resumo-manutencao">Carregando...</span></p>
+        </div>
+      </div>
+      <div class="modal-actions">
+        <button class="btn save-btn" onclick="salvarEdicaoMaquinario()">Salvar Alterações</button>
+        <button class="btn cancel-btn" onclick="fecharModal('modalEditarMaquinario')">
+          Cancelar
+        </button>
+      </div>
+    </div>
+  </div>
     </section>
 
 
@@ -474,6 +505,38 @@
           <p>Recomendações: Adicionar 40 kg/ha de NPK 15-15-15</p>
         </div>
       </div>
+
+      <div id="modalEditarAnalise" class="modal" aria-hidden="true">
+    <div class="modal-content large">
+      <span class="close" onclick="fecharModal('modalEditarAnalise')">&times;</span>
+      <h2>Editar Análise do Solo</h2>
+      <div class="modal-body">
+        <div class="form-section">
+          <label>pH</label><input type="text" id="phSolo" />
+          <label>Matéria Orgânica (%)</label><input type="text" id="moSolo" /> <label>Nitrogênio (N)</label><input
+            type="text" id="nSolo" /> <label>Fósforo (P)</label><input type="text" id="pSolo" /> <label>Potássio
+            (K)</label><input type="text" id="kSolo" /> <label>Observações</label><textarea id="obsSolo"></textarea>
+        </div>
+        <div class="report-section">
+          <h3>Resumo Atual</h3>
+          <p><strong>pH:</strong> 6,2</p>
+          <p><strong>Matéria Orgânica:</strong> 3%</p>
+          <p><strong>N:</strong> 18</p>
+          <p><strong>P:</strong> 12</p>
+          <p><strong>K:</strong> 38</p>
+          <p><strong>Última atualização:</strong> 20/10/2025</p>
+        </div>
+      </div>
+      <div class="modal-actions">
+        <button class="btn save-btn" onclick="salvarAnalise()">
+          Salvar Alterações
+        </button>
+        <button class="btn cancel-btn" onclick="fecharModal('modalEditarAnalise')">
+          Cancelar
+        </button>
+      </div>
+    </div>
+  </div>
     </section>
 
     <section id="section7" class="card-section hidden">
@@ -499,6 +562,7 @@
 
       <form id="formEditarSafra">
         <input type="hidden" id="editSafraId">
+        <input type="hidden" id="editPropriedadeId">
 
         <label>Nome:</label>
         <input type="text" id="editNomeSafra" required>
@@ -625,72 +689,6 @@
   <footer class="footer">
     © 2025 TechSafra — Informação e Inovação para o Agronegócio
   </footer>
-
-  
-
-  <div id="modalEditarMaquinario" class="modal" aria-hidden="true">
-    <div class="modal-content large">
-      <span class="close" onclick="fecharModal('modalEditarMaquinario')">&times;</span>
-      <h2>Editar Maquinário</h2>
-      <input type="hidden" id="editMaquinarioId" /> 
-      <div class="modal-body">
-        <div class="form-section">
-          <label>Nome do Maquinário</label><input type="text" id="edit-nomeMaquinario" /> 
-          <label>Tipo de Máquina</label><input type="text" id="edit-tipoMaquinario" />
-          <label>Horas Trabalhadas (dia)</label><input type="number" id="edit-horasTrabalhadasDia" />
-          <label>Horas Previstas Manutenção</label><input type="number" id="edit-horasManutencaoPrevista" />
-          <label>Situação</label><input type="text" id="edit-situacaoMaquinario" />
-          <label>Observações</label><textarea id="edit-obsMaquinario"></textarea>
-        </div>
-        <div class="report-section">
-          <h3>Resumo Atual</h3>
-          <p><strong>Nome:</strong> <span id="resumo-nomeMaquinario">Carregando...</span></p>
-          <p><strong>Tipo:</strong> <span id="resumo-tipoMaquinario">Carregando...</span></p>
-          <p><strong>Situação:</strong> <span id="resumo-situacao">Carregando...</span></p>
-          <p><strong>Manutenção Prevista:</strong> <span id="resumo-manutencao">Carregando...</span></p>
-        </div>
-      </div>
-      <div class="modal-actions">
-        <button class="btn save-btn" onclick="salvarEdicaoMaquinario()">Salvar Alterações</button>
-        <button class="btn cancel-btn" onclick="fecharModal('modalEditarMaquinario')">
-          Cancelar
-        </button>
-      </div>
-    </div>
-  </div>
-
-
-  <div id="modalEditarAnalise" class="modal" aria-hidden="true">
-    <div class="modal-content large">
-      <span class="close" onclick="fecharModal('modalEditarAnalise')">&times;</span>
-      <h2>Editar Análise do Solo</h2>
-      <div class="modal-body">
-        <div class="form-section">
-          <label>pH</label><input type="text" id="phSolo" />
-          <label>Matéria Orgânica (%)</label><input type="text" id="moSolo" /> <label>Nitrogênio (N)</label><input
-            type="text" id="nSolo" /> <label>Fósforo (P)</label><input type="text" id="pSolo" /> <label>Potássio
-            (K)</label><input type="text" id="kSolo" /> <label>Observações</label><textarea id="obsSolo"></textarea>
-        </div>
-        <div class="report-section">
-          <h3>Resumo Atual</h3>
-          <p><strong>pH:</strong> 6,2</p>
-          <p><strong>Matéria Orgânica:</strong> 3%</p>
-          <p><strong>N:</strong> 18</p>
-          <p><strong>P:</strong> 12</p>
-          <p><strong>K:</strong> 38</p>
-          <p><strong>Última atualização:</strong> 20/10/2025</p>
-        </div>
-      </div>
-      <div class="modal-actions">
-        <button class="btn save-btn" onclick="salvarAnalise()">
-          Salvar Alterações
-        </button>
-        <button class="btn cancel-btn" onclick="fecharModal('modalEditarAnalise')">
-          Cancelar
-        </button>
-      </div>
-    </div>
-  </div>
 
   <!-- 🔹 MODAL EXCLUIR -->
   <div id="modalExcluir" class="modal" aria-hidden="true">
