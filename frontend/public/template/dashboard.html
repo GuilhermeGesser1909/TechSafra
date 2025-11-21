@@ -249,20 +249,6 @@
       </div>
     </div>
   </div>
-
-  <div id="modalExcluir" class="modal" aria-hidden="true">
-  <div class="modal-content small">
-    <span class="close" onclick="fecharModal('modalExcluir')">&times;</span>
-    <h2>Confirmar Exclusão</h2>
-    <p>Tem certeza que deseja excluir este item?</p>
-    <div class="modal-actions">
-      <button class="btn save-btn" id="confirmarExclusaoBtn">Sim, Excluir</button>
-      <button class="btn cancel-btn" onclick="fecharModal('modalExcluir')">
-        Cancelar
-      </button>
-    </div>
-  </div>
-</div>
     </section>
 
 
@@ -403,6 +389,22 @@
       <div class="modal-actions">
         <button class="btn save-btn" id="salvarEdicaoBtn">Salvar Alterações</button>
         <button class="btn cancel-btn" onclick="fecharModal('modalEditarPropriedade')">Cancelar</button>
+      </div>
+    </div>
+  </div>
+
+  <!-- 🔹 MODAL EXCLUIR -->
+  <div id="modalExcluir" class="modal" aria-hidden="true">
+    <div class="modal-content small">
+      <span class="close" onclick="fecharModal('modalExcluir')">&times;</span>
+      <h2>Confirmar Exclusão</h2>
+      <p>Tem certeza que deseja excluir esta propriedade?</p>
+      <div class="modal-actions">
+        <!-- ✅ O JS usa este ID -->
+        <button class="btn save-btn" id="confirmarExclusaoBtn">Sim, Excluir</button>
+        <button class="btn cancel-btn" onclick="fecharModal('modalExcluir')">
+          Cancelar
+        </button>
       </div>
     </div>
   </div>
@@ -697,22 +699,6 @@
   <footer class="footer">
     © 2025 TechSafra — Informação e Inovação para o Agronegócio
   </footer>
-
-  <!-- 🔹 MODAL EXCLUIR -->
-  <div id="modalExcluir" class="modal" aria-hidden="true">
-    <div class="modal-content small">
-      <span class="close" onclick="fecharModal('modalExcluir')">&times;</span>
-      <h2>Confirmar Exclusão</h2>
-      <p>Tem certeza que deseja excluir esta propriedade?</p>
-      <div class="modal-actions">
-        <!-- ✅ O JS usa este ID -->
-        <button class="btn save-btn" id="confirmarExclusaoBtn">Sim, Excluir</button>
-        <button class="btn cancel-btn" onclick="fecharModal('modalExcluir')">
-          Cancelar
-        </button>
-      </div>
-    </div>
-  </div>
 
 
   <script src="/js/dashboard.js"></script>
