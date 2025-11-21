@@ -40,10 +40,14 @@ const Maquinarios = {
         return `
       <div class="list-item" data-id="${m.id}">
           <div class="item-details">
-              <span class="item-nome">${m.nome}</span>
-              <span>Tipo: ${m.tipo}</span>
-              <span>Situação: ${m.situacao}</span>
-              <span>Manutenção: ${m.horasManutencaoPrevista}h</span>
+              <h4 class="item-title">${m.nome}</h4> 
+              <div class="detail-grid">
+                  <p><strong>Tipo de Máquina:</strong> ${m.tipo}</p>
+                  <p><strong>Situação:</strong> ${m.situacao}</p>
+                  <p><strong>Horas Trabalhadas (dia):</strong> ${m.horasTrabalhadasDia}h</p>
+                  <p><strong>Manutenção Prevista:</strong> ${m.horasManutencaoPrevista}h</p>
+              </div>
+              <p class="item-obs"><strong>Observações:</strong> ${m.observacoes || 'Nenhuma.'}</p>
           </div>
           <div class="action-buttons">
               <button class="btn edit-btn" data-edit="${m.id}"><i class="fas fa-edit"></i> Editar</button>
