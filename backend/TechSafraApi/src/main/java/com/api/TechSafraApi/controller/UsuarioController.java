@@ -11,7 +11,7 @@ import java.util.Map;
 
 @RestController
 @RequestMapping("/usuarios")
-@CrossOrigin(origins = "*") // libera para o front acessar
+@CrossOrigin(origins = "*") 
 public class UsuarioController {
 
     private final UsuarioService usuarioService;
@@ -21,7 +21,6 @@ public class UsuarioController {
         this.usuarioService = usuarioService;
     }
 
-    // 🔹 Cadastrar novo usuário
     @PostMapping("/cadastrar")
     public ResponseEntity<String> cadastrar(@RequestBody Map<String, String> body) {
         String nome = body.get("nome");
@@ -39,7 +38,7 @@ public class UsuarioController {
     }
 
     @PostMapping("/login")
-    @CrossOrigin(origins = "*") // ⚠️ garante que o front consiga acessar
+    @CrossOrigin(origins = "*")
     public ResponseEntity<?> login(@RequestBody Map<String, String> body) {
         String email = body.get("email");
         String senha = body.get("senha");
@@ -52,7 +51,6 @@ public class UsuarioController {
             return ResponseEntity.status(HttpStatus.UNAUTHORIZED).body(Map.of("erro", resultado));
         }
 
-        // 🔹 Aqui você pega o usuário autenticado e retorna seus dados
         Usuario usuario = usuarioService.buscarPorEmail(email);
         return ResponseEntity.ok(Map.of(
             "id", usuario.getId(),
@@ -61,14 +59,11 @@ public class UsuarioController {
         ));
     }
 
-
-    // 🔹 (Opcional) Buscar todos os usuários - útil pra testar
     @GetMapping
     public ResponseEntity<?> listarTodos() {
         return ResponseEntity.ok(usuarioService.listarTodos());
     }
 
-    // 🔹 (Opcional) Buscar usuário por ID
     @GetMapping("/{id}")
     public ResponseEntity<Usuario> buscarPorId(@PathVariable Long id) {
         Usuario usuario = usuarioService.buscarPorId(id);

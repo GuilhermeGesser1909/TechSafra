@@ -1,8 +1,3 @@
-// ================================
-// HOME.JS — TechSafra
-// ================================
-
-// 👋 Saudação personalizada
 function saudacaoPersonalizada() {
   const agora = new Date();
   const hora = agora.getHours();
@@ -21,10 +16,9 @@ function saudacaoPersonalizada() {
   if (mensagemDiaEl) mensagemDiaEl.textContent = "Sua produção na palma de suas mãos!";
 }
 
-// 💰 Cotações - usando links reais do CEPEA
 function carregarCotacoes() {
   const grid = document.getElementById("cotacoes-grid");
-  grid.innerHTML = ""; // limpa antes de popular
+  grid.innerHTML = "";
 
   const dados = [
     { produto: "Soja", url: "https://www.cepea.esalq.usp.br/br/indicador/soja.aspx" },
@@ -45,10 +39,7 @@ function carregarCotacoes() {
   });
 }
 
-// Chamar assim que a página carregar
 document.addEventListener("DOMContentLoaded", carregarCotacoes);
-
-// Noticias
 
 async function carregarNoticiasAgro() {
   const box = document.getElementById("noticias-box");
@@ -60,7 +51,7 @@ async function carregarNoticiasAgro() {
 
     box.innerHTML = "";
 
-    const noticias = dados.articles.slice(0, 5); // só as 5 primeiras
+    const noticias = dados.articles.slice(0, 5);
 
     noticias.forEach(noticia => {
       const li = document.createElement("li");
@@ -77,8 +68,6 @@ async function carregarNoticiasAgro() {
     box.innerHTML = "<li>Erro ao carregar notícias.</li>";
   }
 }
-
-//Curiosidades
 
 function carregarCuriosidades() {
   const curiosidades = [
@@ -99,14 +88,12 @@ function carregarCuriosidades() {
   });
 }
 
-// 🚪 Logout
 function logout() {
   localStorage.removeItem("loggedUser");
   sessionStorage.removeItem("usuarioLogado");
   window.location.href = "/PaginaInicial.html";
 }
 
-// Inicialização
 window.addEventListener("DOMContentLoaded", () => {
   saudacaoPersonalizada();
   carregarCotacoes();

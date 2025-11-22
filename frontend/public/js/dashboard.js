@@ -15,7 +15,6 @@ function fecharModal(id) {
   modal.setAttribute("aria-hidden", "true");
 }
 
-// Fecha modal ao clicar fora
 window.addEventListener("click", (event) => {
   if (event.target.classList.contains("modal")) {
     event.target.style.display = "none";

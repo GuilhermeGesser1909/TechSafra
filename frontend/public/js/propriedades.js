@@ -40,7 +40,6 @@ document.addEventListener("DOMContentLoaded", () => {
                 </div>
             `).join("");
 
-            // Event listeners dinâmicos
             lista.querySelectorAll(".edit-btn").forEach(btn => {
                 btn.addEventListener("click", () => editarPropriedade(btn.dataset.id));
             });
@@ -60,7 +59,6 @@ document.addEventListener("DOMContentLoaded", () => {
             if (!resp.ok) throw new Error("Erro ao buscar propriedade");
             const prop = await resp.json();
 
-            // Preencher modal com os dados da propriedade selecionada
             document.getElementById("edit-nomePropriedade").value = prop.nome || "";
             document.getElementById("edit-localizacaoPropriedade").value = prop.localizacao || "";
             document.getElementById("edit-estado").value = prop.estado || "";

@@ -17,19 +17,16 @@ public class AnaliseSoloController {
         this.service = service;
     }
 
-    //  Criar análise
     @PostMapping
     public ResponseEntity<AnaliseSoloModel> criarAnalise(@RequestBody AnaliseSoloModel analise) {
         return ResponseEntity.ok(service.criarAnalise(analise));
     }
 
-    //  Listar todas as análises
     @GetMapping
     public ResponseEntity<List<AnaliseSoloModel>> listarAnalises() {
         return ResponseEntity.ok(service.listarAnalises());
     }
 
-    //  Atualizar uma análise por ID
     @PutMapping("/{id}")
     public ResponseEntity<AnaliseSoloModel> atualizarAnalise(
             @PathVariable UUID id,
@@ -39,7 +36,6 @@ public class AnaliseSoloController {
                 .orElse(ResponseEntity.notFound().build());
     }
 
-    //  Apagar uma análise por ID
     @DeleteMapping("/{id}")
     public ResponseEntity<Void> apagarAnalise(@PathVariable UUID id) {
         service.apagarAnalise(id);
