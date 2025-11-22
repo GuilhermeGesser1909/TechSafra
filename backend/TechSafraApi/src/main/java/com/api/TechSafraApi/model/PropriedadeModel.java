@@ -79,16 +79,13 @@ public class PropriedadeModel implements Serializable {
     @Column(columnDefinition = "TEXT")
     private String observacoes;
 
-    // 🔹 Relacionamento com o usuário (muitas propriedades -> um usuário)
     @ManyToOne
     @JoinColumn(name = "usuario_id", nullable = false)
-    @JsonIgnoreProperties({"senha", "email", "cpf"}) // não manda dados sensíveis
+    @JsonIgnoreProperties({"senha", "email", "cpf"})
     private Usuario usuario;
 
-    // 🔹 Construtores
     public PropriedadeModel() {}
 
- // 🔹 Getters e Setters
     public Long getId() { return id; }
     public void setId(Long id) { this.id = id; }
 

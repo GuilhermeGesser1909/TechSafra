@@ -4,9 +4,6 @@ document.addEventListener("DOMContentLoaded", () => {
 
 const API_PRODUTOS = "http://localhost:8080/produtos";
 
-/* ================================
-   1. LISTAR PRODUTOS
-================================*/
 async function carregarProdutos() {
     const lista = document.getElementById("listaEstoque");
     lista.innerHTML = "<p>Carregando...</p>";
@@ -22,7 +19,6 @@ async function carregarProdutos() {
             return;
         }
 
-        // VISUAL IGUAL PROPRIEDADES
         lista.innerHTML = produtos.map(p => `
   <div class="property-card">
       <h4>${p.nomeProduto}</h4>
@@ -42,9 +38,6 @@ async function carregarProdutos() {
     }
 }
 
-/* ================================
-   2. ABRIR / FECHAR MODAL EXCLUIR
-================================*/
 function abrirModalExcluirProduto(id) {
     document.getElementById("deleteProdutoId").value = id;
     document.getElementById("modalExcluirProduto").style.display = "flex";
@@ -58,9 +51,6 @@ function fecharModal(id) {
     document.getElementById(id).style.display = "none";
 }
 
-/* ================================
-   3. EDITAR (GET)
-================================*/
 async function editarProduto(id) {
     try {
         const resp = await fetch(`${API_PRODUTOS}/${id}`);
@@ -84,9 +74,6 @@ async function editarProduto(id) {
     }
 }
 
-/* ================================
-   4. SALVAR (PUT)
-================================*/
 document.getElementById("salvarEdicaoEstoqueBtn").addEventListener("click", async () => {
 
     const id = document.getElementById("modalEditarEstoque").dataset.id;

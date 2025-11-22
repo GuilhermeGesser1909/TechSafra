@@ -51,7 +51,6 @@ document.addEventListener("DOMContentLoaded", () => {
     msg.style.marginBottom = "15px";
     msg.style.borderRadius = "6px";
 
-    // Remove após 5 segundos
     setTimeout(() => {
       msg.style.display = "none";
     }, 5000);

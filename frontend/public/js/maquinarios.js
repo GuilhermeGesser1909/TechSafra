@@ -1,7 +1,3 @@
-// ===============================
-//  CRUD MAQUINÁRIO (VERSÃO RESUMIDA)
-// ===============================
-
 document.addEventListener("DOMContentLoaded", () => Maquinarios.init());
 
 const Maquinarios = {
@@ -13,7 +9,6 @@ const Maquinarios = {
         this.load();
     },
 
-    // READ -------------------------
     async load() {
         this.elLista.innerHTML = "<p>Carregando maquinários...</p>";
 
@@ -35,7 +30,6 @@ const Maquinarios = {
         }
     },
 
-    // Template do item
     card(m) {
         return `
       <div class="list-item" data-id="${m.id}">
@@ -57,10 +51,8 @@ const Maquinarios = {
     `;
     },
 
-    // EVENTOS ----------------------
     attachEvents() {
 
-        // Seleção
         document.querySelectorAll(".list-item").forEach(el => {
             el.onclick = () => {
                 document.querySelectorAll(".list-item").forEach(i => i.classList.remove("selected"));
@@ -69,7 +61,6 @@ const Maquinarios = {
             };
         });
 
-        // Editar
         document.querySelectorAll("[data-edit]").forEach(btn =>
             btn.onclick = e => {
                 e.stopPropagation();
@@ -77,7 +68,6 @@ const Maquinarios = {
             }
         );
 
-        // Excluir
         document.querySelectorAll("[data-del]").forEach(btn =>
             btn.onclick = e => {
                 e.stopPropagation();
@@ -86,7 +76,6 @@ const Maquinarios = {
         );
     },
 
-    // BUSCAR PARA EDIÇÃO --------------------
     async loadEdit(id) {
         try {
             const resp = await fetch(`${this.api}/${id}`);
@@ -113,7 +102,6 @@ const Maquinarios = {
         }
     },
 
-    // DELETE -----------------------
     async delete(id) {
         if (!confirm("Tem certeza que deseja excluir?")) return;
 
@@ -130,7 +118,6 @@ const Maquinarios = {
         }
     },
 
-    // UPDATE -----------------------
     async save() {
         const id = document.getElementById("editMaquinarioId").value;
 
@@ -160,8 +147,6 @@ const Maquinarios = {
             alert("Erro de rede");
             console.error(e);
         }
-
-        // SECAO MAQUINARIO 
 
         document.addEventListener("DOMContentLoaded", () => {
             carregarMaquinarios();
@@ -210,7 +195,6 @@ const Maquinarios = {
             }
         };
 
-        // Disponibiliza no global para o botão do modal
         window.salvarEdicaoMaquinario = () => Maquinarios.save();
         function abrirModal(id) {
             const modal = document.getElementById(id);
