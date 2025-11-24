@@ -5,7 +5,7 @@
   --green-900: #174e1e;
   --green-700: #3fa34d;
   --green-500: #63c262;
-  --gold-500: #3fa34d;
+  --gold-500: #e4b93c;
   --red-500: #e74c3c;
   --bg-light: #f5f8f3;
   --text-dark: #1f3324;
@@ -694,7 +694,7 @@ body {
   /* permite rolar o conteúdo */
   scrollbar-width: thin;
   /* rolagem mais discreta */
-  scrollbar-color: #8bc34a #f0f0f0;
+  scrollbar-color: #e4b93c #f0f0f0;
   /* cor do scroll */
 }
 
@@ -1468,12 +1468,12 @@ body {
 
 /* BOTÃO EDITAR */
 .property-actions button:first-child {
-  background: #4caf50;
+  background: #e4b93c;
   color: white;
 }
 
 .property-actions button:first-child:hover {
-  background: #4caf50;
+  background: #dcaa16;
 }
 
 /* BOTÃO EXCLUIR */
