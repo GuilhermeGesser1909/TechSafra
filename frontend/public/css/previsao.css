@@ -122,7 +122,7 @@
 }
 
 #section2 h3 {
-    font-size: 24px;
+  font-size: 24px;
 }
 
 /* ===== ÍCONES COLORIDOS ===== */
@@ -148,4 +148,13 @@
 #alert img {
   width: 20px;
   margin-top: 20px;
+}
+
+/* ALTERAÇÃO DE IMAGEM DE FUNDO */
+
+#weather-background {
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
+  border-radius: 20px;
 }
