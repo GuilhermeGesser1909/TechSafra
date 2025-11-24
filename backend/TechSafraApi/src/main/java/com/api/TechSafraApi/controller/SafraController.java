@@ -20,28 +20,24 @@ public class SafraController {
         this.service = service;
     }
 
-    // Criar nova safra
     @PostMapping
     public ResponseEntity<SafraResponseDto> criar(@RequestBody SafraRequestDto dto) {
         SafraResponseDto criado = service.criar(dto);
         return ResponseEntity.status(HttpStatus.CREATED).body(criado);
     }
 
-    // Listar todas as safras
     @GetMapping
     public ResponseEntity<List<SafraResponseDto>> listar() {
         List<SafraResponseDto> lista = service.listarTodos();
         return ResponseEntity.ok(lista);
     }
 
-    // Buscar por id
     @GetMapping("/{id}")
     public ResponseEntity<SafraResponseDto> buscar(@PathVariable Long id) {
         SafraResponseDto dto = service.buscarPorId(id);
         return ResponseEntity.ok(dto);
     }
 
-    // Atualizar safra
     @PutMapping("/{id}")
     public ResponseEntity<SafraResponseDto> atualizar(@PathVariable Long id,
                                                       @RequestBody SafraRequestDto dto) {
@@ -49,7 +45,6 @@ public class SafraController {
         return ResponseEntity.ok(atualizado);
     }
 
-    // Excluir safra
     @DeleteMapping("/{id}")
     public ResponseEntity<Void> excluir(@PathVariable Long id) {
         service.deletar(id);

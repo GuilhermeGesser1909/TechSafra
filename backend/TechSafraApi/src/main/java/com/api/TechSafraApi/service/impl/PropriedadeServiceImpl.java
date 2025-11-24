@@ -24,26 +24,22 @@ public class PropriedadeServiceImpl implements PropriedadeService {
         this.usuarioRepository = usuarioRepository;
     }
 
-    // 🔹 Listar todas as propriedades
     @Override
     public List<PropriedadeModel> listarTodas() {
         return propriedadeRepository.findAll();
     }
 
-    // 🔹 Salvar diretamente um model (usado internamente)
     @Override
     public PropriedadeModel salvar(PropriedadeModel propriedade) {
         return propriedadeRepository.save(propriedade);
     }
 
-    // 🔹 Buscar uma propriedade pelo ID
     @Override
     public PropriedadeModel buscarPorId(Long id) {
         return propriedadeRepository.findById(id)
                 .orElseThrow(() -> new RuntimeException("Propriedade não encontrada com ID: " + id));
     }
 
-    // 🔹 Deletar uma propriedade
     @Override
     public void deletar(Long id) {
         if (!propriedadeRepository.existsById(id)) {
@@ -52,19 +48,15 @@ public class PropriedadeServiceImpl implements PropriedadeService {
         propriedadeRepository.deleteById(id);
     }
 
-    // 🔹 Salvar a partir do DTO (requisição vinda do controller)
     @Override
     public PropriedadeModel salvar(PropriedadeDto dto) {
-        // Validação básica
         if (dto.usuarioId() == null) {
             throw new IllegalArgumentException("O ID do usuário é obrigatório para cadastrar uma propriedade.");
         }
 
-        // Busca o usuário dono da propriedade
         Usuario usuario = usuarioRepository.findById(dto.usuarioId())
                 .orElseThrow(() -> new RuntimeException("Usuário não encontrado com ID: " + dto.usuarioId()));
 
-        // Cria o modelo a partir do DTO
         PropriedadeModel model = new PropriedadeModel();
         model.setNome(dto.nome());
         model.setLocalizacao(dto.localizacao());
@@ -87,9 +79,8 @@ public class PropriedadeServiceImpl implements PropriedadeService {
         model.setLatitude(dto.latitude());
         model.setLongitude(dto.longitude());
         model.setObservacoes(dto.observacoes());
-        model.setUsuario(usuario); // vínculo com usuário
+        model.setUsuario(usuario);
 
-        // Salva e retorna o objeto persistido
         return propriedadeRepository.save(model);
     }
     
@@ -97,7 +88,6 @@ public class PropriedadeServiceImpl implements PropriedadeService {
     public PropriedadeModel atualizar(Long id, PropriedadeDto dto) {
         PropriedadeModel existente = buscarPorId(id);
 
-        // Atualiza todos os campos básicos
         existente.setNome(dto.nome());
         existente.setLocalizacao(dto.localizacao());
         existente.setEstado(dto.estado());
@@ -120,7 +110,6 @@ public class PropriedadeServiceImpl implements PropriedadeService {
         existente.setLongitude(dto.longitude());
         existente.setObservacoes(dto.observacoes());
 
-        // Atualiza o usuário, se necessário
         if (dto.usuarioId() != null && 
             (existente.getUsuario() == null || !existente.getUsuario().getId().equals(dto.usuarioId()))) {
             Usuario usuario = usuarioRepository.findById(dto.usuarioId())

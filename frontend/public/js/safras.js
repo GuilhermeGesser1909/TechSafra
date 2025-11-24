@@ -1,10 +1,6 @@
-//CRUD DE SAFRAS
-
 document.addEventListener("DOMContentLoaded", () => {
   carregarSafras();
 });
-
-// ===================== LISTAR =====================
 
 async function carregarSafras() {
   const lista = document.getElementById("listaSafras");
@@ -40,8 +36,6 @@ async function carregarSafras() {
   }
 }
 
-// ===================== EDITAR =====================
-
 async function carregarDadosParaEdicao(id) {
   abrirModalEditarSafra();
 
@@ -61,7 +55,6 @@ async function carregarDadosParaEdicao(id) {
   document.getElementById("editCustos").value = safra.custos;
   document.getElementById("editObservacoes").value = safra.observacoes ?? "";
 }
-
 
 function abrirModalEditarSafra() {
   document.getElementById("modalEditarSafra").style.display = "flex";
@@ -100,8 +93,6 @@ document.getElementById("formEditarSafra").addEventListener("submit", async (e) 
   alert("Safra atualizada com sucesso!");
 });
 
-// ===================== EXCLUIR =====================
-
 function abrirModalExcluirSafra() {
   document.getElementById("modalExcluirSafra").style.display = "flex";
 }
@@ -118,8 +109,6 @@ async function confirmarExcluirSafra() {
   alert("Safra excluída!");
 }
 
-// HIDDEN 
-
 function mostrarSection(id) {
   document.querySelectorAll(".card-section").forEach(secao => {
     secao.classList.add("hidden");
@@ -132,24 +121,19 @@ document.querySelectorAll(".sidebar nav a").forEach(link => {
   link.addEventListener("click", e => {
     e.preventDefault();
 
-    // Remove "active" de todos
     document.querySelectorAll(".sidebar nav a").forEach(a => a.classList.remove("active"));
 
-    // Ativa o clicado
     link.classList.add("active");
 
-    // Esconde todas as sections
     document.querySelectorAll(".card-section").forEach(secao => {
       secao.classList.add("hidden");
     });
 
-    // Mostra a section alvo
     const alvo = link.getAttribute("data-target");
     document.getElementById(alvo).classList.remove("hidden");
   });
 });
 
-// Abre automaticamente a seção 1 ao carregar a página
 window.addEventListener("load", () => {
   document.querySelector('[data-target="section1"]').click();
 });

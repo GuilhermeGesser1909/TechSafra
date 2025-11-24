@@ -1,6 +1,5 @@
 const apiKey = "e2c52125e70b3fc87ef41d80f29f37fd";
 
-// Elementos principais
 const form = document.getElementById("search");
 const cityInput = document.getElementById("city_Name");
 const title = document.getElementById("title");
@@ -13,16 +12,13 @@ const wind = document.getElementById("wind");
 const tempImg = document.getElementById("temp_img");
 const forecastGrid = document.getElementById("forecast-grid");
 
-// Função principal para buscar e mostrar previsão
 async function buscarPrevisao(cidade = "Blumenau") {
   try {
-    // 🔹 1️⃣ — Dados do clima atual
     const urlAtual = `https://api.openweathermap.org/data/2.5/weather?q=${cidade}&units=metric&lang=pt_br&appid=${apiKey}`;
     const respAtual = await fetch(urlAtual);
     if (!respAtual.ok) throw new Error("Cidade não encontrada.");
     const dadosAtual = await respAtual.json();
 
-    // Atualiza dados principais
     title.textContent = `${dadosAtual.name}, ${dadosAtual.sys.country}`;
     tempValue.innerHTML = `${Math.round(dadosAtual.main.temp)} <sup>°C</sup>`;
     tempDesc.textContent = dadosAtual.weather[0].description;
@@ -31,11 +27,9 @@ async function buscarPrevisao(cidade = "Blumenau") {
     humidity.textContent = `${dadosAtual.main.humidity}%`;
     wind.textContent = `${Math.round(dadosAtual.wind.speed * 3.6)} km/h`; // m/s → km/h
 
-    // Define o ícone principal
-    const icone = dadosAtual.weather[0].icon; // ex: "10d"
+    const icone = dadosAtual.weather[0].icon; 
     tempImg.src = `https://openweathermap.org/img/wn/${icone}@2x.png`;
 
-    // 🔹 2️⃣ — Previsão 5 dias
     const urlPrevisao = `https://api.openweathermap.org/data/2.5/forecast?q=${cidade}&units=metric&lang=pt_br&appid=${apiKey}`;
     const respPrev = await fetch(urlPrevisao);
     const dadosPrev = await respPrev.json();
@@ -47,19 +41,16 @@ async function buscarPrevisao(cidade = "Blumenau") {
   }
 }
 
-// Exibe previsão resumida para 5 dias (média diária)
 function mostrarPrevisao5Dias(lista) {
-  forecastGrid.innerHTML = ""; // limpa anterior
+  forecastGrid.innerHTML = "";
   const dias = {};
 
-  // Agrupa por data
   lista.forEach((item) => {
     const data = item.dt_txt.split(" ")[0];
     if (!dias[data]) dias[data] = [];
     dias[data].push(item);
   });
 
-  // Cria cards simples por dia
   Object.keys(dias)
     .slice(0, 5)
     .forEach((data) => {
@@ -85,12 +76,10 @@ function mostrarPrevisao5Dias(lista) {
     });
 }
 
-// Evento do formulário
 form.addEventListener("submit", (e) => {
   e.preventDefault();
   const cidade = cityInput.value.trim();
   if (cidade) buscarPrevisao(cidade);
 });
 
-// Busca inicial padrão
 buscarPrevisao("Blumenau");
