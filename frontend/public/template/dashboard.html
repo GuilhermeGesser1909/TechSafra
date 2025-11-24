@@ -210,26 +210,45 @@
     <section id="section3" class="card-section hidden">
       <div class="card">
         <h3>🚜 Status do Maquinário</h3>
-
-    <div class="card-actions">
-      <a class="btn add-btn" href="/template/cadastromaquinario.html">
-        <i class="fas fa-plus"></i> Novo Maquinário
-      </a>
-    </div>
         <div class="card-actions">
           <a class="btn add-btn" href="/template/cadastromaquinario.html">
             <i class="fas fa-plus"></i> Novo Maquinário
           </a>
-          <button class="btn edit-btn" onclick="editarSelecionado()">
-            Editar
-          </button>
-          <button class="btn delete-btn" onclick="deletarSelecionado()">
-            Excluir
-          </button>
         </div>
 
         <div id="listaMaquinarios" class="machine-list"></div>
       </div>
+
+      <div id="modalEditarMaquinario" class="modal" aria-hidden="true">
+    <div class="modal-content large">
+      <span class="close" onclick="fecharModal('modalEditarMaquinario')">&times;</span>
+      <h2>Editar Maquinário</h2>
+      <input type="hidden" id="editMaquinarioId" /> 
+      <div class="modal-body">
+        <div class="form-section">
+          <label>Nome do Maquinário</label><input type="text" id="edit-nomeMaquinario" /> 
+          <label>Tipo de Máquina</label><input type="text" id="edit-tipoMaquinario" />
+          <label>Horas Trabalhadas (dia)</label><input type="number" id="edit-horasTrabalhadasDia" />
+          <label>Horas Previstas Manutenção</label><input type="number" id="edit-horasManutencaoPrevista" />
+          <label>Situação</label><input type="text" id="edit-situacaoMaquinario" />
+          <label>Observações</label><textarea id="edit-obsMaquinario"></textarea>
+        </div>
+        <div class="report-section">
+          <h3>Resumo Atual</h3>
+          <p><strong>Nome:</strong> <span id="resumo-nomeMaquinario">Carregando...</span></p>
+          <p><strong>Tipo:</strong> <span id="resumo-tipoMaquinario">Carregando...</span></p>
+          <p><strong>Situação:</strong> <span id="resumo-situacao">Carregando...</span></p>
+          <p><strong>Manutenção Prevista:</strong> <span id="resumo-manutencao">Carregando...</span></p>
+        </div>
+      </div>
+      <div class="modal-actions">
+        <button class="btn save-btn" onclick="salvarEdicaoMaquinario()">Salvar Alterações</button>
+        <button class="btn cancel-btn" onclick="fecharModal('modalEditarMaquinario')">
+          Cancelar
+        </button>
+      </div>
+    </div>
+  </div>
     </section>
 
 
@@ -247,215 +266,7 @@
           <p>Carregando propriedades...</p>
         </div>
       </div>
-    </section>
 
-    <section id="section5" class="card-section hidden">
-  <div class="card">
-    <h3>📦 Estoque de Insumos</h3>
-
-    <div class="card-actions">
-      <button class="btn add-btn" onclick="location.href='./cadastroproduto.html'">
-        <i class="fas fa-plus"></i> Adicionar Insumos
-      </button>
-    </div>
-
-    <!-- LISTA DE PRODUTOS (VISUAL IGUAL A PROPRIEDADES) -->
-    <div id="listaEstoque" class="properties-list">
-      <p>Carregando estoque...</p>
-    </div>
-  </div>
-
-  <!-- MODAL EDITAR -->
-  <div id="modalEditarEstoque" class="modal">
-    <div class="modal-conteudo">
-      <h2>Editar Produto do Estoque</h2>
-
-      <label>Nome do Produto</label>
-      <input type="text" id="edit-nomeProduto">
-
-      <label>Quantidade</label>
-      <input type="number" id="edit-quantidade">
-
-      <label>Tipo do Produto</label>
-      <input type="text" id="edit-tipoProduto">
-
-      <label>Custo</label>
-      <input type="number" id="edit-custo" step="0.01">
-
-      <label>Observação</label>
-      <textarea id="edit-observacao"></textarea>
-
-      <div class="modal-buttons">
-        <button onclick="fecharModal('modalEditarEstoque')" class="btn-cancelar">
-          Cancelar
-        </button>
-        <button id="salvarEdicaoEstoqueBtn" class="btn-salvar">
-          Salvar
-        </button>
-      </div>
-    </div>
-  </div>
-
-  <!-- MODAL EXCLUIR -->
-  <div id="modalExcluirProduto" class="modal">
-    <div class="modal-content">
-      <h2>Excluir Produto</h2>
-      <p>Tem certeza que deseja excluir este produto?</p>
-
-      <input type="hidden" id="deleteProdutoId">
-
-      <div class="modal-buttons">
-        <button onclick="fecharModal('modalExcluirProduto')" class="btn-cancelar">
-          Cancelar
-        </button>
-        <button class="btnConfirmar" onclick="excluirProduto()">
-          Excluir
-        </button>
-      </div>
-    </div>
-  </div>
-</section>
-
-
-
-    <section id="section6" class="card-section hidden">
-      <div class="card">
-        <h3>🧪 Análise de Solo</h3>
-
-        <div class="card-actions">
-          <button class="btn add-btn" onclick="location.href='/template/cadastroanalisesolo.html'">
-            + Nova Análise
-          </button>
-          <button class="btn edit-btn" onclick="abrirModal('modalEditarAnalise')">
-            Editar
-          </button>
-          <button class="btn delete-btn" onclick="abrirModal('modalExcluir')">
-            Excluir
-          </button>
-        </div>
-
-        <div class="analysis-item">
-          <h4>Análise - Fazenda São João</h4>
-          <p>Data: 10/09/2023</p>
-          <p>
-            pH: 6.5 | Nitrogênio: 20 mg/kg | Fósforo: 15 mg/kg | Potássio: 120
-            mg/kg
-          </p>
-          <p>Recomendações: Adicionar 50 kg/ha de NPK 20-10-10</p>
-        </div>
-
-        <div class="analysis-item">
-          <h4>Análise - Rancho das Orquídeas</h4>
-          <p>Data: 05/08/2023</p>
-          <p>
-            pH: 5.8 | Nitrogênio: 18 mg/kg | Fósforo: 10 mg/kg | Potássio: 100
-            mg/kg
-          </p>
-          <p>Recomendações: Adicionar 40 kg/ha de NPK 15-15-15</p>
-        </div>
-      </div>
-    </section>
-
-    <section id="section7" class="card-section hidden">
-      <div class="card">
-        <h3>📅 Planejamento de Safras</h3>
-
-        <div class="card-actions">
-          <button class="btn add-btn" onclick="location.href='/template/cadastrosafra.html'">
-            + Nova Safra
-          </button>
-        </div>
-
-        <div id="listaSafras">
-          <!-- As safras serão carregadas automaticamente via JS -->
-        </div>
-      </div>
-    </section>
-
-
-
-    <section id="section8" class="card-section hidden">
-      <div class="card">
-        <h3>⚠️ Alertas e Notificações</h3>
-
-        <div class="card-actions">
-          <button class="btn mark-read-btn">
-            <i class="fas fa-check"></i> Marcar todas como lidas
-          </button>
-          <button class="btn settings-btn">
-            <i class="fas fa-cog"></i> Configurações
-          </button>
-        </div>
-
-        <div class="alert-item critical">
-          <h4>Alerta Crítico: Falta de Combustível</h4>
-          <p>Data: 20/09/2023 14:30</p>
-          <p>
-            O nível de combustível está abaixo de 15%. Reabasteça
-            imediatamente para evitar paralisações.
-          </p>
-        </div>
-
-        <div class="alert-item warning">
-          <h4>Aviso: Manutenção do Trator</h4>
-          <p>Data: 18/09/2023 09:00</p>
-          <p>
-            O trator John Deere 5075E está próximo da próxima manutenção.
-            Agende uma revisão em breve.
-          </p>
-        </div>
-
-        <div class="alert-item info">
-          <h4>Notificação: Nova Análise de Solo Disponível</h4>
-          <p>Data: 15/09/2023 16:45</p>
-          <p>
-            A análise de solo para a Fazenda São João foi concluída. Verifique
-            os resultados e recomendações.
-          </p>
-        </div>
-      </div>
-    </section>
-
-    <section id="section9" class="card-section hidden">
-      <div class="card">
-        <h3>📑 Relatórios e Estatísticas</h3>
-
-        <div class="card-actions">
-          <a href="/template/relatorio.html" class="btn generate-report-btn"><i class="fas fa-file-alt"></i> Gerar Novo
-            Relatório</a>
-          <button class="btn export-btn">
-            <i class="fas fa-file-export"></i> Exportar Dados
-          </button>
-        </div>
-
-        <div class="report-item">
-          <h4>Relatório Mensal - Setembro 2023</h4>
-          <p>Data de Geração: 30/09/2023</p>
-          <p>
-            Resumo: Produtividade de milho aumentou 10% em relação ao mês
-            anterior. Custos com insumos reduziram 5%.
-          </p>
-          <a href="#" class="view-report-link">Ver Relatório Completo</a>
-        </div>
-
-        <div class="report-item">
-          <h4>Relatório Anual - 2022</h4>
-          <p>Data de Geração: 31/12/2022</p>
-          <p>
-            Resumo: Análise detalhada das safras, insumos utilizados, e
-            desempenho do maquinário ao longo do ano.
-          </p>
-          <a href="#" class="view-report-link">Ver Relatório Completo</a>
-        </div>
-      </div>
-    </section>
-  </main>
-
-  <footer class="footer">
-    © 2025 TechSafra — Informação e Inovação para o Agronegócio
-  </footer>
-
-  <!-- 🔹 MODAL EDITAR PROPRIEDADE -->
   <div id="modalEditarPropriedade" class="modal" aria-hidden="true">
     <div class="modal-content large">
       <span class="close" onclick="fecharModal('modalEditarPropriedade')">&times;</span>
@@ -581,90 +392,125 @@
     </div>
   </div>
 
-  <div id="modalEditarMaquinario" class="modal" aria-hidden="true">
-    <div class="modal-content large">
-      <span class="close" onclick="fecharModal('modalEditarMaquinario')">&times;</span>
-      <h2>Editar Maquinário</h2>
-      <input type="hidden" id="editMaquinarioId" /> 
-      <div class="modal-body">
-        <div class="form-section">
-          <label>Nome do Maquinário</label><input type="text" id="edit-nomeMaquinario" /> 
-          <label>Tipo de Máquina</label><input type="text" id="edit-tipoMaquinario" />
-          <label>Horas Trabalhadas (dia)</label><input type="number" id="edit-horasTrabalhadasDia" />
-          <label>Horas Previstas Manutenção</label><input type="number" id="edit-horasManutencaoPrevista" />
-          <label>Situação</label><input type="text" id="edit-situacaoMaquinario" />
-          <label>Observações</label><textarea id="edit-obsMaquinario"></textarea>
-        </div>
-        <div class="report-section">
-          <h3>Resumo Atual</h3>
-          <p><strong>Nome:</strong> <span id="resumo-nomeMaquinario">Carregando...</span></p>
-          <p><strong>Tipo:</strong> <span id="resumo-tipoMaquinario">Carregando...</span></p>
-          <p><strong>Situação:</strong> <span id="resumo-situacao">Carregando...</span></p>
-          <p><strong>Manutenção Prevista:</strong> <span id="resumo-manutencao">Carregando...</span></p>
-        </div>
-      </div>
+  <div id="modalExcluir" class="modal" aria-hidden="true">
+    <div class="modal-content small">
+      <span class="close" onclick="fecharModal('modalExcluir')">&times;</span>
+      <h2>Confirmar Exclusão</h2>
+      <p>Tem certeza que deseja excluir esta propriedade?</p>
       <div class="modal-actions">
-        <button class="btn save-btn" onclick="salvarEdicaoMaquinario()">Salvar Alterações</button>
-        <button class="btn cancel-btn" onclick="fecharModal('modalEditarMaquinario')">
+        <button class="btn save-btn" id="confirmarExclusaoBtn">Sim, Excluir</button>
+        <button class="btn cancel-btn" onclick="fecharModal('modalExcluir')">
           Cancelar
         </button>
       </div>
     </div>
   </div>
+    </section>
 
-  <!-- Modal Editar Safra -->
-  <div id="modalEditarSafra" class="modal">
-    <div class="modal-content">
-      <span class="close" onclick="fecharModal('modalEditarSafra')">&times;</span>
-      <h3>Editar Safra</h3>
+    <section id="section5" class="card-section hidden">
+  <div class="card">
+    <h3>📦 Estoque de Insumos</h3>
 
-      <form id="formEditarSafra">
-        <input type="hidden" id="editSafraId">
+    <div class="card-actions">
+      <button class="btn add-btn" onclick="location.href='./cadastroproduto.html'">
+        <i class="fas fa-plus"></i> Adicionar Insumos
+      </button>
+    </div>
 
-        <label>Nome:</label>
-        <input type="text" id="editNomeSafra" required>
-
-        <label>Cultura:</label>
-        <input type="text" id="editCultura" required>
-
-        <label>Data Início:</label>
-        <input type="date" id="editDataInicio" required>
-
-        <label>Data Fim:</label>
-        <input type="date" id="editDataFim" required>
-
-        <label>Área (ha):</label>
-        <input type="number" id="editArea" required>
-
-        <label>Produção (ton):</label>
-        <input type="number" id="editProducao" required>
-
-        <label>Custos (R$):</label>
-        <input type="number" id="editCustos" required>
-
-        <label>Observações:</label>
-        <textarea id="editObservacoes"></textarea>
-
-        <button type="submit" class="btn save-btn">Salvar Alterações</button>
-      </form>
+    <div id="listaEstoque" class="properties-list">
+      <p>Carregando estoque...</p>
     </div>
   </div>
 
-  <!-- Modal Excluir -->
-  <div id="modalExcluirSafra" class="modal">
-    <div class="modal-content">
-      <span class="close" onclick="fecharModal('modalExcluirSafra')">&times;</span>
-      <h3>Excluir Safra</h3>
+  <div id="modalEditarEstoque" class="modal">
+    <div class="modal-conteudo">
+      <h2>Editar Produto do Estoque</h2>
 
-      <p>Digite o ID da Safra para confirmar:</p>
-      <input type="number" id="deleteSafraId" placeholder="ID">
+      <label>Nome do Produto</label>
+      <input type="text" id="edit-nomeProduto">
 
-      <button class="btn delete-btn" onclick="confirmarExcluirSafra()">Excluir</button>
+      <label>Quantidade</label>
+      <input type="number" id="edit-quantidade">
+
+      <label>Tipo do Produto</label>
+      <input type="text" id="edit-tipoProduto">
+
+      <label>Custo</label>
+      <input type="number" id="edit-custo" step="0.01">
+
+      <label>Observação</label>
+      <textarea id="edit-observacao"></textarea>
+
+      <div class="modal-buttons">
+        <button onclick="fecharModal('modalEditarEstoque')" class="btn-cancelar">
+          Cancelar
+        </button>
+        <button id="salvarEdicaoEstoqueBtn" class="btn-salvar">
+          Salvar
+        </button>
+      </div>
     </div>
   </div>
 
+  <div id="modalExcluirProduto" class="modal">
+    <div class="modal-content">
+      <h2>Excluir Produto</h2>
+      <p>Tem certeza que deseja excluir este produto?</p>
 
-  <div id="modalEditarAnalise" class="modal" aria-hidden="true">
+      <input type="hidden" id="deleteProdutoId">
+
+      <div class="modal-buttons">
+        <button onclick="fecharModal('modalExcluirProduto')" class="btn-cancelar">
+          Cancelar
+        </button>
+        <button class="btnConfirmar" onclick="excluirProduto()">
+          Excluir
+        </button>
+      </div>
+    </div>
+  </div>
+</section>
+
+
+
+    <section id="section6" class="card-section hidden">
+      <div class="card">
+        <h3>🧪 Análise de Solo</h3>
+
+        <div class="card-actions">
+          <button class="btn add-btn" onclick="location.href='/template/cadastroanalisesolo.html'">
+            + Nova Análise
+          </button>
+          <button class="btn edit-btn" onclick="abrirModal('modalEditarAnalise')">
+            Editar
+          </button>
+          <button class="btn delete-btn" onclick="abrirModal('modalExcluir')">
+            Excluir
+          </button>
+        </div>
+
+        <div class="analysis-item">
+          <h4>Análise - Fazenda São João</h4>
+          <p>Data: 10/09/2023</p>
+          <p>
+            pH: 6.5 | Nitrogênio: 20 mg/kg | Fósforo: 15 mg/kg | Potássio: 120
+            mg/kg
+          </p>
+          <p>Recomendações: Adicionar 50 kg/ha de NPK 20-10-10</p>
+        </div>
+
+        <div class="analysis-item">
+          <h4>Análise - Rancho das Orquídeas</h4>
+          <p>Data: 05/08/2023</p>
+          <p>
+            pH: 5.8 | Nitrogênio: 18 mg/kg | Fósforo: 10 mg/kg | Potássio: 100
+            mg/kg
+          </p>
+          <p>Recomendações: Adicionar 40 kg/ha de NPK 15-15-15</p>
+        </div>
+      </div>
+
+      <div id="modalEditarAnalise" class="modal" aria-hidden="true">
     <div class="modal-content large">
       <span class="close" onclick="fecharModal('modalEditarAnalise')">&times;</span>
       <h2>Editar Análise do Solo</h2>
@@ -695,26 +541,163 @@
       </div>
     </div>
   </div>
+    </section>
 
-  <!-- 🔹 MODAL EXCLUIR -->
-  <div id="modalExcluir" class="modal" aria-hidden="true">
-    <div class="modal-content small">
-      <span class="close" onclick="fecharModal('modalExcluir')">&times;</span>
-      <h2>Confirmar Exclusão</h2>
-      <p>Tem certeza que deseja excluir esta propriedade?</p>
-      <div class="modal-actions">
-        <!-- ✅ O JS usa este ID -->
-        <button class="btn save-btn" id="confirmarExclusaoBtn">Sim, Excluir</button>
-        <button class="btn cancel-btn" onclick="fecharModal('modalExcluir')">
-          Cancelar
-        </button>
+    <section id="section7" class="card-section hidden">
+      <div class="card">
+        <h3>📅 Planejamento de Safras</h3>
+
+        <div class="card-actions">
+          <button class="btn add-btn" onclick="location.href='/template/cadastrosafra.html'">
+            + Nova Safra
+          </button>
+        </div>
+
+        <div id="listaSafras">
+        </div>
       </div>
+
+  <div id="modalEditarSafra" class="modal">
+    <div class="modal-content">
+      <span class="close" onclick="fecharModal('modalEditarSafra')">&times;</span>
+      <h3>Editar Safra</h3>
+
+      <form id="formEditarSafra">
+        <input type="hidden" id="editSafraId">
+        <input type="hidden" id="editPropriedadeId">
+
+        <label>Nome:</label>
+        <input type="text" id="editNomeSafra" required>
+
+        <label>Cultura:</label>
+        <input type="text" id="editCultura" required>
+
+        <label>Data Início:</label>
+        <input type="date" id="editDataInicio" required>
+
+        <label>Data Fim:</label>
+        <input type="date" id="editDataFim" required>
+
+        <label>Área (ha):</label>
+        <input type="number" id="editArea" required>
+
+        <label>Produção (ton):</label>
+        <input type="number" id="editProducao" required>
+
+        <label>Custos (R$):</label>
+        <input type="number" id="editCustos" required>
+
+        <label>Observações:</label>
+        <textarea id="editObservacoes"></textarea>
+
+        <button type="submit" class="btn save-btn">Salvar Alterações</button>
+      </form>
     </div>
   </div>
+
+  <div id="modalExcluirSafra" class="modal">
+    <div class="modal-content">
+      <span class="close" onclick="fecharModal('modalExcluirSafra')">&times;</span>
+      <h3>Excluir Safra</h3>
+
+      <p>Digite o ID da Safra para confirmar:</p>
+      <input type="number" id="deleteSafraId" placeholder="ID">
+
+      <button class="btn delete-btn" onclick="confirmarExcluirSafra()">Excluir</button>
+    </div>
+  </div>
+    </section>
+
+
+
+    <section id="section8" class="card-section hidden">
+      <div class="card">
+        <h3>⚠️ Alertas e Notificações</h3>
+
+        <div class="card-actions">
+          <button class="btn mark-read-btn">
+            <i class="fas fa-check"></i> Marcar todas como lidas
+          </button>
+          <button class="btn settings-btn">
+            <i class="fas fa-cog"></i> Configurações
+          </button>
+        </div>
+
+        <div class="alert-item critical">
+          <h4>Alerta Crítico: Falta de Combustível</h4>
+          <p>Data: 20/09/2023 14:30</p>
+          <p>
+            O nível de combustível está abaixo de 15%. Reabasteça
+            imediatamente para evitar paralisações.
+          </p>
+        </div>
+
+        <div class="alert-item warning">
+          <h4>Aviso: Manutenção do Trator</h4>
+          <p>Data: 18/09/2023 09:00</p>
+          <p>
+            O trator John Deere 5075E está próximo da próxima manutenção.
+            Agende uma revisão em breve.
+          </p>
+        </div>
+
+        <div class="alert-item info">
+          <h4>Notificação: Nova Análise de Solo Disponível</h4>
+          <p>Data: 15/09/2023 16:45</p>
+          <p>
+            A análise de solo para a Fazenda São João foi concluída. Verifique
+            os resultados e recomendações.
+          </p>
+        </div>
+      </div>
+    </section>
+
+    <section id="section9" class="card-section hidden">
+      <div class="card">
+        <h3>📑 Relatórios e Estatísticas</h3>
+
+        <div class="card-actions">
+          <a href="/template/relatorio.html" class="btn generate-report-btn"><i class="fas fa-file-alt"></i> Gerar Novo
+            Relatório</a>
+          <button class="btn export-btn">
+            <i class="fas fa-file-export"></i> Exportar Dados
+          </button>
+        </div>
+
+        <div class="report-item">
+          <h4>Relatório Mensal - Setembro 2023</h4>
+          <p>Data de Geração: 30/09/2023</p>
+          <p>
+            Resumo: Produtividade de milho aumentou 10% em relação ao mês
+            anterior. Custos com insumos reduziram 5%.
+          </p>
+          <a href="#" class="view-report-link">Ver Relatório Completo</a>
+        </div>
+
+        <div class="report-item">
+          <h4>Relatório Anual - 2022</h4>
+          <p>Data de Geração: 31/12/2022</p>
+          <p>
+            Resumo: Análise detalhada das safras, insumos utilizados, e
+            desempenho do maquinário ao longo do ano.
+          </p>
+          <a href="#" class="view-report-link">Ver Relatório Completo</a>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <footer class="footer">
+    © 2025 TechSafra — Informação e Inovação para o Agronegócio
+  </footer>
 
 
   <script src="/js/dashboard.js"></script>
   <script src="/js/previsao.js"></script>
+  <script src="/js/produtos.js"></script>
+  <script src="/js/safras.js"></script>
+  <script src="/js/maquinarios.js"></script>
+  <script src="/js/propriedades.js"></script>
 
 </body>
 

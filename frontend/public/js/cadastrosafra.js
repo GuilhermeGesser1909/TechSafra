@@ -31,9 +31,7 @@ document.addEventListener("DOMContentLoaded", () => {
     event.preventDefault();
 
     const safraData = {
-      propriedade: {
-        id: parseInt(document.getElementById("propriedadeId").value)
-      },
+      propriedadeId: parseInt(document.getElementById("propriedadeId").value),
 
       nome: document.getElementById("nomeSafra").value,
       cultura: document.getElementById("cultura").value,
