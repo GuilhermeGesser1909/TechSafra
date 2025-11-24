@@ -13,6 +13,5 @@ document.addEventListener('DOMContentLoaded', () => {
         updateLanguage(e.target.value);
     });
 
-    // Inicializa em português
     updateLanguage('pt');
 });

@@ -13,7 +13,6 @@ document.addEventListener("DOMContentLoaded", () => {
   form.addEventListener("submit", async (e) => {
     e.preventDefault();
 
-    // Monta o objeto exatamente como o backend espera
     const propriedade = {
       nome: document.getElementById("nomePropriedade").value.trim(),
       responsavel: document.getElementById("responsavel").value.trim(),
