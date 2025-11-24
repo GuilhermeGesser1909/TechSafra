@@ -324,7 +324,7 @@ p.lead {
 .footer {
   background: linear-gradient(90deg, var(--green-dark), var(--green));
   color: #fff;
-  padding: 60px 6vw 30px;
+  padding: -20px 1vw 1px;
   text-align: center;
 }
 
