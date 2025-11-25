@@ -26,8 +26,8 @@ async function carregarProdutos() {
       <p><strong>Tipo:</strong> ${p.tipoProduto}</p>
       <p><strong>Custo:</strong> R$ ${p.custo}</p>
       <div class="property-actions">
-          <button onclick="editarProduto(${p.id})">✏️ Editar</button>
-          <button onclick="abrirModalExcluirProduto(${p.id})">🗑 Excluir</button>
+          <button onclick="editarProduto(${p.id})"> Editar</button>
+          <button onclick="abrirModalExcluirProduto(${p.id})"> Excluir</button>
       </div>
   </div>
 `).join("");
