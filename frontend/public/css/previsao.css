@@ -86,7 +86,6 @@
 /* ===== OUTRAS INFORMAÇÕES ===== */
 #other_infos {
   text-align: center;
-  margin-top: 15px;
   display: grid;
   grid-template-columns: 1fr 1fr;
   gap: 12px;
