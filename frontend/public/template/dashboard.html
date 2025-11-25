@@ -37,7 +37,7 @@
     </nav>
 
     <div class="sidebar-footer">
-      <button class="btn btn-gold" onclick="location.href='/PaginaInicial.html'">
+      <button class="btn btn" onclick="location.href='/PaginaInicial.html'">
         Sair
       </button>
     </div>
@@ -45,10 +45,6 @@
 
   <header class="header" role="banner">
     <h1>TechSafra Dashboard</h1>
-    <div class="user-info">
-      <span>Olá, Produtor</span>
-      <img src="/img/user-placeholder.png" alt="Usuário" />
-    </div>
   </header>
 
   <main class="main" role="main">
@@ -141,71 +137,71 @@
     </section>
 
     <section id="section2" class="card-section hidden">
-      <div class="card weather-card">
-        <h3>🌤️ Previsão do Tempo</h3>
+  <div id="weather-background" class="card weather-card">
+    <h3>🌤️ Previsão do Tempo</h3>
 
-        <form id="search" aria-label="Pesquisar cidade">
-          <i class="fa-solid fa-location-dot"></i>
-          <input type="search" name="city" id="city_Name" placeholder="Buscar cidade" />
-          <button type="submit">
-            <i class="fa-solid fa-magnifying-glass"></i>
-          </button>
-        </form>
+    <form id="search" aria-label="Pesquisar cidade">
+      <i class="fa-solid fa-location-dot"></i>
+      <input type="search" name="city" id="city_Name" placeholder="Buscar cidade" />
+      <button type="submit">
+        <i class="fa-solid fa-magnifying-glass"></i>
+      </button>
+    </form>
 
-        <div id="weather" class="weather-display">
-          <h1 id="title">Blumenau, BR</h1>
+    <div id="weather" class="weather-display">
+      <h1 id="title">Blumenau, BR</h1>
 
-          <div id="infos" class="info-grid">
-            <div id="temp" class="temp-block">
-              <img id="temp_img" src="/img/sunny.jpg" alt="" />
-              <div>
-                <p id="temp_value">32 <sup>°C</sup></p>
-                <p id="temp_description">Ensolarado</p>
-              </div>
-            </div>
+      <div id="infos" class="info-grid">
+        <div id="temp" class="temp-block">
+          <img id="temp_img" src="/img/sunny.jpg" alt="" />
+          <div>
+            <p id="temp_value">32 <sup>°C</sup></p>
+            <p id="temp_description">Ensolarado</p>
+          </div>
+        </div>
 
-            <div id="other_infos">
-              <div class="info">
-                <i id="temp_max_icon" class="fa-solid fa-temperature-high"></i>
-                <div>
-                  <h4>Temperatura máxima</h4>
-                  <p id="temp_max">32°C</p>
-                </div>
-              </div>
-
-              <div class="info">
-                <i id="temp_min_icon" class="fa-solid fa-temperature-low"></i>
-                <div>
-                  <h4>Temperatura mínima</h4>
-                  <p id="temp_min">20°C</p>
-                </div>
-              </div>
-
-              <div class="info">
-                <i id="humidity_icon" class="fa-solid fa-droplet"></i>
-                <div>
-                  <h4>Humidade</h4>
-                  <p id="humidity">60%</p>
-                </div>
-              </div>
-
-              <div class="info">
-                <i id="wind_icon" class="fa-solid fa-wind"></i>
-                <div>
-                  <h4>Vento</h4>
-                  <p id="wind">12 km/h</p>
-                </div>
-              </div>
+        <div id="other_infos">
+          <div class="info">
+            <i id="temp_max_icon" class="fa-solid fa-temperature-high"></i>
+            <div>
+              <h4>Temperatura máxima</h4>
+              <p id="temp_max">32°C</p>
             </div>
           </div>
 
-          <div id="forecast">
-            <h3>📅 Previsão para os próximos 5 dias</h3>
-            <div id="forecast-grid"></div>
+          <div class="info">
+            <i id="temp_min_icon" class="fa-solid fa-temperature-low"></i>
+            <div>
+              <h4>Temperatura mínima</h4>
+              <p id="temp_min">20°C</p>
+            </div>
+          </div>
+
+          <div class="info">
+            <i id="humidity_icon" class="fa-solid fa-droplet"></i>
+            <div>
+              <h4>Humidade</h4>
+              <p id="humidity">60%</p>
+            </div>
+          </div>
+
+          <div class="info">
+            <i id="wind_icon" class="fa-solid fa-wind"></i>
+            <div>
+              <h4>Vento</h4>
+              <p id="wind">12 km/h</p>
+            </div>
           </div>
         </div>
       </div>
-    </section>
+
+      <div id="forecast">
+        <h3>📅 Previsão para os próximos 5 dias</h3>
+        <div id="forecast-grid"></div>
+      </div>
+    </div>
+  </div>
+</section>
 
     <section id="section3" class="card-section hidden">
       <div class="card">
