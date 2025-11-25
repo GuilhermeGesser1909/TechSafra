@@ -464,7 +464,7 @@ body {
 
 /* ===== Previsão dos 7 dias ===== */
 #forecast {
-  margin-top: 1.5rem;
+  margin-top: -35;
   text-align: left;
 }
 
