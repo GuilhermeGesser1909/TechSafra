@@ -44,8 +44,8 @@ const Maquinarios = {
               <p class="item-obs"><strong>Observações:</strong> ${m.observacoes || 'Nenhuma.'}</p>
           </div>
           <div class="action-buttons">
-              <button class="btn edit-btn" data-edit="${m.id}"><i class="fas fa-edit"></i> Editar</button>
-              <button class="btn delete-btn" data-del="${m.id}"><i class="fas fa-trash"></i> Excluir</button>
+              <button class="btn edit-btn" data-edit="${m.id}"></i> Editar</button>
+              <button class="btn delete-btn" data-del="${m.id}"></i> Excluir</button>
           </div>
       </div>
     `;
