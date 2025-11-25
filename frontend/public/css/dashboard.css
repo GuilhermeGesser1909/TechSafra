@@ -5,7 +5,7 @@
   --green-900: #174e1e;
   --green-700: #3fa34d;
   --green-500: #63c262;
-  --gold-700: #fbc02d;
+  --gold-500: #3fa34d;
   --red-500: #e74c3c;
   --bg-light: #f5f8f3;
   --text-dark: #1f3324;
@@ -752,7 +752,7 @@ body {
 }
 
 .btn-gold {
-  background: var(--green-500);
+  background: var(--gold-500);
   color: #fcfcfc;
 }
 
