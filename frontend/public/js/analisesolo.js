@@ -27,24 +27,24 @@ async function listarAnalisesCard() {
         analises.forEach(analise => {
             const nomePropriedade = analise.propriedade ? analise.propriedade.nome : "Propriedade Desconhecida";
 
-            // Cria o HTML do Card
+            // HTML Limpo: Sem 'style="..."', usando apenas classes CSS
             const cardHtml = `
-                <div class="analysis-item" style="border-bottom: 1px solid #eee; padding: 15px 0; margin-bottom: 10px;">
+                <div class="analysis-item">
                     <h4>Análise - ${nomePropriedade}</h4>
-                    <p><strong>Área:</strong> ${analise.area} | <strong>Data:</strong> ${formatarData(analise.dataAnalise)}</p>
-                    <p>
-                        <strong>pH:</strong> ${analise.ph} | 
-                        <strong>Matéria Orgânica:</strong> ${analise.materiaOrganica}% |
-                        <strong>Solo:</strong> ${analise.tipoSolo}
-                    </p>
                     
-                    <div style="margin-top: 10px;">
-                        <button class="btn edit-btn" style="padding: 5px 10px; font-size: 0.8rem;" 
-                                onclick="abrirModalEdicao('${analise.id}')">
+                    <p><strong>Área:</strong> ${analise.area}</p>
+                    <p><strong>Data:</strong> ${formatarData(analise.dataAnalise)}</p>
+                    
+                    <div style="margin: 8px 0; border-left: 3px solid #63c262; padding-left: 10px;">
+                        <p><strong>pH:</strong> ${analise.ph} | <strong>Solo:</strong> ${analise.tipoSolo}</p>
+                        <p><strong>Matéria Orgânica:</strong> ${analise.materiaOrganica}%</p>
+                    </div>
+                    
+                    <div class="analysis-actions">
+                        <button class="btn edit-btn" onclick="abrirModalEdicao('${analise.id}')">
                             Editar
                         </button>
-                        <button class="btn delete-btn" style="padding: 5px 10px; font-size: 0.8rem; background-color: #ff4d4d; color: white;" 
-                                onclick="deletarAnalise('${analise.id}')">
+                        <button class="btn delete-btn" onclick="deletarAnalise('${analise.id}')">
                             Excluir
                         </button>
                     </div>
