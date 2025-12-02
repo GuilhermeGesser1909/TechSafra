@@ -152,13 +152,13 @@ body {
 .actions-grid {
   display: grid;
   grid-template-columns: repeat(auto-fit, minmax(160px, 1fr));
-  gap: 20px;
+  gap: 30px;
 }
 
 .action-item {
   background: #fff;
   border-radius: 12px;
-  padding: 22px;
+  padding: 28px;
   text-align: center;
   box-shadow: var(--shadow);
   cursor: pointer;
@@ -187,13 +187,13 @@ body {
 .metrics {
   display: grid;
   grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
-  gap: 28px;
+  gap: 35px;
 }
 
 .metric-card {
   background: linear-gradient(145deg, #ffffff, #f2fff2);
   border-radius: 12px;
-  padding: 22px;
+  padding: 28px;
   text-align: center;
   box-shadow: var(--shadow);
   transition: all 0.25s ease;
@@ -229,6 +229,31 @@ body {
   font-family: "Poppins", sans-serif;
   color: var(--green-900);
   margin-bottom: 10px;
+}
+
+/* ==============================
+   Lista de Atividades Recentes
+   ============================== */
+
+.dashboard-activities {
+  /* Adiciona mais espaço entre a grelha de ações e a lista de atividades */
+  margin-top: 35px;
+  padding-top: 20px;
+  border-top: 1px solid rgba(0, 0, 0, 0.08);
+  /* Linha divisória subtil */
+}
+
+.dashboard-activities h3 {
+  margin-top: 0;
+  margin-bottom: 15px;
+  /* Espaço abaixo do título da lista */
+}
+
+.dashboard-activities p {
+  padding: 8px 0;
+  /* Mais espaço vertical para cada item da lista */
+  border-bottom: 1px dotted #f0f0f0;
+  margin: 0;
 }
 
 /* ==============================
