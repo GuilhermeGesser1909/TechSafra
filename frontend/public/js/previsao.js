@@ -12,6 +12,31 @@ const wind = document.getElementById("wind");
 const tempImg = document.getElementById("temp_img");
 const forecastGrid = document.getElementById("forecast-grid");
 
+// 🔥 NOVA FUNÇÃO: troca imagem conforme o clima
+function atualizarBackground(clima) {
+  const bg = document.getElementById("weather-background");
+  if (!bg) return;
+
+  clima = clima.toLowerCase();
+  let imagem = "/img/sunny.jpg"; // padrão
+
+  if (clima.includes("clear") || clima.includes("céu limpo")) {
+    imagem = "/img/sunny.jpg";
+  } else if (clima.includes("cloud") || clima.includes("nublado")) {
+    imagem = "/img/nublado.jpg";
+  } else if (
+    clima.includes("rain") ||
+    clima.includes("chuva") ||
+    clima.includes("drizzle")
+  ) {
+    imagem = "/img/chuvoso.jpg";
+  }
+
+  bg.style.backgroundImage = `url('${imagem}')`;
+  bg.style.backgroundSize = "cover";
+  bg.style.backgroundPosition = "center";
+}
+
 async function buscarPrevisao(cidade = "Blumenau") {
   try {
     const urlAtual = `https://api.openweathermap.org/data/2.5/weather?q=${cidade}&units=metric&lang=pt_br&appid=${apiKey}`;
@@ -25,10 +50,14 @@ async function buscarPrevisao(cidade = "Blumenau") {
     tempMax.textContent = `${Math.round(dadosAtual.main.temp_max)}°C`;
     tempMin.textContent = `${Math.round(dadosAtual.main.temp_min)}°C`;
     humidity.textContent = `${dadosAtual.main.humidity}%`;
-    wind.textContent = `${Math.round(dadosAtual.wind.speed * 3.6)} km/h`; // m/s → km/h
+    wind.textContent = `${Math.round(dadosAtual.wind.speed * 3.6)} km/h`;
 
-    const icone = dadosAtual.weather[0].icon; 
+    const icone = dadosAtual.weather[0].icon;
     tempImg.src = `https://openweathermap.org/img/wn/${icone}@2x.png`;
+
+    // 🔥 ATUALIZA BACKGROUND AQUI
+    const clima = dadosAtual.weather[0].main; // ex: "Clouds", "Rain", "Clear"
+    atualizarBackground(clima);
 
     const urlPrevisao = `https://api.openweathermap.org/data/2.5/forecast?q=${cidade}&units=metric&lang=pt_br&appid=${apiKey}`;
     const respPrev = await fetch(urlPrevisao);
@@ -64,10 +93,10 @@ function mostrarPrevisao5Dias(lista) {
       card.classList.add("forecast-day");
       card.innerHTML = `
         <p class="forecast-date">${new Date(data).toLocaleDateString("pt-BR", {
-          weekday: "short",
-          day: "2-digit",
-          month: "2-digit"
-        })}</p>
+        weekday: "short",
+        day: "2-digit",
+        month: "2-digit"
+      })}</p>
         <img src="https://openweathermap.org/img/wn/${icone}.png" alt="${descricao}">
         <p class="forecast-temp">${Math.round(mediaTemp)}°C</p>
         <p class="forecast-desc">${descricao}</p>

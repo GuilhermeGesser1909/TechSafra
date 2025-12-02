@@ -7,7 +7,7 @@ import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import com.fasterxml.jackson.annotation.JsonInclude;
 
 @Entity
-@Table(name = "TB_PROPRIEDADE")
+@Table(name = "TB_PROPRIEDADES")
 @JsonInclude(JsonInclude.Include.NON_NULL)
 public class PropriedadeModel implements Serializable {
     private static final long serialVersionUID = 1L;

@@ -464,7 +464,7 @@ body {
 
 /* ===== Previsão dos 7 dias ===== */
 #forecast {
-  margin-top: 1.5rem;
+  margin-top: -35;
   text-align: left;
 }
 
@@ -694,7 +694,7 @@ body {
   /* permite rolar o conteúdo */
   scrollbar-width: thin;
   /* rolagem mais discreta */
-  scrollbar-color: #8bc34a #f0f0f0;
+  scrollbar-color: #e4b93c #f0f0f0;
   /* cor do scroll */
 }
 
@@ -753,7 +753,7 @@ body {
 
 .btn-gold {
   background: var(--gold-500);
-  color: #2c2c2c;
+  color: #fcfcfc;
 }
 
 .add-btn {
@@ -777,7 +777,7 @@ body {
   text-decoration: none !important;
 }
 
-/* Padronização de tamanho dos botões de ação */
+
 .btn {
   min-width: 150px;
   /* largura mínima igual para todos */
@@ -1468,12 +1468,12 @@ body {
 
 /* BOTÃO EDITAR */
 .property-actions button:first-child {
-  background: #4caf50;
+  background: #e4b93c;
   color: white;
 }
 
 .property-actions button:first-child:hover {
-  background: #4caf50;
+  background: #dcaa16;
 }
 
 /* BOTÃO EXCLUIR */

@@ -10,7 +10,7 @@ import jakarta.persistence.Id;
 import jakarta.persistence.Table;
 
 @Entity
-@Table(name = "safras")
+@Table(name = "TB_SAFRAS")
 public class SafraModel {
 
     @Id
