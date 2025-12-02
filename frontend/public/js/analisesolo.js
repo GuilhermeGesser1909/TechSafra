@@ -27,7 +27,7 @@ async function listarAnalisesCard() {
         analises.forEach(analise => {
             const nomePropriedade = analise.propriedade ? analise.propriedade.nome : "Propriedade Desconhecida";
 
-            // HTML Limpo: Sem 'style="..."', usando apenas classes CSS
+            // HTML Limpo: Classes CSS controlam o visual (definidas no dashboard.css)
             const cardHtml = `
                 <div class="analysis-item">
                     <h4>Análise - ${nomePropriedade}</h4>
@@ -44,7 +44,7 @@ async function listarAnalisesCard() {
                         <button class="btn edit-btn" onclick="abrirModalEdicao('${analise.id}')">
                             Editar
                         </button>
-                        <button class="btn delete-btn" onclick="deletarAnalise('${analise.id}')">
+                        <button class="btn delete-btn" onclick="abrirModalExclusao('${analise.id}')">
                             Excluir
                         </button>
                     </div>
@@ -62,10 +62,7 @@ async function listarAnalisesCard() {
 // --- FUNÇÃO PARA ABRIR O MODAL E PREENCHER DADOS ---
 async function abrirModalEdicao(id) {
     try {
-        // Busca os dados atuais da análise
-        const resposta = await fetch(`${API_URL_ANALISES}/${id}`); // Assumindo que criaste o endpoint GET /{id}
-        // Se não tiveres o endpoint GET /{id} no backend, teremos de filtrar da lista, 
-        // mas o ideal é ter no controller: @GetMapping("/{id}")
+        const resposta = await fetch(`${API_URL_ANALISES}/${id}`);
 
         if (!resposta.ok) {
             alert("Erro ao buscar detalhes da análise.");
@@ -82,12 +79,11 @@ async function abrirModalEdicao(id) {
         document.getElementById("editMateriaOrganica").value = analise.materiaOrganica;
         document.getElementById("editDataAnalise").value = analise.dataAnalise;
 
-        // Precisamos do ID da propriedade para o PUT funcionar corretamente
         if (analise.propriedade) {
             document.getElementById("editPropriedadeId").value = analise.propriedade.id;
         }
 
-        // Abre o modal (usando a tua função existente ou estilo direto)
+        // Abre o modal
         const modal = document.getElementById("modalEditarAnalise");
         modal.style.display = "block";
         modal.setAttribute("aria-hidden", "false");
@@ -108,7 +104,7 @@ async function salvarEdicaoAnalise() {
         ph: parseFloat(document.getElementById("editPh").value),
         materiaOrganica: parseFloat(document.getElementById("editMateriaOrganica").value),
         dataAnalise: document.getElementById("editDataAnalise").value,
-        propriedadeId: parseInt(propriedadeId) // Mantém a mesma propriedade
+        propriedadeId: parseInt(propriedadeId)
     };
 
     try {
@@ -121,7 +117,7 @@ async function salvarEdicaoAnalise() {
         if (resposta.ok) {
             alert("Análise atualizada!");
             fecharModal('modalEditarAnalise');
-            listarAnalisesCard(); // Atualiza a lista na tela
+            listarAnalisesCard();
         } else {
             alert("Erro ao atualizar.");
         }
@@ -130,24 +126,53 @@ async function salvarEdicaoAnalise() {
     }
 }
 
-// --- FUNÇÃO AUXILIAR PARA FORMATAR DATA ---
+// ==========================================
+//     LÓGICA DO MODAL DE EXCLUSÃO (NOVO)
+// ==========================================
+
+// 1. Abre o modal e guarda o ID que queremos apagar
+function abrirModalExclusao(id) {
+    document.getElementById("idAnaliseParaExcluir").value = id;
+
+    const modal = document.getElementById("modalExcluirAnalise");
+    if (modal) {
+        modal.style.display = "block";
+        modal.setAttribute("aria-hidden", "false");
+    }
+}
+
+// 2. Executa a exclusão quando o usuário clica em "Sim, Excluir"
+async function confirmarExclusaoAnalise() {
+    const id = document.getElementById("idAnaliseParaExcluir").value;
+
+    if (!id) return;
+
+    try {
+        const resposta = await fetch(`${API_URL_ANALISES}/${id}`, {
+            method: "DELETE"
+        });
+
+        if (resposta.ok) {
+            alert("Análise removida com sucesso!");
+            fecharModal('modalExcluirAnalise'); // Fecha o modal
+            listarAnalisesCard(); // Atualiza a lista
+        } else {
+            alert("Erro ao excluir análise. Verifique se existem dependências.");
+        }
+    } catch (erro) {
+        console.error("Erro ao excluir:", erro);
+        alert("Erro de conexão ao tentar excluir.");
+    }
+}
+
+// --- UTILITÁRIOS ---
+
 function formatarData(dataString) {
     if (!dataString) return "";
     const [ano, mes, dia] = dataString.split("-");
     return `${dia}/${mes}/${ano}`;
 }
 
-// Função de deletar (reutilizada da resposta anterior)
-async function deletarAnalise(id) {
-    if (confirm("Tem certeza que deseja excluir esta análise?")) {
-        try {
-            const resposta = await fetch(`${API_URL_ANALISES}/${id}`, { method: "DELETE" });
-            if (resposta.ok) listarAnalisesCard();
-        } catch (erro) { console.error(erro); }
-    }
-}
-
-// Funções de controle do Modal (caso não existam globalmente)
 function fecharModal(modalId) {
     const modal = document.getElementById(modalId);
     if (modal) {

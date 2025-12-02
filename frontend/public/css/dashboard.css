@@ -1899,3 +1899,105 @@ body {
   font-style: italic;
   font-size: 1.1rem;
 }
+
+/* =========================================
+   🎯 CENTRALIZAÇÃO PERFEITA DOS MODAIS
+   ========================================= */
+
+/* O fundo escuro do modal */
+.modal {
+  display: none;
+  /* Controlado pelo JS */
+  position: fixed;
+  z-index: 1000;
+  left: 0;
+  top: 0;
+  width: 100%;
+  height: 100%;
+  background-color: rgba(0, 0, 0, 0.5);
+  /* Fundo semi-transparente */
+
+  /* Remove paddings antigos que empurravam para cima */
+  padding-top: 0 !important;
+}
+
+/* A caixa branca do modal */
+.modal-content {
+  background-color: #fefefe;
+  border-radius: 12px;
+  box-shadow: 0 5px 25px rgba(0, 0, 0, 0.25);
+  padding: 0;
+  /* O conteúdo interno define o padding */
+  border: none;
+
+  /* --- O TRUQUE DE CENTRALIZAÇÃO --- */
+  position: absolute;
+  /* Liberta o elemento */
+  top: 50%;
+  /* Empurra para o meio vertical */
+  left: 50%;
+  /* Empurra para o meio horizontal */
+  transform: translate(-50%, -50%);
+  /* Corrige o alinhamento pelo próprio tamanho */
+
+  /* Tamanho Padrão */
+  width: 90%;
+  max-width: 500px;
+
+  /* Se o modal for maior que a tela, permite scroll */
+  max-height: 90vh;
+  overflow-y: auto;
+}
+
+/* Ajuste para modais maiores (como o de Edição) */
+.modal-content.large {
+  max-width: 700px;
+  width: 95%;
+}
+
+/* Cabeçalho do modal (Título e Botão X) */
+.modal-content h2 {
+  margin: 0;
+  padding: 20px;
+  background-color: #f8f9fa;
+  border-bottom: 1px solid #eee;
+  border-radius: 12px 12px 0 0;
+  font-size: 1.25rem;
+  color: #2c3e50;
+}
+
+/* Botão de Fechar (X) */
+.close {
+  color: #aaa;
+  position: absolute;
+  right: 20px;
+  top: 15px;
+  /* Ajustado para alinhar com o título */
+  font-size: 28px;
+  font-weight: bold;
+  transition: color 0.2s;
+}
+
+.close:hover,
+.close:focus {
+  color: #d23b3b;
+  text-decoration: none;
+  cursor: pointer;
+}
+
+/* Corpo do Modal (onde ficam os inputs) */
+.modal-body {
+  padding: 20px;
+}
+
+/* Ações do Modal (Botões em baixo) */
+.modal-actions {
+  padding: 15px 20px;
+  background-color: #f8f9fa;
+  border-top: 1px solid #eee;
+  border-radius: 0 0 12px 12px;
+  display: flex;
+  justify-content: flex-end;
+  /* Botões à direita */
+  gap: 10px;
+}

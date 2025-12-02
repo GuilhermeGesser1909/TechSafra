@@ -521,6 +521,30 @@
             </div>
         </div>
     </div>
+
+    <div id="modalExcluirAnalise" class="modal" aria-hidden="true">
+        <div class="modal-content">
+            <span class="close" onclick="fecharModal('modalExcluirAnalise')">&times;</span>
+            
+            <div style="text-align: center; padding: 20px;">
+                <div style="font-size: 3rem; color: #d23b3b; margin-bottom: 10px;">🗑️</div>
+                
+                <h2>Excluir Análise?</h2>
+                <p>Tem certeza que deseja remover esta análise de solo? <br>Essa ação não pode ser desfeita.</p>
+                
+                <input type="hidden" id="idAnaliseParaExcluir">
+            </div>
+
+            <div class="modal-actions" style="justify-content: center;">
+                <button class="btn edit-btn" onclick="fecharModal('modalExcluirAnalise')">
+                    Cancelar
+                </button>
+                <button class="btn delete-btn" onclick="confirmarExclusaoAnalise()">
+                    Sim, Excluir
+                </button>
+            </div>
+        </div>
+    </div>
 </section>
 
     <section id="section7" class="card-section hidden">
