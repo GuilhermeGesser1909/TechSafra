@@ -4,6 +4,8 @@ import jakarta.persistence.*;
 import java.time.LocalDate;
 import java.util.UUID;
 
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
+
 @Entity
 @Table(name = "TB_ANALISE_SOLO")
 public class AnaliseSoloModel {
@@ -26,6 +28,11 @@ public class AnaliseSoloModel {
 
     @Column(nullable = false)
     private LocalDate dataAnalise;
+    
+    @ManyToOne
+    @JoinColumn(name = "propriedade_id", nullable = false)
+    @JsonIgnoreProperties({"usuario", "observacoes"}) // Evita loop infinito ou dados desnecessários
+    private PropriedadeModel propriedade;
 
     public UUID getId() { return id; }
     public String getArea() { return area; }
@@ -42,4 +49,7 @@ public class AnaliseSoloModel {
 
     public LocalDate getDataAnalise() { return dataAnalise; }
     public void setDataAnalise(LocalDate dataAnalise) { this.dataAnalise = dataAnalise; }
+    
+    public PropriedadeModel getPropriedade() { return propriedade; }
+    public void setPropriedade(PropriedadeModel propriedade) { this.propriedade = propriedade; }
 }

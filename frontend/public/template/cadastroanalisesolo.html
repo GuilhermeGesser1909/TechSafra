@@ -16,35 +16,46 @@
 
     <div id="mensagem" style="display:none"></div>
 
-    <form id="formAnaliseSolo">
+    <form id="form-analise-solo">
+      
       <div>
-        <label for="formAmostra">Nome da Amostra:</label>
-        <input type="text" id="nomeAmostra" name="nomeAmostra" placeholder="Ex: Coleta 01" required />
-      </div>
-
-      <div>
-        <label for="cultura">Tipo de analise desejada:</label>
-        <select id="analise" name="analise" required>
-          <option value="">Selecione...</option>
-          <option value="soja">Física</option>
-          <option value="milho">Química</option>
+        <label for="propriedadeId">Propriedade:</label>
+        <select id="propriedadeId" name="propriedadeId" required>
+            <option value="">Carregando propriedades...</option>
         </select>
       </div>
 
-      <div style="display: flex; gap: 70px">
+      <div>
+        <label for="area">Área / Talhão:</label>
+        <input type="text" id="area" name="area" placeholder="Ex: Talhão Norte" required />
+      </div>
+
+      <div>
+        <label for="tipoSolo">Tipo de Solo:</label>
+        <select id="tipoSolo" name="tipoSolo" required>
+          <option value="">Selecione...</option>
+          <option value="Argiloso">Argiloso</option>
+          <option value="Arenoso">Arenoso</option>
+          <option value="Humoso">Humoso</option>
+          <option value="Calcario">Calcário</option>
+        </select>
+      </div>
+
+      <div style="display: flex; gap: 20px">
         <div style="flex: 1">
-          <label for="DataColeta">Data da Coleta:</label>
-          <input type="date" id="dataColeta" name="ataColeta" required />
+          <label for="dataAnalise">Data da Análise:</label>
+          <input type="date" id="dataAnalise" name="dataAnalise" required />
         </div>
 
         <div style="flex: 1">
-          <label for="nivelph">Nível de PH do solo:</label>
-          <input type="number" id="nivelph" name="nivelph" required placeholder="5,5" />
+          <label for="ph">Nível de pH:</label>
+          <input type="number" id="ph" name="ph" step="0.1" required placeholder="Ex: 6.5" />
         </div>
       </div>
+
       <div>
-        <label for="observacoes">Principais Nutrientes:</label>
-        <textarea id="observacoes" name="observacoes" placeholder="Ex: Nitrogênio, Fósforo, Potássio..."></textarea>
+        <label for="materiaOrganica">Matéria Orgânica (%):</label>
+        <input type="number" id="materiaOrganica" name="materiaOrganica" step="0.1" placeholder="Ex: 3.5" required>
       </div>
 
       <div class="button-group">
@@ -55,8 +66,7 @@
       </div>
     </form>
   </div>
+
+  <script src="/js/cadastroanalisesolo.js" defer></script> 
 </body>
-
-<script src="/js/cadastroanalisesolo.js" defer></script>
-
 </html>

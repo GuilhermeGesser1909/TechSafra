@@ -1,41 +1,89 @@
+const API_URL_PROPRIEDADES = "http://localhost:8080/propriedades";
+const API_URL_ANALISES = "http://localhost:8080/analises-solo";
+
 document.addEventListener("DOMContentLoaded", () => {
-  const form = document.getElementById("formAnaliseSolo");
+  const form = document.getElementById("form-analise-solo");
   const msg = document.getElementById("mensagem");
 
-  form.addEventListener("submit", async (e) => {
-    e.preventDefault();
+  // 1. Carregar as propriedades no <select> assim que a página abre
+  carregarPropriedades();
 
-    mostrarMensagem("Enviando dados...", "info");
+  // 2. Configurar o envio do formulário
+  if (form) {
+    form.addEventListener("submit", async (e) => {
+      e.preventDefault();
 
-    const dados = {
-      nomeAmostra: document.getElementById("nomeAmostra").value,
-      analise: document.getElementById("analise").value,
-      dataColeta: document.getElementById("dataColeta").value,
-      nivelph: document.getElementById("nivelph").value,
-      observacoes: document.getElementById("observacoes").value
-    };
+      mostrarMensagem("Enviando dados...", "info");
+
+      // Captura os dados (IDs atualizados conforme o novo HTML)
+      const dados = {
+        area: document.getElementById("area").value,
+        tipoSolo: document.getElementById("tipoSolo").value,
+        ph: parseFloat(document.getElementById("ph").value),
+        materiaOrganica: parseFloat(document.getElementById("materiaOrganica").value),
+        dataAnalise: document.getElementById("dataAnalise").value,
+        propriedadeId: parseInt(document.getElementById("propriedadeId").value)
+      };
+
+      try {
+        const resposta = await fetch(API_URL_ANALISES, {
+          method: "POST",
+          headers: { "Content-Type": "application/json" },
+          body: JSON.stringify(dados)
+        });
+
+        if (!resposta.ok) {
+          throw new Error("Erro ao salvar no servidor.");
+        }
+
+        mostrarMensagem("Amostra salva com sucesso! Redirecionando...", "sucesso");
+
+        form.reset();
+
+        // Redireciona para o dashboard após 2 segundos
+        setTimeout(() => {
+          window.location.href = "/template/dashboard.html";
+        }, 2000);
+
+      } catch (erro) {
+        mostrarMensagem("Erro ao enviar: " + erro.message, "erro");
+      }
+    });
+  }
+
+  // --- Função para buscar as propriedades do Backend ---
+  async function carregarPropriedades() {
+    const selectPropriedade = document.getElementById("propriedadeId");
+    if (!selectPropriedade) return;
 
     try {
-      const resposta = await fetch("http://localhost:3000/api/solo", {
-        method: "POST",
-        headers: { "Content-Type": "application/json" },
-        body: JSON.stringify(dados)
-      });
+      const resposta = await fetch(API_URL_PROPRIEDADES);
+      if (resposta.ok) {
+        const propriedades = await resposta.json();
 
-      if (!resposta.ok) {
-        throw new Error("Erro ao salvar no servidor.");
+        // Limpa o select e adiciona opção padrão
+        selectPropriedade.innerHTML = '<option value="">Selecione...</option>';
+
+        // Preenche com as fazendas vindas do banco
+        propriedades.forEach(prop => {
+          const option = document.createElement("option");
+          option.value = prop.id;
+          option.textContent = prop.nome;
+          selectPropriedade.appendChild(option);
+        });
+      } else {
+        selectPropriedade.innerHTML = '<option value="">Erro ao carregar lista</option>';
       }
-
-      mostrarMensagem("Amostra salva com sucesso!", "sucesso");
-
-      form.reset();
-
     } catch (erro) {
-      mostrarMensagem("Erro ao enviar: " + erro.message, "erro");
+      console.error("Erro ao buscar propriedades:", erro);
+      mostrarMensagem("Não foi possível carregar as propriedades.", "erro");
     }
-  });
+  }
 
+  // --- Tua função original de mensagem (Mantida) ---
   function mostrarMensagem(texto, tipo) {
+    if (!msg) return;
+
     msg.style.display = "block";
     msg.textContent = texto;
 
