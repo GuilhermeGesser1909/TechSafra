@@ -470,74 +470,82 @@
 
 
     <section id="section6" class="card-section hidden">
-      <div class="card">
+    <div class="card">
         <h3>🧪 Análise de Solo</h3>
 
         <div class="card-actions">
-          <button class="btn add-btn" onclick="location.href='/template/cadastroanalisesolo.html'">
-            + Nova Análise
-          </button>
-          <button class="btn edit-btn" onclick="abrirModal('modalEditarAnalise')">
-            Editar
-          </button>
-          <button class="btn delete-btn" onclick="abrirModal('modalExcluir')">
-            Excluir
-          </button>
+            <button class="btn add-btn" onclick="location.href='/template/cadastroanalisesolo.html'">
+                + Nova Análise
+            </button>
         </div>
 
-        <div class="analysis-item">
-          <h4>Análise - Fazenda São João</h4>
-          <p>Data: 10/09/2023</p>
-          <p>
-            pH: 6.5 | Nitrogênio: 20 mg/kg | Fósforo: 15 mg/kg | Potássio: 120
-            mg/kg
-          </p>
-          <p>Recomendações: Adicionar 50 kg/ha de NPK 20-10-10</p>
+        <div id="lista-analises-container">
+            <p>Carregando análises...</p>
         </div>
-
-        <div class="analysis-item">
-          <h4>Análise - Rancho das Orquídeas</h4>
-          <p>Data: 05/08/2023</p>
-          <p>
-            pH: 5.8 | Nitrogênio: 18 mg/kg | Fósforo: 10 mg/kg | Potássio: 100
-            mg/kg
-          </p>
-          <p>Recomendações: Adicionar 40 kg/ha de NPK 15-15-15</p>
-        </div>
-      </div>
-
-      <div id="modalEditarAnalise" class="modal" aria-hidden="true">
-    <div class="modal-content large">
-      <span class="close" onclick="fecharModal('modalEditarAnalise')">&times;</span>
-      <h2>Editar Análise do Solo</h2>
-      <div class="modal-body">
-        <div class="form-section">
-          <label>pH</label><input type="text" id="phSolo" />
-          <label>Matéria Orgânica (%)</label><input type="text" id="moSolo" /> <label>Nitrogênio (N)</label><input
-            type="text" id="nSolo" /> <label>Fósforo (P)</label><input type="text" id="pSolo" /> <label>Potássio
-            (K)</label><input type="text" id="kSolo" /> <label>Observações</label><textarea id="obsSolo"></textarea>
-        </div>
-        <div class="report-section">
-          <h3>Resumo Atual</h3>
-          <p><strong>pH:</strong> 6,2</p>
-          <p><strong>Matéria Orgânica:</strong> 3%</p>
-          <p><strong>N:</strong> 18</p>
-          <p><strong>P:</strong> 12</p>
-          <p><strong>K:</strong> 38</p>
-          <p><strong>Última atualização:</strong> 20/10/2025</p>
-        </div>
-      </div>
-      <div class="modal-actions">
-        <button class="btn save-btn" onclick="salvarAnalise()">
-          Salvar Alterações
-        </button>
-        <button class="btn cancel-btn" onclick="fecharModal('modalEditarAnalise')">
-          Cancelar
-        </button>
-      </div>
     </div>
-  </div>
-    </section>
+
+    <div id="modalEditarAnalise" class="modal" aria-hidden="true">
+        <div class="modal-content large">
+            <span class="close" onclick="fecharModal('modalEditarAnalise')">&times;</span>
+            <h2>Editar Análise do Solo</h2>
+            
+            <div class="modal-body">
+                <input type="hidden" id="editAnaliseId">
+                <input type="hidden" id="editPropriedadeId">
+
+                <div class="form-section">
+                    <label>Área / Talhão</label>
+                    <input type="text" id="editArea" />
+
+                    <label>Tipo de Solo</label>
+                    <input type="text" id="editTipoSolo" />
+
+                    <label>pH</label>
+                    <input type="number" step="0.1" id="editPh" />
+
+                    <label>Matéria Orgânica (%)</label>
+                    <input type="number" step="0.1" id="editMateriaOrganica" />
+
+                    <label>Data da Análise</label>
+                    <input type="date" id="editDataAnalise" />
+                </div>
+            </div>
+
+            <div class="modal-actions">
+                <button class="btn save-btn" onclick="salvarEdicaoAnalise()">
+                    Salvar Alterações
+                </button>
+                <button class="btn cancel-btn" onclick="fecharModal('modalEditarAnalise')">
+                    Cancelar
+                </button>
+            </div>
+        </div>
+    </div>
+
+    <div id="modalExcluirAnalise" class="modal" aria-hidden="true">
+        <div class="modal-content">
+            <span class="close" onclick="fecharModal('modalExcluirAnalise')">&times;</span>
+            
+            <div style="text-align: center; padding: 20px;">
+                <div style="font-size: 3rem; color: #d23b3b; margin-bottom: 10px;">🗑️</div>
+                
+                <h2>Excluir Análise?</h2>
+                <p>Tem certeza que deseja remover esta análise de solo? <br>Essa ação não pode ser desfeita.</p>
+                
+                <input type="hidden" id="idAnaliseParaExcluir">
+            </div>
+
+            <div class="modal-actions" style="justify-content: center;">
+                <button class="btn edit-btn" onclick="fecharModal('modalExcluirAnalise')">
+                    Cancelar
+                </button>
+                <button class="btn delete-btn" onclick="confirmarExclusaoAnalise()">
+                    Sim, Excluir
+                </button>
+            </div>
+        </div>
+    </div>
+</section>
 
     <section id="section7" class="card-section hidden">
       <div class="card">
@@ -694,6 +702,7 @@
   <script src="/js/safras.js"></script>
   <script src="/js/maquinarios.js"></script>
   <script src="/js/propriedades.js"></script>
+  <script src="/js/analisesolo.js"></script>
 
 </body>
 

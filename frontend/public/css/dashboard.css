@@ -1783,3 +1783,221 @@ body {
   transform: translateY(-6px);
   box-shadow: 0 12px 24px rgba(63, 162, 77, 0.2);
 }
+
+/* ===============================
+   🧪 SEÇÃO DE ANÁLISE DE SOLO (Estilo AgroTech)
+   =============================== */
+
+/* O Container da lista (Grid) */
+#lista-analises-container {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+  gap: 20px;
+  margin-top: 20px;
+  padding: 10px;
+}
+
+/* O Card Individual */
+.analysis-item {
+  background: linear-gradient(145deg, #ffffff, #f8fff5);
+  border-radius: 16px;
+  border: 2px solid rgba(99, 194, 98, 0.15);
+  box-shadow: 0 8px 18px rgba(63, 162, 77, 0.12);
+  padding: 20px;
+  transition: transform 0.2s ease, box-shadow 0.25s ease;
+  position: relative;
+  overflow: hidden;
+  /* Garante que não há margens estranhas herdadas */
+  margin-bottom: 0;
+}
+
+/* A barra colorida no topo do card */
+.analysis-item::before {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 8px;
+  /* Gradiente Verde e Dourado igual ao das propriedades */
+  background: linear-gradient(90deg, #2e7d32, #d4a017);
+  border-radius: 12px 12px 0 0;
+}
+
+/* Efeito Hover (Levantar o card) */
+.analysis-item:hover {
+  transform: translateY(-6px);
+  box-shadow: 0 12px 24px rgba(63, 162, 77, 0.2);
+}
+
+/* Títulos dentro do card */
+.analysis-item h4 {
+  font-family: "Poppins", sans-serif;
+  font-weight: 600;
+  font-size: 1.2rem;
+  color: #1b4d1e;
+  /* Verde escuro */
+  margin: 10px 0 8px;
+  /* Espaço para a barra colorida */
+}
+
+/* Texto descritivo */
+.analysis-item p {
+  color: #4a5b4a;
+  font-size: 0.95rem;
+  margin: 4px 0;
+  line-height: 1.5;
+}
+
+/* Container dos botões */
+.analysis-actions {
+  display: flex;
+  justify-content: flex-end;
+  gap: 12px;
+  margin-top: 16px;
+  padding-top: 10px;
+  border-top: 1px solid rgba(0, 0, 0, 0.05);
+  /* Linha subtil separadora */
+}
+
+/* Estilo Base dos Botões */
+.analysis-actions .btn {
+  border-radius: 10px;
+  font-size: 0.9rem;
+  padding: 8px 14px;
+  transition: all 0.2s ease;
+  border: none;
+  cursor: pointer;
+  font-weight: 500;
+}
+
+/* Botão Editar (Dourado) */
+.analysis-actions .edit-btn {
+  background: linear-gradient(90deg, #e4b93c);
+  color: #ffffff;
+}
+
+.analysis-actions .edit-btn:hover {
+  box-shadow: 0 0 14px rgba(228, 185, 60, 0.5);
+}
+
+/* Botão Excluir (Vermelho) */
+.analysis-actions .delete-btn {
+  background: linear-gradient(90deg, #d23b3b);
+  color: #fff;
+}
+
+.analysis-actions .delete-btn:hover {
+  box-shadow: 0 0 14px rgba(231, 76, 60, 0.5);
+}
+
+/* Mensagem quando não há itens */
+#lista-analises-container p {
+  grid-column: 1 / -1;
+  text-align: center;
+  color: #6b7a6b;
+  font-style: italic;
+  font-size: 1.1rem;
+}
+
+/* =========================================
+   🎯 CENTRALIZAÇÃO PERFEITA DOS MODAIS
+   ========================================= */
+
+/* O fundo escuro do modal */
+.modal {
+  display: none;
+  /* Controlado pelo JS */
+  position: fixed;
+  z-index: 1000;
+  left: 0;
+  top: 0;
+  width: 100%;
+  height: 100%;
+  background-color: rgba(0, 0, 0, 0.5);
+  /* Fundo semi-transparente */
+
+  /* Remove paddings antigos que empurravam para cima */
+  padding-top: 0 !important;
+}
+
+/* A caixa branca do modal */
+.modal-content {
+  background-color: #fefefe;
+  border-radius: 12px;
+  box-shadow: 0 5px 25px rgba(0, 0, 0, 0.25);
+  padding: 0;
+  /* O conteúdo interno define o padding */
+  border: none;
+
+  /* --- O TRUQUE DE CENTRALIZAÇÃO --- */
+  position: absolute;
+  /* Liberta o elemento */
+  top: 50%;
+  /* Empurra para o meio vertical */
+  left: 50%;
+  /* Empurra para o meio horizontal */
+  transform: translate(-50%, -50%);
+  /* Corrige o alinhamento pelo próprio tamanho */
+
+  /* Tamanho Padrão */
+  width: 90%;
+  max-width: 500px;
+
+  /* Se o modal for maior que a tela, permite scroll */
+  max-height: 90vh;
+  overflow-y: auto;
+}
+
+/* Ajuste para modais maiores (como o de Edição) */
+.modal-content.large {
+  max-width: 700px;
+  width: 95%;
+}
+
+/* Cabeçalho do modal (Título e Botão X) */
+.modal-content h2 {
+  margin: 0;
+  padding: 20px;
+  background-color: #f8f9fa;
+  border-bottom: 1px solid #eee;
+  border-radius: 12px 12px 0 0;
+  font-size: 1.25rem;
+  color: #2c3e50;
+}
+
+/* Botão de Fechar (X) */
+.close {
+  color: #aaa;
+  position: absolute;
+  right: 20px;
+  top: 15px;
+  /* Ajustado para alinhar com o título */
+  font-size: 28px;
+  font-weight: bold;
+  transition: color 0.2s;
+}
+
+.close:hover,
+.close:focus {
+  color: #d23b3b;
+  text-decoration: none;
+  cursor: pointer;
+}
+
+/* Corpo do Modal (onde ficam os inputs) */
+.modal-body {
+  padding: 20px;
+}
+
+/* Ações do Modal (Botões em baixo) */
+.modal-actions {
+  padding: 15px 20px;
+  background-color: #f8f9fa;
+  border-top: 1px solid #eee;
+  border-radius: 0 0 12px 12px;
+  display: flex;
+  justify-content: flex-end;
+  /* Botões à direita */
+  gap: 10px;
+}

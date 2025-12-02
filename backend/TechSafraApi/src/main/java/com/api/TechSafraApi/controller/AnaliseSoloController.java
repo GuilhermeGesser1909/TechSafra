@@ -1,7 +1,9 @@
 package com.api.TechSafraApi.controller;
 
+import com.api.TechSafraApi.dtos.AnaliseSoloDto;
 import com.api.TechSafraApi.model.AnaliseSoloModel;
 import com.api.TechSafraApi.service.AnaliseSoloService;
+import jakarta.validation.Valid;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 import java.util.List;
@@ -9,6 +11,7 @@ import java.util.UUID;
 
 @RestController
 @RequestMapping("/analises-solo")
+@CrossOrigin(origins = "*") // Importante para o frontend aceder
 public class AnaliseSoloController {
 
     private final AnaliseSoloService service;
@@ -18,8 +21,8 @@ public class AnaliseSoloController {
     }
 
     @PostMapping
-    public ResponseEntity<AnaliseSoloModel> criarAnalise(@RequestBody AnaliseSoloModel analise) {
-        return ResponseEntity.ok(service.criarAnalise(analise));
+    public ResponseEntity<AnaliseSoloModel> criarAnalise(@RequestBody @Valid AnaliseSoloDto dto) {
+        return ResponseEntity.ok(service.criarAnalise(dto));
     }
 
     @GetMapping
@@ -30,8 +33,8 @@ public class AnaliseSoloController {
     @PutMapping("/{id}")
     public ResponseEntity<AnaliseSoloModel> atualizarAnalise(
             @PathVariable UUID id,
-            @RequestBody AnaliseSoloModel analiseAtualizada) {
-        return service.atualizarAnalise(id, analiseAtualizada)
+            @RequestBody @Valid AnaliseSoloDto dto) {
+        return service.atualizarAnalise(id, dto)
                 .map(ResponseEntity::ok)
                 .orElse(ResponseEntity.notFound().build());
     }
@@ -40,5 +43,12 @@ public class AnaliseSoloController {
     public ResponseEntity<Void> apagarAnalise(@PathVariable UUID id) {
         service.apagarAnalise(id);
         return ResponseEntity.noContent().build();
+    }
+    
+    @GetMapping("/{id}")
+    public ResponseEntity<AnaliseSoloModel> buscarPorId(@PathVariable UUID id) {
+        return service.buscarPorId(id)
+                .map(ResponseEntity::ok)
+                .orElse(ResponseEntity.notFound().build());
     }
 }
