@@ -395,3 +395,43 @@ a {
   bottom: 0;
   background: linear-gradient(to top, rgba(0, 0, 0, 0.15), transparent);
 }
+
+/* --- Estilos para a nova área Interativa --- */
+.interactive-card {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  padding-bottom: 1.5rem;
+}
+
+.btn-interativo {
+  background-color: var(--green-primary);
+  color: var(--white);
+  border: none;
+  padding: 8px 16px;
+  border-radius: 20px;
+  cursor: pointer;
+  margin: 5px;
+  font-size: 0.9rem;
+  transition: 0.3s;
+}
+
+.btn-interativo:hover {
+  background-color: var(--gold);
+  color: var(--text-dark);
+  transform: scale(1.05);
+}
+
+.calc-box {
+  display: flex;
+  justify-content: center;
+  gap: 10px;
+  align-items: center;
+  margin: 10px 0;
+}
+
+.calc-box input {
+  border: 1px solid #ccc;
+  border-radius: 8px;
+  text-align: center;
+}

@@ -100,3 +100,65 @@ window.addEventListener("DOMContentLoaded", () => {
   carregarNoticiasAgro();
   carregarCuriosidades();
 });
+
+/* --- Funções da Área Interativa --- */
+
+// 1. Quiz do Agro
+function verificarQuiz(elemento, correto) {
+  const resultado = elemento.parentElement.nextElementSibling; // Pega o <p id="quiz-resultado">
+
+  if (correto) {
+    resultado.style.display = "block";
+    resultado.style.color = "green";
+    resultado.textContent = "✅ Acertou! O MT é gigante!";
+  } else {
+    resultado.style.display = "block";
+    resultado.style.color = "red";
+    resultado.textContent = "❌ Tente de novo!";
+  }
+}
+
+// 2. Calculadora de Churrasco
+function calcularChurrasco() {
+  const pessoas = document.getElementById("qtd-pessoas").value;
+  const resultadoEl = document.getElementById("res-churrasco");
+
+  if (pessoas && pessoas > 0) {
+    // Cálculo base: 400g por pessoa
+    const totalCarne = (pessoas * 0.4).toFixed(1);
+    resultadoEl.textContent = `🥩 Precisa de aprox. ${totalCarne} kg de carne.`;
+  } else {
+    resultadoEl.textContent = "Informe o nº de pessoas.";
+  }
+}
+
+// 3. Gerador de Sabedoria
+function gerarSabedoria() {
+  const frases = [
+    "🌱 Quem planta cuidado, colhe fartura.",
+    "🚜 O melhor adubo é a pegada do dono.",
+    "🌧️ Chuva mansa não quebra telha, mas molha a terra toda.",
+    "🌽 Milho que demora a crescer, a espiga vem cheia.",
+    "🐂 Boi no pasto é dinheiro no bolso, mas boi gordo é dinheiro no banco.",
+    "🌅 Aproveite o sereno da manhã, que o sol do meio-dia não perdoa."
+  ];
+
+  const fraseAleatoria = frases[Math.floor(Math.random() * frases.length)];
+  document.getElementById("frase-roca").textContent = `"${fraseAleatoria}"`;
+}
+
+// 4. Sugestão de Música
+function sugerirMusica() {
+  const musicas = [
+    "🎵 Rei do Gado - Tião Carreiro",
+    "🎵 Fio de Cabelo - Chitãozinho & Xororó",
+    "🎵 Evidências - Chitãozinho & Xororó",
+    "🎵 O Menino da Porteira - Sérgio Reis",
+    "🎵 Ipê Florido - Liu & Léu",
+    "🎵 Do Fundo da Grota - Baitaca",
+    "🎵 Saudade da Minha Terra - Belmonte & Amaraí"
+  ];
+
+  const musicaAleatoria = musicas[Math.floor(Math.random() * musicas.length)];
+  document.getElementById("sugestao-musica").textContent = musicaAleatoria;
+}
