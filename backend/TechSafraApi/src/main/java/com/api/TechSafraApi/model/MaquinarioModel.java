@@ -1,9 +1,8 @@
 package com.api.TechSafraApi.model;
 
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import jakarta.persistence.*;
-
 import java.io.Serializable;
-import java.util.UUID;
 
 @Entity
 @Table(name = "TB_MAQUINARIOS")
@@ -11,63 +10,80 @@ public class MaquinarioModel implements Serializable {
     private static final long serialVersionUID = 1L;
 
     @Id
-    @GeneratedValue(strategy = GenerationType.AUTO)
-    private UUID id;
+    @GeneratedValue(strategy = GenerationType.IDENTITY) // Mudado para IDENTITY (Padrão Long)
+    private Long id;
 
+    @Column(nullable = false)
     private String nome;
+
+    @Column(nullable = false)
     private String tipo;
+
     private int horasTrabalhadasDia;
     private int horasManutencaoPrevista;
     private String situacao;
-    
+
     @Column(columnDefinition = "TEXT")
     private String observacoes;
 
     @ManyToOne
     @JoinColumn(name = "usuario_id", nullable = false)
+    @JsonIgnoreProperties({"senha", "email", "propriedades"}) // Evita loop infinito no JSON
     private Usuario usuario;
 
-	public String getNome() {
-		return nome;
-	}
+    // Construtor vazio
+    public MaquinarioModel() {}
 
-	public void setNome(String nome) {
-		this.nome = nome;
-	}
+    // Getters e Setters
+    public Long getId() {
+        return id;
+    }
 
-	public String getTipo() {
-		return tipo;
-	}
+    public void setId(Long id) {
+        this.id = id;
+    }
 
-	public void setTipo(String tipo) {
-		this.tipo = tipo;
-	}
+    public String getNome() {
+        return nome;
+    }
 
-	public int getHorasTrabalhadasDia() {
-		return horasTrabalhadasDia;
-	}
+    public void setNome(String nome) {
+        this.nome = nome;
+    }
 
-	public void setHorasTrabalhadasDia(int horasTrabalhadasDia) {
-		this.horasTrabalhadasDia = horasTrabalhadasDia;
-	}
+    public String getTipo() {
+        return tipo;
+    }
 
-	public int getHorasManutencaoPrevista() {
-		return horasManutencaoPrevista;
-	}
+    public void setTipo(String tipo) {
+        this.tipo = tipo;
+    }
 
-	public void setHorasManutencaoPrevista(int horasManutencaoPrevista) {
-		this.horasManutencaoPrevista = horasManutencaoPrevista;
-	}
+    public int getHorasTrabalhadasDia() {
+        return horasTrabalhadasDia;
+    }
 
-	public String getSituacao() {
-		return situacao;
-	}
+    public void setHorasTrabalhadasDia(int horasTrabalhadasDia) {
+        this.horasTrabalhadasDia = horasTrabalhadasDia;
+    }
 
-	public void setSituacao(String situacao) {
-		this.situacao = situacao;
-	}
+    public int getHorasManutencaoPrevista() {
+        return horasManutencaoPrevista;
+    }
 
-	public String getObservacoes() {
+    public void setHorasManutencaoPrevista(int horasManutencaoPrevista) {
+        this.horasManutencaoPrevista = horasManutencaoPrevista;
+    }
+
+    public String getSituacao() {
+        return situacao;
+    }
+
+    public void setSituacao(String situacao) {
+        this.situacao = situacao;
+    }
+
+    public String getObservacoes() {
         return observacoes;
     }
 

@@ -2,13 +2,9 @@ package com.api.TechSafraApi.repository;
 
 import com.api.TechSafraApi.model.MaquinarioModel;
 import org.springframework.data.jpa.repository.JpaRepository;
+import org.springframework.stereotype.Repository;
 
-import java.util.Optional;
-import java.util.UUID;
-
-public interface MaquinarioRepository extends JpaRepository<MaquinarioModel, UUID> {
-
-    void deleteById(UUID id);
-
-    Optional<MaquinarioModel> findById(UUID id);
+@Repository
+public interface MaquinarioRepository extends JpaRepository<MaquinarioModel, Long> {
+    // Métodos padrões como save, findById, deleteById já estão inclusos
 }
