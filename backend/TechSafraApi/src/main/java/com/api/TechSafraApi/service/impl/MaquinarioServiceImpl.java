@@ -9,6 +9,7 @@ import com.api.TechSafraApi.repository.UsuarioRepository;
 import com.api.TechSafraApi.service.MaquinarioService;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
+import com.api.TechSafraApi.service.AtividadeService;
 
 import java.util.List;
 
@@ -18,10 +19,13 @@ public class MaquinarioServiceImpl implements MaquinarioService {
 
     private final MaquinarioRepository repository;
     private final UsuarioRepository usuarioRepository;
+    private final AtividadeService atividadeService;
 
-    public MaquinarioServiceImpl(MaquinarioRepository repository, UsuarioRepository usuarioRepository) {
+    public MaquinarioServiceImpl(MaquinarioRepository repository, UsuarioRepository usuarioRepository,
+            AtividadeService atividadeService) {
         this.repository = repository;
         this.usuarioRepository = usuarioRepository;
+        this.atividadeService = atividadeService;
     }
 
     @Override
@@ -45,8 +49,14 @@ public class MaquinarioServiceImpl implements MaquinarioService {
 
         MaquinarioModel model = new MaquinarioModel();
         copiarDtoParaModel(dto, model);
+        model.setNome(dto.nome());
         model.setUsuario(usuario); // Vincula ao usuário
 
+        MaquinarioModel salvo = repository.save(model);
+
+        // 3. GATILHO MÁGICO: Registra a atividade
+        atividadeService.registrar(usuario, "Adicionou maquinário: " + salvo.getNome());
+        
         return repository.save(model);
     }
 
@@ -68,11 +78,16 @@ public class MaquinarioServiceImpl implements MaquinarioService {
 
     @Override
     public void deletar(Long id) {
+    	MaquinarioModel maq = buscarPorId(id);
         if (!repository.existsById(id)) {
             throw new ResourceNotFoundException("Impossível deletar. Maquinário não encontrado com ID: " + id);
         }
         repository.deleteById(id);
+        
+     // GATILHO NA EXCLUSÃO
+        atividadeService.registrar(maq.getUsuario(), "Excluiu maquinário: " + maq.getNome());
     }
+    
 
     // Método auxiliar para não repetir código
     private void copiarDtoParaModel(MaquinarioDto dto, MaquinarioModel model) {
