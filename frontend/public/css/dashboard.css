@@ -2093,3 +2093,86 @@ body {
   margin: 4px 0;
   line-height: 1.5;
 }
+
+/* --- Estilos dos Cards de Relatórios --- */
+
+/* Container que organiza os cards em grade */
+.reports-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+  /* Responsivo: ajusta quantos cabem na tela */
+  gap: 20px;
+  margin-top: 20px;
+}
+
+/* O visual de cada cartão individual */
+.report-card {
+  background-color: #fff;
+  border: 1px solid #eee;
+  border-radius: 12px;
+  /* Bordas arredondadas */
+  padding: 20px;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.05);
+  /* Sombra suave */
+  transition: transform 0.2s, box-shadow 0.2s;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+}
+
+/* Efeito ao passar o mouse (levanta um pouco) */
+.report-card:hover {
+  transform: translateY(-5px);
+  box-shadow: 0 8px 15px rgba(0, 0, 0, 0.1);
+  border-color: #4CAF50;
+  /* Detalhe verde ao passar o mouse */
+}
+
+.report-header {
+  margin-bottom: 15px;
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+.report-header i {
+  font-size: 1.5rem;
+  color: #4CAF50;
+  /* Cor do ícone */
+  background: #e8f5e9;
+  padding: 10px;
+  border-radius: 50%;
+}
+
+.report-header h4 {
+  margin: 0;
+  font-size: 1.1rem;
+  color: #333;
+}
+
+.report-body p {
+  font-size: 0.9rem;
+  color: #666;
+  margin-bottom: 8px;
+  line-height: 1.4;
+}
+
+.report-footer {
+  margin-top: 15px;
+  padding-top: 15px;
+  border-top: 1px solid #f0f0f0;
+  text-align: center;
+}
+
+.btn-link {
+  color: #4CAF50;
+  text-decoration: none;
+  font-weight: 600;
+  font-size: 0.9rem;
+  transition: color 0.2s;
+}
+
+.btn-link:hover {
+  color: #2E7D32;
+  text-decoration: underline;
+}
