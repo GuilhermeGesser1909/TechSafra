@@ -9,7 +9,7 @@ import java.util.List;
 
 @RestController
 @RequestMapping("/relatorios")
-@CrossOrigin(origins = "*") // Permite acesso do frontend
+@CrossOrigin(origins = "*") // Isso permite o acesso, mas o endpoint precisa existir!
 public class RelatorioController {
 
     private final RelatorioRepository repository;
@@ -24,7 +24,15 @@ public class RelatorioController {
         return repository.findAll();
     }
 
-    // Criar um novo relatório (para popular o banco)
+    // --- NOVO MÉTODO: Buscar relatório específico por ID ---
+    @GetMapping("/{id}")
+    public ResponseEntity<RelatorioModel> buscarPorId(@PathVariable Long id) {
+        return repository.findById(id)
+                .map(relatorio -> ResponseEntity.ok(relatorio))
+                .orElse(ResponseEntity.notFound().build());
+    }
+
+    // Criar um novo relatório
     @PostMapping
     public ResponseEntity<RelatorioModel> criar(@RequestBody RelatorioModel relatorio) {
         RelatorioModel salvo = repository.save(relatorio);
@@ -34,7 +42,10 @@ public class RelatorioController {
     // Deletar relatório
     @DeleteMapping("/{id}")
     public ResponseEntity<Void> deletar(@PathVariable Long id) {
-        repository.deleteById(id);
-        return ResponseEntity.noContent().build();
+        if (repository.existsById(id)) {
+            repository.deleteById(id);
+            return ResponseEntity.noContent().build();
+        }
+        return ResponseEntity.notFound().build();
     }
 }
