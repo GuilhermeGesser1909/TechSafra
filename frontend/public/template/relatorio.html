@@ -3,162 +3,86 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Relatório de Gestão Agrícola - Relatório de Produção</title>
+    <title>TechSafra - Relatório Detalhado</title>
     <link rel="stylesheet" href="/css/relatorio.css" />
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css" />
+    <link rel="icon" href="/img/logo.png" />
   </head>
   <body>
     <header class="dashboard-header" role="banner">
-      <h1>Relatório de Produção Agrícola</h1>
+      <h1 id="relatorioTitulo">Carregando Relatório...</h1>
       <div class="metadata">
-        <span aria-label="Período de Análise">Análise: Setembro 2025</span>
+        <span aria-label="Data do Relatório" id="relatorioData">--/--/----</span>
       </div>
+      
+      <button onclick="window.location.href='/template/dashboard.html'" style="margin-top: 10px; padding: 5px 10px; cursor: pointer;">
+        <i class="fas fa-arrow-left"></i> Voltar ao Dashboard
+      </button>
     </header>
 
     <main class="main-content">
-      <section
-        class="controls-panel"
-        aria-label="Painel de Filtros do Relatório"
-      >
-        <form class="filters-form">
-          <div class="filter-group">
-            <label for="ciclo-periodo">Ciclo/Período:</label>
-            <select id="ciclo-periodo" name="ciclo-periodo">
-              <option value="atual">Ciclo Atual (2025/2026)</option>
-              <option value="ultima-colheita">
-                Última Colheita (2024/2025)
-              </option>
-              <option value="mes">Mês Atual</option>
-              <option value="trimestre">Trimestre</option>
-            </select>
-          </div>
-
-          <div class="filter-group">
-            <label for="cultura">Cultura:</label>
-            <select id="cultura" name="cultura">
-              <option value="todos">Todas as Culturas</option>
-              <option value="soja">Soja</option>
-              <option value="milho">Milho</option>
-              <option value="trigo">Trigo</option>
-              <option value="cafe">Café</option>
-            </select>
-          </div>
-
-          <div class="filter-group">
-            <label for="talhao">Talhão/Área:</label>
-            <select id="talhao" name="talhao">
-              <option value="todos">Todos</option>
-              <option value="A">Talhão A</option>
-              <option value="B">Talhão B</option>
-              <option value="C">Talhão C</option>
-            </select>
-          </div>
-
-          <button type="submit" class="button-primary">Gerar Relatório</button>
-        </form>
+      
+      <section class="report-section" style="margin-bottom: 20px; background: white; padding: 20px; border-radius: 8px;">
+        <h2>📝 Resumo do Gestor</h2>
+        <p id="relatorioResumo" style="line-height: 1.6; color: #555;">
+          Carregando informações...
+        </p>
       </section>
 
-      <section
-        class="kpi-summary"
-        aria-label="Indicadores Chave de Performance (KPIs)"
-      >
+      <section class="kpi-summary" aria-label="Indicadores Chave">
         <figure class="kpi-card">
-          <figcaption>Área Plantada (ha)</figcaption>
-          <p class="kpi-value">350 ha</p>
-          <span class="kpi-trend">Meta: 400 ha</span>
+          <figcaption>Área Total (ha)</figcaption>
+          <p class="kpi-value" id="kpiArea">--</p>
+          <span class="kpi-trend">Base Cadastral</span>
         </figure>
         <figure class="kpi-card">
-          <figcaption>Produtividade Média (sc/ha)</figcaption>
-          <p class="kpi-value">65 sc/ha</p>
-          <span class="kpi-trend trend-positive">▲ +15% vs. Mês Anterior</span>
+          <figcaption>Produtividade (sc/ha)</figcaption>
+          <p class="kpi-value" id="kpiProdutividade">--</p>
+          <span class="kpi-trend trend-positive">Fator Chave</span>
         </figure>
         <figure class="kpi-card">
-          <figcaption>Previsão de Colheita (Ton)</figcaption>
-          <p class="kpi-value">227,5 Ton</p>
-          <span class="kpi-trend trend-negative"
-            >▼ 10% Abaixo da Estimativa</span
-          >
+          <figcaption>Produção Total (Ton)</figcaption>
+          <p class="kpi-value" id="kpiProducao">--</p>
+          <span class="kpi-trend">Volume Bruto</span>
         </figure>
         <figure class="kpi-card">
-          <figcaption>Índice de Chuva Acumulado (mm)</figcaption>
-          <p class="kpi-value">150 mm</p>
-          <span class="kpi-trend trend-neutral">Média Histórica: 145 mm</span>
+          <figcaption>Chuva Acumulada (mm)</figcaption>
+          <p class="kpi-value" id="kpiChuva">--</p>
+          <span class="kpi-trend trend-neutral">Clima</span>
         </figure>
-      </section>
-
-      <section class="report-section detail-table-section">
-        <h2>Detalhes Operacionais da Plantação por Talhão</h2>
-        <div class="table-container">
-          <table class="data-table">
-            <thead>
-              <tr>
-                <th>Talhão</th>
-                <th>Cultura</th>
-                <th>Área (ha)</th>
-                <th>Data de Plantio</th>
-                <th>Estágio de Desenvolvimento</th>
-                <th>Ações de Manejo Pendentes</th>
-              </tr>
-            </thead>
-            <tbody>
-              <tr>
-                <td>A</td>
-                <td>Soja</td>
-                <td>150</td>
-                <td>20/09/2025</td>
-                <td data-status="critical">V3 (Terceiro Trifólio)</td>
-                <td>Monitoramento de Pragas (Urgente)</td>
-              </tr>
-              <tr>
-                <td>B</td>
-                <td>Milho</td>
-                <td>100</td>
-                <td>05/08/2025</td>
-                <td data-status="stable">Tasselamento (VT)</td>
-                <td>Aplicação de Nitrogênio (Prevista)</td>
-              </tr>
-              <tr>
-                <td>C</td>
-                <td>Soja</td>
-                <td>100</td>
-                <td>25/09/2025</td>
-                <td data-status="new">Emergência (VE)</td>
-                <td>Irrigação Leve</td>
-              </tr>
-            </tbody>
-          </table>
-        </div>
       </section>
 
       <section class="report-section results-table-section">
-        <h2>Análise da Última Colheita (Milho - Talhão B)</h2>
+        <h2>📊 Análise Financeira e Qualidade</h2>
         <div class="table-container">
           <table class="data-table analysis-table">
             <thead>
               <tr>
-                <th>Métrica de Performance</th>
-                <th>Valor Obtido</th>
-                <th>Meta Estabelecida</th>
-                <th>Desvio (%)</th>
+                <th>Indicador</th>
+                <th>Valor Apurado</th>
+                <th>Status</th>
               </tr>
             </thead>
             <tbody>
               <tr>
-                <td>Produtividade</td>
-                <td>85 sc/ha</td>
-                <td>70 sc/ha</td>
-                <td data-trend="positive">+21,4%</td>
+                <td>Custo por Saca (R$)</td>
+                <td id="dadoCusto">--</td>
+                <td data-trend="neutral">Custo Operacional</td>
               </tr>
               <tr>
-                <td>Umidade</td>
-                <td>14,5%</td>
-                <td>14%</td>
-                <td data-trend="negative">+0,5%</td>
+                <td>Preço Médio de Venda (R$)</td>
+                <td id="dadoVenda">--</td>
+                <td data-trend="positive">Receita</td>
               </tr>
               <tr>
-                <td>Custo de Produção</td>
-                <td>R$ 45,00/sc</td>
-                <td>R$ 50,00/sc</td>
-                <td data-trend="positive">-10,0%</td>
+                <td>Lucratividade Estimada (R$/sc)</td>
+                <td id="dadoLucro">--</td>
+                <td id="statusLucro" style="font-weight: bold;">--</td>
+              </tr>
+              <tr>
+                <td>Umidade Média do Grão (%)</td>
+                <td id="dadoUmidade">--</td>
+                <td>Qualidade Padrão</td>
               </tr>
             </tbody>
           </table>
@@ -167,10 +91,9 @@
     </main>
 
     <footer class="dashboard-footer" role="contentinfo">
-      <p>
-        &copy; 2025 Agribusiness Solutions. Todos os direitos reservados. |
-        Última Atualização: 11/10/2025
-      </p>
+      <p>&copy; 2025 TechSafra - Inteligência no Campo</p>
     </footer>
+
+    <script src="/js/detalheRelatorio.js"></script>
   </body>
 </html>

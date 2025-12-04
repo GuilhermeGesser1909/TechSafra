@@ -70,8 +70,7 @@
             <span>Adicionar Maquinário</span>
           </div>
 
-          <div class="action-item" onclick="location.href='/template/relatorio.html'">
-            <i class="fas fa-file-alt"></i>
+          <div class="action-item" onclick="abrirModal('modalNovoRelatorio')"> <i class="fas fa-file-alt"></i>
             <span>Gerar Relatório</span>
           </div>
 
@@ -613,40 +612,95 @@
         </div>
       </div>
     </section>
+<section id="section9" class="card-section hidden">
+  <div class="card">
+    <h3>📑 Relatórios e Estatísticas</h3>
 
-    <section id="section9" class="card-section hidden">
-      <div class="card">
-        <h3>📑 Relatórios e Estatísticas</h3>
+    <div class="card-actions">
+      <button class="btn add-btn" onclick="abrirModal('modalNovoRelatorio')">
+        <i class="fas fa-plus"></i> Novo Relatório
+      </button>
+      
+      <!-- <a href="/template/relatorio.html" class="btn generate-report-btn">
+        <i class="fas fa-chart-line"></i> Ver Painel Completo
+      </a> -->
+      
+       <!-- <button class="btn export-btn">
+        <i class="fas fa-file-export"></i> Exportar Dados
+      </button>   --> 
+    </div>
 
-        <div class="card-actions">
-          <a href="/template/relatorio.html" class="btn generate-report-btn"><i class="fas fa-file-alt"></i> Gerar Novo
-            Relatório</a>
-          <button class="btn export-btn">
-            <i class="fas fa-file-export"></i> Exportar Dados
-          </button>
+    <div id="listaRelatoriosContainer">
+      <p>Carregando relatórios...</p>
+    </div>
+  </div>
+
+  <div id="modalNovoRelatorio" class="modal" aria-hidden="true">
+    <div class="modal-content large">
+      <span class="close" onclick="fecharModal('modalNovoRelatorio')">&times;</span>
+      <h2>Gerar Novo Relatório</h2>
+      
+      <form id="formNovoRelatorio">
+        <div class="modal-body">
+          <div class="form-section">
+            <h3>Informações Gerais</h3>
+            <label>Título do Relatório</label>
+            <input type="text" id="relTitulo" placeholder="Ex: Fechamento Safra Soja 2025" required />
+            
+            <label>Data da Análise</label>
+            <input type="date" id="relData" required />
+            
+            <label>Resumo Gerencial</label>
+            <textarea id="relResumo" rows="3" placeholder="Breve descrição dos resultados..."></textarea>
+          </div>
+  
+          <div class="form-section">
+            <h3>Métricas Operacionais</h3>
+            <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 10px;">
+              <div>
+                <label>Área Total (ha)</label>
+                <input type="number" id="relArea" step="0.1" required />
+              </div>
+              <div>
+                <label>Produtividade (sc/ha)</label>
+                <input type="number" id="relProdutividade" step="0.1" required />
+              </div>
+              <div>
+                <label>Produção Total (Ton)</label>
+                <input type="number" id="relProducao" step="0.1" required />
+              </div>
+              <div>
+                <label>Chuva Acumulada (mm)</label>
+                <input type="number" id="relChuva" step="0.1" />
+              </div>
+            </div>
+  
+            <h3>Financeiro e Qualidade</h3>
+            <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 10px;">
+              <div>
+                <label>Custo por Saca (R$)</label>
+                <input type="number" id="relCusto" step="0.01" placeholder="0.00" />
+              </div>
+              <div>
+                <label>Preço Venda Médio (R$)</label>
+                <input type="number" id="relVenda" step="0.01" placeholder="0.00" />
+              </div>
+              <div style="grid-column: span 2;">
+                <label>Umidade Média (%)</label>
+                <input type="number" id="relUmidade" step="0.1" />
+              </div>
+            </div>
+          </div>
         </div>
-
-        <div class="report-item">
-          <h4>Relatório Mensal - Setembro 2023</h4>
-          <p>Data de Geração: 30/09/2023</p>
-          <p>
-            Resumo: Produtividade de milho aumentou 10% em relação ao mês
-            anterior. Custos com insumos reduziram 5%.
-          </p>
-          <a href="#" class="view-report-link">Ver Relatório Completo</a>
+  
+        <div class="modal-actions">
+          <button type="submit" class="btn save-btn">Salvar Relatório</button>
+          <button type="button" class="btn cancel-btn" onclick="fecharModal('modalNovoRelatorio')">Cancelar</button>
         </div>
-
-        <div class="report-item">
-          <h4>Relatório Anual - 2022</h4>
-          <p>Data de Geração: 31/12/2022</p>
-          <p>
-            Resumo: Análise detalhada das safras, insumos utilizados, e
-            desempenho do maquinário ao longo do ano.
-          </p>
-          <a href="#" class="view-report-link">Ver Relatório Completo</a>
-        </div>
-      </div>
-    </section>
+      </form>
+    </div>
+  </div>
+</section>
   </main>
 
   <footer class="footer">
@@ -662,6 +716,7 @@
   <script src="/js/maquinarios.js"></script>
   <script src="/js/propriedades.js"></script>
   <script src="/js/analisesolo.js"></script>
+  <script src="/js/relatorio.js"></script>
 
 </body>
 
