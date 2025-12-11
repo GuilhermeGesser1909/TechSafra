@@ -367,7 +367,6 @@ p.lead {
   opacity: 0.9;
 }
 
-/* Centralizar todos os subtítulos (h2) das seções */
 section.container h2,
 section h2 {
   text-align: center;

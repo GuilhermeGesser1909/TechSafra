@@ -1,7 +1,6 @@
 const API_URL_ANALISES = "http://localhost:8080/analises-solo";
 
 document.addEventListener("DOMContentLoaded", () => {
-    // Só executa se estivermos na dashboard e a section existir
     if (document.getElementById("lista-analises-container")) {
         listarAnalisesCard();
     }
@@ -17,7 +16,7 @@ async function listarAnalisesCard() {
         if (!resposta.ok) throw new Error("Erro ao buscar dados");
 
         const analises = await resposta.json();
-        container.innerHTML = ""; // Limpa o loading
+        container.innerHTML = "";
 
         if (analises.length === 0) {
             container.innerHTML = "<p>Nenhuma análise registada.</p>";

@@ -1,20 +1,13 @@
-/* dashboard_agricola.css */
-
-/* --- Configurações Gerais e Variáveis --- */
 :root {
-    /* Cores Institucionais Agrícolas */
-    --color-primary: #1e8449;   /* Verde Profundo (Agricultura) */
-    --color-secondary: #f4f6f9; /* Fundo de Dashboard Claro */
-    --color-text-dark: #2c3e50; /* Texto Principal */
-    --color-text-muted: #7f8c8d; /* Texto Secundário/Tendência */
+    --color-primary: #1e8449;
+    --color-secondary: #f4f6f9;
+    --color-text-dark: #2c3e50;
+    --color-text-muted: #7f8c8d;
     --color-border: #e0e6ed;
     --color-card-bg: #ffffff;
-
-    /* Cores de Status/Tendência */
-    --color-positive: #2ecc71;  /* Verde (Bom) */
-    --color-negative: #e74c3c;  /* Vermelho (Alerta/Ruim) */
-    --color-neutral: #f39c12;   /* Amarelo/Laranja (Atenção/Novo) */
-
+    --color-positive: #2ecc71;
+    --color-negative: #e74c3c;
+    --color-neutral: #f39c12;
     --spacing-default: 20px;
     --border-radius: 8px;
     --shadow-default: 0 4px 12px rgba(0, 0, 0, 0.05);
@@ -33,7 +26,7 @@ body {
     line-height: 1.6;
 }
 
-/* --- Header (Barra Superior) --- */
+/* Header  */
 .dashboard-header {
     background-color: var(--color-card-bg);
     border-bottom: 2px solid var(--color-border);
@@ -55,7 +48,6 @@ body {
     color: var(--color-text-muted);
 }
 
-/* --- Conteúdo Principal e Layout (MAIN) --- */
 .main-content {
     padding: var(--spacing-default);
 }
@@ -73,7 +65,7 @@ body {
     display: flex;
     flex-wrap: wrap;
     gap: 20px;
-    align-items: flex-end; /* Alinha o botão com os campos */
+    align-items: flex-end;
 }
 
 .filter-group {
@@ -115,10 +107,9 @@ body {
     transform: translateY(1px);
 }
 
-/* --- Resumo (KPIs) --- */
+/* Resumo  */
 .kpi-summary {
     display: grid;
-    /* 4 colunas em telas grandes */
     grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
     gap: var(--spacing-default);
     margin-bottom: var(--spacing-default);
@@ -159,12 +150,22 @@ body {
     color: var(--color-text-muted);
 }
 
-/* Indicadores de Tendência */
-.trend-positive { color: var(--color-positive); font-weight: 600; }
-.trend-negative { color: var(--color-negative); font-weight: 600; }
-.trend-neutral { color: var(--color-neutral); font-weight: 600; }
+.trend-positive {
+    color: var(--color-positive);
+    font-weight: 600;
+}
 
-/* --- Seções de Relatório (Tabelas) --- */
+.trend-negative {
+    color: var(--color-negative);
+    font-weight: 600;
+}
+
+.trend-neutral {
+    color: var(--color-neutral);
+    font-weight: 600;
+}
+
+/* Seções de Relatório (Tabelas)  */
 .report-section {
     background-color: var(--color-card-bg);
     padding: var(--spacing-default);
@@ -182,7 +183,7 @@ body {
 }
 
 .table-container {
-    overflow-x: auto; /* Garante que a tabela seja scrollável horizontalmente em telas pequenas */
+    overflow-x: auto;
 }
 
 .data-table {
@@ -210,22 +211,23 @@ body {
     font-size: 0.85em;
 }
 
-/* Efeito Zebrado */
 .data-table tbody tr:nth-child(even) {
     background-color: #f9fbfd;
 }
 
 .data-table tbody tr:hover {
-    background-color: #f0fff4; /* Um verde bem suave ao passar o mouse */
+    background-color: #f0fff4;
 }
 
 /* Estilização de Status/Tendência nas Células */
-[data-status="critical"], [data-trend="negative"] {
+[data-status="critical"],
+[data-trend="negative"] {
     color: var(--color-negative);
     font-weight: 600;
 }
 
-[data-status="stable"], [data-trend="positive"] {
+[data-status="stable"],
+[data-trend="positive"] {
     color: var(--color-positive);
     font-weight: 600;
 }
@@ -235,7 +237,7 @@ body {
     font-weight: 600;
 }
 
-/* --- Footer --- */
+/* Footer */
 .dashboard-footer {
     padding: 15px var(--spacing-default);
     text-align: center;
@@ -245,7 +247,7 @@ body {
     background-color: var(--color-card-bg);
 }
 
-/* --- Responsividade --- */
+/* Responsividade */
 @media (max-width: 992px) {
     .filters-form {
         flex-direction: column;
@@ -266,6 +268,7 @@ body {
     .dashboard-header h1 {
         font-size: 1.5em;
     }
+
     .kpi-value {
         font-size: 2em;
     }

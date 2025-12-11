@@ -192,7 +192,7 @@ body {
   display: none;
 }
 
-/* 🌤️ Previsão do tempo */
+/*  Previsão do tempo */
 .weather-widget {
   background: var(--white);
   border-radius: 16px;
@@ -214,7 +214,7 @@ body {
   color: #333;
 }
 
-/* 💰 Cotações */
+/*  Cotações */
 .cotacoes {
   padding: 3rem;
   text-align: center;
@@ -246,7 +246,7 @@ body {
   transform: translateY(-6px);
 }
 
-/* 🧑‍🌾 Produtor da semana */
+/*  Produtor da semana */
 .destaque-produtor {
   background: linear-gradient(90deg, var(--green-light), var(--green-primary));
   color: var(--white);
@@ -317,7 +317,7 @@ a {
   color: #000;
 }
 
-/* 📰 Estilo para as listas de notícias e curiosidades */
+/* Estilo para as listas de notícias e curiosidades */
 .news-list {
   padding: 1rem 1.5rem;
   text-align: left;
@@ -342,23 +342,19 @@ a {
   color: var(--green-primary);
 }
 
-/* Área de conteúdo rolável dentro dos cards */
 .card .scroll-area {
   max-height: 220px;
-  /* altura fixa do card */
   overflow-y: auto;
   padding: 1rem 1.3rem;
   text-align: left;
 }
 
-/* Estilo da barra de rolagem (Chrome/Edge) */
 .card .scroll-area::-webkit-scrollbar {
   width: 8px;
 }
 
 .card .scroll-area::-webkit-scrollbar-track {
   background: #e8f5e9;
-  /* verde bem claro */
   border-radius: 10px;
 }
 
@@ -371,7 +367,6 @@ a {
   background: var(--green-dark);
 }
 
-/* Sombreamento top/bottom ao rolar */
 .card {
   position: relative;
 }
